@@ -5,8 +5,5 @@ public class Driver extends Application {
 		void launch() {}
 
 		@Override
-		public void start(Stage arg0) throws Exception {
-			// TODO Auto-generated method stub
-			
-		}
+		public void start(Stage arg0) throws Exception {}
 	}
