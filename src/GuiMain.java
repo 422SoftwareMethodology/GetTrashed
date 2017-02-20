@@ -16,7 +16,6 @@ public class GuiMain extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.show();
 			ObservableList<String> options = FXCollections.observableArrayList("Option 1", "Option 2", "Option 3");
-			final ComboBox comboBox = new ComboBox();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
