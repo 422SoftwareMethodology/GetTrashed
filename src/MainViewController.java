@@ -50,10 +50,7 @@ public class MainViewController implements Initializable {
 		ObservableList<String> testList = FXCollections.observableArrayList("White Russian", "Whisky Sour", "Jack and Coke", "Sidecar", "Gimlet", "Martini");
 		cocktailList.setItems(testList);
 
-		/**
-		 * Cocktail Detail Text
-		 */
-		cocktailInfo.setText("Cocktail name:  Coming soon\n Cocktail Ingredient: Some More Stuff\n How to Make it: Mix That Drink ");
+
 
 		/**
 		 * Clicking on cocktail from list
@@ -62,17 +59,41 @@ public class MainViewController implements Initializable {
 			   @Override
 		        public void handle(MouseEvent event) {
 				   //PUT COCKTAIL INFO HERE
-		            System.out.println("clicked on " + cocktailList.getSelectionModel().getSelectedItem());
+				   String cocktailName =cocktailList.getSelectionModel().getSelectedItem();
+				   if(cocktailName == "White Russian"){
+						/**
+						 * Cocktail Detail Text
+						 */
+						cocktailInfo.setText("Cocktail name:  White Russian\n Cocktail Ingredient: Vodka Kahlua Cream\n How to Make it: Pour and Stir");
+						
+						/**
+						 * Img window
+						 */
+						String imageUrl = "http://cdn.liquor.com/wp-content/uploads/2011/09/02120028/white-russian-720x720-recipe.jpg";
+						Image newImage = new Image(imageUrl);
+						
+						cocktailImage.setImage(newImage);
+				   }
+				   else if(cocktailName == "Whisky Sour"){
+						/**
+						 * Cocktail Detail Text
+						 */
+						cocktailInfo.setText("Cocktail name:  Whisky Sour\n Cocktail Ingredient: Bourbon Lemon Simple \n How to Make it: Pour and Stir");
+						
+						/**
+						 * Img window
+						 */
+						String imageUrl = "http://cdn.liquor.com/wp-content/uploads/2011/07/fa-Whiskey-Sour.jpg";
+						Image newImage = new Image(imageUrl);
+						
+						cocktailImage.setImage(newImage);
+				   }
+				   
+		           System.out.println("clicked on " + cocktailName);
 			   }
 		});
 		
-		/**
-		 * Img window
-		 */
-		String imageUrl = "http://cdn.liquor.com/wp-content/uploads/2011/09/02120028/white-russian-720x720-recipe.jpg";
-		Image newImage = new Image(imageUrl);
-		
-		cocktailImage.setImage(newImage);
+
 		cocktailImage.fitWidthProperty().bind(imgPane.widthProperty());
 		cocktailImage.fitHeightProperty().bind(imgPane.heightProperty());
 		
