@@ -9,11 +9,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.ImageViewBuilder;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 
@@ -50,6 +48,11 @@ public class MainViewController implements Initializable {
 		ObservableList<String> testList = FXCollections.observableArrayList("White Russian", "Whisky Sour", "Jack and Coke", "Sidecar", "Gimlet", "Martini");
 		cocktailList.setItems(testList);
 
+		//Default img load
+		String imageUrl = "http://cdn.playbuzz.com/cdn/f6b9bbfb-8708-49ad-a164-cdea284a0845/2bfcacf2-c580-4b60-aa95-8b5616d5c350.jpg";
+		Image newImage = new Image(imageUrl);
+		
+		cocktailImage.setImage(newImage);
 
 
 		/**
