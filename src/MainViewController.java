@@ -8,18 +8,29 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.ImageViewBuilder;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 
 public class MainViewController implements Initializable {
 
+	@FXML
+	private AnchorPane imgPane;
+	
 	@FXML// the list of all cocktails
 	private ListView<String> cocktailList;
 
 
 	@FXML// Detail of selected cocktail
 	public Label cocktailInfo;
+	
+	@FXML
+	public ImageView cocktailImage;
 
 	@FXML
 	public CheckBox vodkaCheckbox;
@@ -54,6 +65,17 @@ public class MainViewController implements Initializable {
 		            System.out.println("clicked on " + cocktailList.getSelectionModel().getSelectedItem());
 			   }
 		});
+		
+		/**
+		 * Img window
+		 */
+		String imageUrl = "http://cdn.liquor.com/wp-content/uploads/2011/09/02120028/white-russian-720x720-recipe.jpg";
+		Image newImage = new Image(imageUrl);
+		
+		cocktailImage.setImage(newImage);
+		cocktailImage.fitWidthProperty().bind(imgPane.widthProperty());
+		cocktailImage.fitHeightProperty().bind(imgPane.heightProperty());
+		
 	}
 
 	public void checkBoxChecked() {
