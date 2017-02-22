@@ -49,41 +49,11 @@
                                                       <Font size="20.0" />
                                                    </font>
                                                 </CheckBox>
-                                                <CheckBox layoutX="10.0" layoutY="130.0" mnemonicParsing="false" text="Vodka">
-                                                   <font>
-                                                      <Font size="20.0" />
-                                                   </font>
-                                                </CheckBox>
-                                                <CheckBox layoutX="10.0" layoutY="130.0" mnemonicParsing="false" text="Vodka">
-                                                   <font>
-                                                      <Font size="20.0" />
-                                                   </font>
-                                                </CheckBox>
-                                                <CheckBox layoutX="10.0" layoutY="190.0" mnemonicParsing="false" text="Whisky">
-                                                   <font>
-                                                      <Font size="20.0" />
-                                                   </font>
-                                                </CheckBox>
-                                                <CheckBox layoutX="10.0" layoutY="220.0" mnemonicParsing="false" text="Whisky">
-                                                   <font>
-                                                      <Font size="20.0" />
-                                                   </font>
-                                                </CheckBox>
-                                                <CheckBox layoutX="10.0" layoutY="250.0" mnemonicParsing="false" text="Whisky">
-                                                   <font>
-                                                      <Font size="20.0" />
-                                                   </font>
-                                                </CheckBox>
-                                                <CheckBox layoutX="10.0" layoutY="280.0" mnemonicParsing="false" text="Whisky">
-                                                   <font>
-                                                      <Font size="20.0" />
-                                                   </font>
-                                                </CheckBox>
                                              </children>
                                           </VBox>
                                        </content>
                                     </ScrollPane>
-                                    <Button layoutX="16.0" layoutY="472.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="165.0" text="Select All" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                    <Button fx:id="selectAllLiquorsButton" layoutX="16.0" layoutY="472.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="165.0" text="Select All" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                                  </children>
                               </AnchorPane>
                            </content>
@@ -102,57 +72,12 @@
                                        <content>
                                           <VBox prefHeight="295.0" prefWidth="216.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
                                              <children>
-                                                <CheckBox mnemonicParsing="false" text="Lemon">
+                                                <CheckBox fx:id="lemonCheckbox" mnemonicParsing="false" onAction="#checkBoxChecked" text="Lemon">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
                                                 </CheckBox>
-                                                <CheckBox layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Lemon">
-                                                   <font>
-                                                      <Font size="20.0" />
-                                                   </font>
-                                                </CheckBox>
-                                                <CheckBox layoutX="10.0" layoutY="40.0" mnemonicParsing="false" text="Lemon">
-                                                   <font>
-                                                      <Font size="20.0" />
-                                                   </font>
-                                                </CheckBox>
-                                                <CheckBox layoutX="10.0" layoutY="70.0" mnemonicParsing="false" text="Lemon">
-                                                   <font>
-                                                      <Font size="20.0" />
-                                                   </font>
-                                                </CheckBox>
-                                                <CheckBox layoutX="10.0" layoutY="100.0" mnemonicParsing="false" text="Lemon">
-                                                   <font>
-                                                      <Font size="20.0" />
-                                                   </font>
-                                                </CheckBox>
-                                                <CheckBox layoutX="10.0" layoutY="130.0" mnemonicParsing="false" text="Lemon">
-                                                   <font>
-                                                      <Font size="20.0" />
-                                                   </font>
-                                                </CheckBox>
-                                                <CheckBox layoutX="10.0" layoutY="160.0" mnemonicParsing="false" text="Lemon">
-                                                   <font>
-                                                      <Font size="20.0" />
-                                                   </font>
-                                                </CheckBox>
-                                                <CheckBox layoutX="10.0" layoutY="190.0" mnemonicParsing="false" text="Lime">
-                                                   <font>
-                                                      <Font size="20.0" />
-                                                   </font>
-                                                </CheckBox>
-                                                <CheckBox layoutX="10.0" layoutY="220.0" mnemonicParsing="false" text="Lime">
-                                                   <font>
-                                                      <Font size="20.0" />
-                                                   </font>
-                                                </CheckBox>
-                                                <CheckBox layoutX="10.0" layoutY="250.0" mnemonicParsing="false" text="Lime">
-                                                   <font>
-                                                      <Font size="20.0" />
-                                                   </font>
-                                                </CheckBox>
-                                                <CheckBox layoutX="10.0" layoutY="280.0" mnemonicParsing="false" text="Lime">
+                                                <CheckBox fx:id="limeCheckbox" layoutX="10.0" layoutY="190.0" mnemonicParsing="false" onAction="#checkBoxChecked" text="Lime">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
@@ -161,14 +86,14 @@
                                           </VBox>
                                        </content>
                                     </ScrollPane>
-                                    <Button layoutX="16.0" layoutY="478.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="165.0" text="Select All" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                    <Button fx:id="selectAllMixersButton" layoutX="16.0" layoutY="478.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="165.0" text="Select All" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                                  </children>
                               </AnchorPane>
                            </content>
                         </TitledPane>
                      </panes>
                   </Accordion>
-                  <Button layoutY="572.0" mnemonicParsing="false" text="Select All Ingredients" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
+                  <Button fx:id="selectAllIngredientsButton" layoutY="572.0" mnemonicParsing="false" text="Select All Ingredients" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
                   <Button layoutY="2.0" mnemonicParsing="false" text="What Can I Make?" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                      <effect>
                         <InnerShadow blurType="GAUSSIAN" color="#01650b" radius="15.19" width="41.76" />

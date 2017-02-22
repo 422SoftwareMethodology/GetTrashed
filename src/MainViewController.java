@@ -4,6 +4,7 @@ import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,13 +13,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 
 public class MainViewController implements Initializable {
 
-	@FXML
-	private AnchorPane imgPane;
+
 	
 	@FXML// the list of all cocktails
 	private ListView<String> cocktailList;
@@ -27,9 +28,20 @@ public class MainViewController implements Initializable {
 	@FXML// Detail of selected cocktail
 	public Label cocktailInfo;
 	
-	@FXML
+	@FXML //Image of the selected cocktail
 	public ImageView cocktailImage;
+	@FXML
+	private AnchorPane imgPane;
+	
+	// the javafx buttons
+	@FXML
+	public Button selectAllIngredientsButton;
+	@FXML
+	public Button selectAllLiquorsButton;
+	@FXML
+	public Button selectAllMixersButton;
 
+	// The javafx checkboxes
 	@FXML
 	public CheckBox vodkaCheckbox;
 	@FXML
@@ -40,6 +52,10 @@ public class MainViewController implements Initializable {
 	public CheckBox ginCheckbox;
 	@FXML
 	public CheckBox kahluaCheckbox;
+	@FXML
+	public CheckBox limeCheckbox;
+	@FXML
+	public CheckBox lemonCheckbox;
 
 
 	@Override
@@ -54,7 +70,79 @@ public class MainViewController implements Initializable {
 		
 		cocktailImage.setImage(newImage);
 
+		listClick();
+		selectAllLiquorCheckboxes();
+		selectAllMixerCheckboxes();
+		selectAllIngredients();
+		
 
+		cocktailImage.fitWidthProperty().bind(imgPane.widthProperty());
+		cocktailImage.fitHeightProperty().bind(imgPane.heightProperty());
+		
+	}
+
+	public void checkBoxChecked() {
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		if(vodkaCheckbox.isSelected()){
+			  System.out.println("clicked on " + vodkaCheckbox.getText());
+		}
+
+		if(whiskyCheckbox.isSelected()){
+			  System.out.println("clicked on " + whiskyCheckbox.getText());
+		}
+
+		if(ginCheckbox.isSelected()){
+			  System.out.println("clicked on " + ginCheckbox.getText());
+		}
+
+		if(rumCheckbox.isSelected()){
+			  System.out.println("clicked on " + rumCheckbox.getText());
+		}
+
+		if(kahluaCheckbox.isSelected()){
+			  System.out.println("clicked on " + kahluaCheckbox.getText());
+		}
+
+	}
+	
+	public void selectAllLiquorCheckboxes(){
+		selectAllLiquorsButton.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override public void handle(ActionEvent e) {
+				vodkaCheckbox.setSelected(true);
+				whiskyCheckbox.setSelected(true);
+				ginCheckbox.setSelected(true);
+				rumCheckbox.setSelected(true);
+				kahluaCheckbox.setSelected(true);
+		    }
+		});
+		
+	}
+	
+	public void selectAllMixerCheckboxes(){
+		selectAllMixersButton.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override public void handle(ActionEvent e) {
+		    	limeCheckbox.setSelected(true);
+				lemonCheckbox.setSelected(true);
+		    }
+		});
+		
+	}
+	
+	public void selectAllIngredients(){
+		selectAllIngredientsButton.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override public void handle(ActionEvent e) {
+		    	limeCheckbox.setSelected(true);
+				lemonCheckbox.setSelected(true);
+				vodkaCheckbox.setSelected(true);
+				whiskyCheckbox.setSelected(true);
+				ginCheckbox.setSelected(true);
+				rumCheckbox.setSelected(true);
+				kahluaCheckbox.setSelected(true);
+		    }
+		});
+	}
+	
+	public void listClick() {
 		/**
 		 * Clicking on cocktail from list
 		 */
@@ -96,34 +184,11 @@ public class MainViewController implements Initializable {
 			   }
 		});
 		
-
-		cocktailImage.fitWidthProperty().bind(imgPane.widthProperty());
-		cocktailImage.fitHeightProperty().bind(imgPane.heightProperty());
-		
 	}
-
-	public void checkBoxChecked() {
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		if(vodkaCheckbox.isSelected()){
-			  System.out.println("clicked on " + vodkaCheckbox.getText());
-		}
-
-		if(whiskyCheckbox.isSelected()){
-			  System.out.println("clicked on " + whiskyCheckbox.getText());
-		}
-
-		if(ginCheckbox.isSelected()){
-			  System.out.println("clicked on " + ginCheckbox.getText());
-		}
-
-		if(rumCheckbox.isSelected()){
-			  System.out.println("clicked on " + rumCheckbox.getText());
-		}
-
-		if(kahluaCheckbox.isSelected()){
-			  System.out.println("clicked on " + kahluaCheckbox.getText());
-		}
-
+	
+	public void javaFXML (){
+		
+		
 	}
 
 
