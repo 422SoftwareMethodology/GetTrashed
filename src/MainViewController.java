@@ -1,4 +1,5 @@
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
@@ -40,6 +41,8 @@ public class MainViewController implements Initializable {
 	public Button selectAllLiquorsButton;
 	@FXML
 	public Button selectAllMixersButton;
+	@FXML
+	public Button whatCanIMakeButton;
 
 	// The javafx checkboxes
 	@FXML
@@ -56,6 +59,9 @@ public class MainViewController implements Initializable {
 	public CheckBox limeCheckbox;
 	@FXML
 	public CheckBox lemonCheckbox;
+	
+	//the ingredients arraylist
+	 ArrayList<String> filterIngredients = new ArrayList<String>();
 
 
 	@Override
@@ -70,10 +76,12 @@ public class MainViewController implements Initializable {
 		
 		cocktailImage.setImage(newImage);
 
+		//initialize the button actions
 		listClick();
 		selectAllLiquorCheckboxes();
 		selectAllMixerCheckboxes();
 		selectAllIngredients();
+		ingredientArraylistMaker();
 		
 
 		cocktailImage.fitWidthProperty().bind(imgPane.widthProperty());
@@ -81,28 +89,42 @@ public class MainViewController implements Initializable {
 		
 	}
 
-	public void checkBoxChecked() {
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		if(vodkaCheckbox.isSelected()){
-			  System.out.println("clicked on " + vodkaCheckbox.getText());
-		}
+	public void ingredientArraylistMaker() {
+		whatCanIMakeButton.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override public void handle(ActionEvent e) {
+		    	filterIngredients.clear();
+		    	
+		    	//Liquor
+		    	if(vodkaCheckbox.isSelected()){
+		    		filterIngredients.add("vodka");
+				}
 
-		if(whiskyCheckbox.isSelected()){
-			  System.out.println("clicked on " + whiskyCheckbox.getText());
-		}
+				if(whiskyCheckbox.isSelected()){
+					filterIngredients.add("whisky");
+				}
 
-		if(ginCheckbox.isSelected()){
-			  System.out.println("clicked on " + ginCheckbox.getText());
-		}
+				if(ginCheckbox.isSelected()){
+					filterIngredients.add("gin");
+				}
 
-		if(rumCheckbox.isSelected()){
-			  System.out.println("clicked on " + rumCheckbox.getText());
-		}
+				if(rumCheckbox.isSelected()){
+					filterIngredients.add("rum");
+				}
 
-		if(kahluaCheckbox.isSelected()){
-			  System.out.println("clicked on " + kahluaCheckbox.getText());
-		}
-
+				if(kahluaCheckbox.isSelected()){
+					filterIngredients.add("kahlua");
+				}
+				
+				//Mixers
+				if(limeCheckbox.isSelected()){
+					filterIngredients.add("lime");
+				}
+				if(lemonCheckbox.isSelected()){
+					filterIngredients.add("lemon");
+				}
+				System.out.println("Contents of Arraylist: " + filterIngredients);
+		    }
+		});
 	}
 	
 	public void selectAllLiquorCheckboxes(){
@@ -183,11 +205,6 @@ public class MainViewController implements Initializable {
 		           System.out.println("clicked on " + cocktailName);
 			   }
 		});
-		
-	}
-	
-	public void javaFXML (){
-		
 		
 	}
 

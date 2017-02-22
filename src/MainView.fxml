@@ -24,27 +24,27 @@
                                        <content>
                                           <VBox AnchorPane.topAnchor="30.0">
                                              <children>
-                                                <CheckBox fx:id="vodkaCheckbox" mnemonicParsing="false" onAction="#checkBoxChecked" text="Vodka">
+                                                <CheckBox fx:id="vodkaCheckbox" mnemonicParsing="false" text="Vodka">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
                                                 </CheckBox>
-                                                <CheckBox fx:id="whiskyCheckbox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#checkBoxChecked" text="Whisky">
+                                                <CheckBox fx:id="whiskyCheckbox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Whisky">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
                                                 </CheckBox>
-                                                <CheckBox fx:id="rumCheckbox" layoutX="10.0" layoutY="40.0" mnemonicParsing="false" onAction="#checkBoxChecked" text="Rum">
+                                                <CheckBox fx:id="rumCheckbox" layoutX="10.0" layoutY="40.0" mnemonicParsing="false" text="Rum">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
                                                 </CheckBox>
-                                                <CheckBox fx:id="ginCheckbox" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" onAction="#checkBoxChecked" text="Gin">
+                                                <CheckBox fx:id="ginCheckbox" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" text="Gin">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
                                                 </CheckBox>
-                                                <CheckBox fx:id="kahluaCheckbox" layoutX="10.0" layoutY="100.0" mnemonicParsing="false" onAction="#checkBoxChecked" text="Kahlua">
+                                                <CheckBox fx:id="kahluaCheckbox" layoutX="10.0" layoutY="100.0" mnemonicParsing="false" text="Kahlua">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
@@ -72,12 +72,12 @@
                                        <content>
                                           <VBox prefHeight="295.0" prefWidth="216.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
                                              <children>
-                                                <CheckBox fx:id="lemonCheckbox" mnemonicParsing="false" onAction="#checkBoxChecked" text="Lemon">
+                                                <CheckBox fx:id="lemonCheckbox" mnemonicParsing="false" text="Lemon">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
                                                 </CheckBox>
-                                                <CheckBox fx:id="limeCheckbox" layoutX="10.0" layoutY="190.0" mnemonicParsing="false" onAction="#checkBoxChecked" text="Lime">
+                                                <CheckBox fx:id="limeCheckbox" layoutX="10.0" layoutY="190.0" mnemonicParsing="false" text="Lime">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
@@ -94,7 +94,7 @@
                      </panes>
                   </Accordion>
                   <Button fx:id="selectAllIngredientsButton" layoutY="572.0" mnemonicParsing="false" text="Select All Ingredients" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
-                  <Button layoutY="2.0" mnemonicParsing="false" text="What Can I Make?" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                  <Button fx:id="whatCanIMakeButton" layoutY="2.0" mnemonicParsing="false" text="What Can I Make?" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                      <effect>
                         <InnerShadow blurType="GAUSSIAN" color="#01650b" radius="15.19" width="41.76" />
                      </effect>
