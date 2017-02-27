@@ -5,7 +5,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Driver extends Application {
-	public static void main(String[] args) {
+	public static void Main(String[] args) {
 		launch();
 	}
 
@@ -15,7 +15,7 @@ public class Driver extends Application {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("MainView.fxml"));
 			Parent root = loader.load();
-			Scene scene = new Scene(root, 800, 600);
+			Scene scene = new Scene(root, 1000, 600);
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch(Exception e) {
