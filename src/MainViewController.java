@@ -85,7 +85,7 @@ public class MainViewController implements Initializable {
 	public void selectAllLiquorCheckboxes(){
 		selectAllLiquorsButton.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
-
+		    	checkAllLiquor();
 				
 		    }
 		});
@@ -95,7 +95,7 @@ public class MainViewController implements Initializable {
 	public void selectAllMixerCheckboxes(){
 		selectAllMixersButton.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
-
+		    	checkAllIngredients();
 
 		    }
 		});
