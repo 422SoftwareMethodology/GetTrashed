@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class SqlDatabase {
 	private Connection connection = null;
 	SqlDatabase() {
-		String srcLocation = System.getProperty("user.dir");
+		String srcLocation = Driver.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 		String sTempDb = "drinks.db";
         String sJdbc = "jdbc:sqlite:" + srcLocation;
         System.out.println(sJdbc);
@@ -23,6 +23,10 @@ public class SqlDatabase {
 	
 	public ArrayList<String> Query(int[] combined) {
 		SqlQueryBuilder sqlQuery = new SqlQueryBuilder(combined, connection);
+		//System.out.println("In SqlDatabase");
+		for (int i = 0; i < sqlQuery.queriedList.size(); ++i) {
+			//System.out.println(sqlQuery.queriedList.get(i)[0]);
+		}
 		return sqlQuery.queriedList;
 	}
 }
