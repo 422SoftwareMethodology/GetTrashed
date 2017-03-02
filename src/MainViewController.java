@@ -18,17 +18,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 
+@SuppressWarnings("restriction")
 public class MainViewController implements Initializable {
-
-
-	
 	@FXML// the list of all cocktails
 	private ListView<String> cocktailList;
-
-
 	@FXML// Detail of selected cocktail
 	public Label cocktailInfo;
-	
 	@FXML //Image of the selected cocktail
 	public ImageView cocktailImage;
 	@FXML
@@ -44,25 +39,18 @@ public class MainViewController implements Initializable {
 	@FXML
 	public Button whatCanIMakeButton;
 
-
-	
 	//the ingredients arraylist
-	 ArrayList<String> filterIngredients = new ArrayList<String>();
-	 ArrayList<String> cocktailResults = new ArrayList<String>(); 
+	ArrayList<String> filterIngredients = new ArrayList<String>();
+	ArrayList<String> cocktailResults = new ArrayList<String>();
+	ObservableList<String> tempList = null;
+	ArrayList<String> drinkNames = new ArrayList<String>();
+	ArrayList<String> drinkDirections = new ArrayList<String>();
 	 
 	// Select groups toggle
-	 private boolean selectAllStatus = true;
+	private boolean selectAllStatus = true;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-		/*cocktailResults.add("Whisky Sour");
-		cocktailResults.add("White Russian");
-		cocktailResults.add("Jack and Coke");
-		cocktailResults.add("Sidecar");
-		cocktailResults.add("Gimlet");
-		cocktailResults.add("Martini");*/
-
 		//Default img load
 		String imageUrl = "http://cdn.playbuzz.com/cdn/f6b9bbfb-8708-49ad-a164-cdea284a0845/2bfcacf2-c580-4b60-aa95-8b5616d5c350.jpg";
 		Image newImage = new Image(imageUrl);
@@ -76,7 +64,6 @@ public class MainViewController implements Initializable {
 		selectAllIngredients();
 		ingredientArraylistMaker();
 		
-
 		cocktailImage.fitWidthProperty().bind(imgPane.widthProperty());
 		cocktailImage.fitHeightProperty().bind(imgPane.heightProperty());
 		
@@ -109,10 +96,9 @@ public class MainViewController implements Initializable {
 		    	checkAllIngredients(selectAllStatus);
 		    	checkAllLiquor(selectAllStatus);
 		    	selectAllStatus = !selectAllStatus;
-		    	if (selectAllStatus){
+		    	if (selectAllStatus) {
 		    		selectAllIngredientsButton.setText("Select All Ingredients");
-		    	}
-		    	else {
+		    	} else {
 		    		selectAllIngredientsButton.setText("Deselect All Ingredients");
 		    	}
 		    }
@@ -126,27 +112,15 @@ public class MainViewController implements Initializable {
 		cocktailList.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			   @Override
 		        public void handle(MouseEvent event) {
-				   //PUT COCKTAIL INFO HERE
+				   Integer index = null;
 				   String cocktailName = cocktailList.getSelectionModel().getSelectedItem();
-				   /*if(cocktailName == "White Russian"){
-						cocktailInfo.setText("Cocktail name:  White Russian\n Cocktail Ingredient: Vodka Kahlua Cream\n How to Make it: Pour and Stir");
-						String imageUrl = "http://cdn.liquor.com/wp-content/uploads/2011/09/02120028/white-russian-720x720-recipe.jpg";
-						Image newImage = new Image(imageUrl);
-						
-						cocktailImage.setImage(newImage);
-				   }
-				   else if(cocktailName == "Whisky Sour"){
-						cocktailInfo.setText("Cocktail name:  Whisky Sour\n Cocktail Ingredient: Bourbon Lemon Simple \n How to Make it: Pour and Stir");
-						String imageUrl = "http://cdn.liquor.com/wp-content/uploads/2011/07/fa-Whiskey-Sour.jpg";
-						Image newImage = new Image(imageUrl);
-						
-						cocktailImage.setImage(newImage);
-				   }*/
-				   
-		           System.out.println("clicked on " + cocktailName);
-			   }
-		});
-		
+				   index = cocktailList.getSelectionModel().getSelectedIndex();
+				   cocktailInfo.setText(drinkDirections.get(drinkDirections.size() - 1 - index));
+				   String imageUrl = "http://cdn.liquor.com/wp-content/uploads/2011/09/02120028/white-russian-720x720-recipe.jpg";
+				   Image newImage = new Image(imageUrl);
+				   cocktailImage.setImage(newImage);
+				}		   
+		});	
 	}
 
 // The Checkbox Functions
@@ -402,8 +376,7 @@ public class MainViewController implements Initializable {
 	
 	public void ingredientArraylistMaker() {
 		whatCanIMakeButton.setOnAction(new EventHandler<ActionEvent>() {
-		    @SuppressWarnings("null")
-			@Override public void handle(ActionEvent e) {
+		    @Override public void handle(ActionEvent e) {
 		    	filterIngredients.clear();
 		    	
 		    	if(ginCheckbox.isSelected()){
@@ -1374,13 +1347,20 @@ public class MainViewController implements Initializable {
 				if(juiceLemonadeCheckbox.isSelected()){
 					filterIngredients.add("juiceLemonade");
 				}
+				
+		    	drinkNames.clear();
+		    	drinkDirections.clear();
+		    	tempList = FXCollections.observableArrayList(drinkNames);
+				cocktailList.setItems(tempList);
 
 				SearchingIngredientsCode search = new SearchingIngredientsCode();
 				cocktailResults = Driver.sqlDatabase.Query(search.Search(filterIngredients));
-				ObservableList<String> tempList = null;
-				ArrayList<String> drinkNames = new ArrayList<String>();
-				for (int i = cocktailResults.size()/2; i < cocktailResults.size(); ++i) {
-					drinkNames.add(cocktailResults.get(i));
+				for (int i = 0; i < cocktailResults.size(); ++i) {
+					if (i < cocktailResults.size()/2) {
+						drinkDirections.add(cocktailResults.get(i));
+					} else {
+						drinkNames.add(cocktailResults.get(i));
+					}
 				}
 				tempList = FXCollections.observableArrayList(drinkNames);
 				cocktailList.setItems(tempList);

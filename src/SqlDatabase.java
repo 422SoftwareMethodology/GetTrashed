@@ -23,10 +23,6 @@ public class SqlDatabase {
 	
 	public ArrayList<String> Query(int[] combined) {
 		SqlQueryBuilder sqlQuery = new SqlQueryBuilder(combined, connection);
-		//System.out.println("In SqlDatabase");
-		for (int i = 0; i < sqlQuery.queriedList.size(); ++i) {
-			//System.out.println(sqlQuery.queriedList.get(i)[0]);
-		}
 		return sqlQuery.queriedList;
 	}
 }

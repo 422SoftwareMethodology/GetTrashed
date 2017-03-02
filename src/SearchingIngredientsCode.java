@@ -1,11 +1,8 @@
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.stream.IntStream;
 
 public class SearchingIngredientsCode {
-
 	public int[] Search(ArrayList<String> filterIngredients){
-		
 		Ingredients ingredients = new Ingredients();
 		Spirits spirit = new Spirits();
 		int[] combined = new int[4000];
@@ -47,33 +44,29 @@ public class SearchingIngredientsCode {
 		int threeArrayPosition = 0;
 		int fourArrayPosition = 0;
 		int numIngredients = 1;
-		for(int i = 0; i < combined.length - 1; i++){
+		for(int i = 0; i < combined.length - 1; i++) {
 			if(combined[i] == combined[i+1]){
 				numIngredients++;
-			}
-			else{
+			} else {
 				//here is where we would add the recipe to an array that corresponds to number of ingredients missing
 				//We would compare the amount of ingredients we have (number of consecutive ingredients), to the 
 				//number of ingredients in the recipe (by doing a call to the database).  If getNumIngred(i) -numIngredients = 0,
 				//then it would go into the ready to make, otherwise, the difference would be the number of missing ingredients.  If we limit
 				//the number of missing ingredients to "Ready to make", "Missing One", "Missing Two", and "Missing 3 or more", we would
 				//only have to deal with 4 arrays.  For this demo, I'm just going to add the number of ingredients into their arrays.
-				if(numIngredients == 2){
+				if(numIngredients == 2) {
 					twoIngredients[twoArrayPosition] = combined[i];
 					numIngredients = 1;
 					twoArrayPosition++;
-				}
-				else if(numIngredients == 3){
+				} else if(numIngredients == 3) {
 					threeIngredients[threeArrayPosition] = combined[i];
 					numIngredients = 1;
 					threeArrayPosition++;
-				}
-				else if(numIngredients ==4){
+				} else if(numIngredients ==4) {
 					fourIngredients[fourArrayPosition] = combined[i];
 					numIngredients = 1;
 					fourArrayPosition++;
-				}
-				else{
+				} else {
 					numIngredients = 1;
 				}
 			}
