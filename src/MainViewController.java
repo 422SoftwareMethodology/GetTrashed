@@ -38,8 +38,11 @@ public class MainViewController implements Initializable {
 	public Button selectAllMixersButton;
 	@FXML
 	public Button whatCanIMakeButton;
+	
+	SearchingIngredientsCode search = new SearchingIngredientsCode();
 
 	//the ingredients arraylist
+	ArrayList<String> utilityArray = new ArrayList<String>();
 	ArrayList<String> filterIngredients = new ArrayList<String>();
 	ArrayList<String> cocktailResults = new ArrayList<String>();
 	ObservableList<String> tempList = null;
@@ -92,7 +95,6 @@ public class MainViewController implements Initializable {
 	public void selectAllIngredients(){
 		selectAllIngredientsButton.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
-
 		    	checkAllIngredients(selectAllStatus);
 		    	checkAllLiquor(selectAllStatus);
 		    	selectAllStatus = !selectAllStatus;
@@ -116,6 +118,15 @@ public class MainViewController implements Initializable {
 				   String cocktailName = cocktailList.getSelectionModel().getSelectedItem();
 				   index = cocktailList.getSelectionModel().getSelectedIndex();
 				   cocktailInfo.setText(drinkDirections.get(drinkDirections.size() - 1 - index));
+				   utilityArray = Driver.sqlDatabase.QueryByIngredients(search.Search(drinkNames.get(index)));
+			       utilityArray = Driver.sqlDatabase.QueryByMeasurements(search.Search(drinkNames.get(index)));
+				   for (int i = 0; i < cocktailResults.size(); ++i) {
+					   if (i < cocktailResults.size()/2) {
+						   drinkDirections.add(cocktailResults.get(i));
+					   } else {
+						   drinkNames.add(cocktailResults.get(i));
+					   }
+				   }
 				   String imageUrl = "http://cdn.liquor.com/wp-content/uploads/2011/09/02120028/white-russian-720x720-recipe.jpg";
 				   Image newImage = new Image(imageUrl);
 				   cocktailImage.setImage(newImage);
@@ -1357,8 +1368,7 @@ public class MainViewController implements Initializable {
 		    	tempList = FXCollections.observableArrayList(drinkNames);
 				cocktailList.setItems(tempList);
 
-				SearchingIngredientsCode search = new SearchingIngredientsCode();
-				cocktailResults = Driver.sqlDatabase.Query(search.Search(filterIngredients));
+				cocktailResults = Driver.sqlDatabase.QueryByName(search.Search(filterIngredients));
 				for (int i = 0; i < cocktailResults.size(); ++i) {
 					if (i < cocktailResults.size()/2) {
 						drinkDirections.add(cocktailResults.get(i));

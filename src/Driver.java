@@ -4,6 +4,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+@SuppressWarnings("restriction")
 public class Driver extends Application {
 	public static SqlDatabase sqlDatabase;
 	public static void Main(String[] args) {
