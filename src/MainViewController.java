@@ -117,14 +117,14 @@ public class MainViewController implements Initializable {
 				   Integer index = null;  
 				   index = cocktailList.getSelectionModel().getSelectedIndex();
 				   cocktailInfo.setText(drinkDirections.get(drinkDirections.size() - 1 - index));
-				   utilityArray = Driver.sqlDatabase.QueryByIngredients(drinkNames.get(index));
+				   utilityArray = Driver.sqlDatabase.QueryForIngredients(drinkNames.get(index));
 				   for (int i = 0; i < utilityArray.size(); ++i) {
 					   if (utilityArray.get(i) != null) {
 						   System.out.println(utilityArray.get(i));
 					   }
 				   }
 				   utilityArray.clear();
-			       utilityArray = Driver.sqlDatabase.QueryByMeasurements(drinkNames.get(index));
+			       utilityArray = Driver.sqlDatabase.QueryForMeasurements(drinkNames.get(index));
 			       for (int i = 0; i < utilityArray.size(); ++i) {
 					   if (utilityArray.get(i) != null) {
 						   System.out.println(utilityArray.get(i));
@@ -1379,7 +1379,7 @@ public class MainViewController implements Initializable {
 		    	tempList = FXCollections.observableArrayList(drinkNames);
 				cocktailList.setItems(tempList);
 
-				cocktailResults = Driver.sqlDatabase.QueryByName(search.Search(filterIngredients));
+				cocktailResults = Driver.sqlDatabase.QueryForName(search.Search(filterIngredients));
 				for (int i = 0; i < cocktailResults.size(); ++i) {
 					if (i < cocktailResults.size()/2) {
 						drinkDirections.add(cocktailResults.get(i));

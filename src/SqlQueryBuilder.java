@@ -18,7 +18,7 @@ public class SqlQueryBuilder {
 		localConnection = connection;
 	}
 	
-	public ArrayList<String> QueryForName() {
+	public ArrayList<String> QueryName() {
 		try {
 			Statement statement = null;
 			statement = localConnection.createStatement();
@@ -31,7 +31,7 @@ public class SqlQueryBuilder {
 		return queriedList;
 	}
 	
-	public ArrayList<String> QueryForIngredients() {
+	public ArrayList<String> QueryIngredients() {
 		try {
 			Statement statement = null;
 			statement = localConnection.createStatement();
@@ -55,7 +55,7 @@ public class SqlQueryBuilder {
 		return queriedList;
 	}
 	
-	public ArrayList<String> QueryForMeasurements() {
+	public ArrayList<String> QueryMeasurements() {
 		try {
 			Statement statement = null;
 			statement = localConnection.createStatement();

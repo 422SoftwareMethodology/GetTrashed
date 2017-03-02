@@ -22,18 +22,18 @@ public class SqlDatabase {
 	    System.out.println("Opened database successfully");
     }
 	
-	public ArrayList<String> QueryByName(ArrayList<Integer> combined) {
+	public ArrayList<String> QueryForName(ArrayList<Integer> combined) {
 		sqlQuery = new SqlQueryBuilder(combined, connection);
-		return sqlQuery.QueryForName();
+		return sqlQuery.QueryName();
 	}
 	
-	public ArrayList<String> QueryByIngredients(String drinkName) {
+	public ArrayList<String> QueryForIngredients(String drinkName) {
 		sqlQuery = new SqlQueryBuilder(drinkName, connection);
-		return sqlQuery.QueryForIngredients();
+		return sqlQuery.QueryIngredients();
 	}
 	
-	public ArrayList<String> QueryByMeasurements(String drinkName) {
+	public ArrayList<String> QueryForMeasurements(String drinkName) {
 		sqlQuery = new SqlQueryBuilder(drinkName, connection);
-		return sqlQuery.QueryForMeasurements();
+		return sqlQuery.QueryMeasurements();
 	}
 }
