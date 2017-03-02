@@ -4,7 +4,7 @@ import java.util.stream.IntStream;
 
 public class SearchingIngredientsCode {
 
-	public void Search(ArrayList<String> filterIngredients){
+	public Integer[] Search(ArrayList<String> filterIngredients){
 		
 		Ingredients ingredients = new Ingredients();
 		Spirits spirit = new Spirits();
@@ -103,6 +103,7 @@ public class SearchingIngredientsCode {
 			}
 		}
 System.out.print("\n");
+return combined;
 	}
 	//This function will take as many arrays as the user puts into it as arguments, and append them all together.  We could probably find
 	//another way to append all if this won't work with our checkbox implementation.

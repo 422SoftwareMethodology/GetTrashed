@@ -48,7 +48,7 @@ public class MainViewController implements Initializable {
 	
 	//the ingredients arraylist
 	 ArrayList<String> filterIngredients = new ArrayList<String>();
-	 ArrayList<String> cocktailResults = new ArrayList<String>(); 
+	 ArrayList<String[]> cocktailResults = new ArrayList<String[]>(); 
 	 
 	// Select groups toggle
 	 private boolean selectAllStatus = true;
@@ -56,15 +56,12 @@ public class MainViewController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		cocktailResults.add("Whisky Sour");
+		/*cocktailResults.add("Whisky Sour");
 		cocktailResults.add("White Russian");
 		cocktailResults.add("Jack and Coke");
 		cocktailResults.add("Sidecar");
 		cocktailResults.add("Gimlet");
-
-		cocktailResults.add("Martini");
-		ObservableList<String> testList = FXCollections.observableArrayList(cocktailResults);
-		cocktailList.setItems(testList);
+		cocktailResults.add("Martini");*/
 
 		//Default img load
 		String imageUrl = "http://cdn.playbuzz.com/cdn/f6b9bbfb-8708-49ad-a164-cdea284a0845/2bfcacf2-c580-4b60-aa95-8b5616d5c350.jpg";
@@ -130,35 +127,21 @@ public class MainViewController implements Initializable {
 			   @Override
 		        public void handle(MouseEvent event) {
 				   //PUT COCKTAIL INFO HERE
-				   String cocktailName =cocktailList.getSelectionModel().getSelectedItem();
-				   if(cocktailName == "White Russian"){
-						/**
-						 * Cocktail Detail Text
-						 */
+				   String cocktailName = cocktailList.getSelectionModel().getSelectedItem();
+				   /*if(cocktailName == "White Russian"){
 						cocktailInfo.setText("Cocktail name:  White Russian\n Cocktail Ingredient: Vodka Kahlua Cream\n How to Make it: Pour and Stir");
-						
-						/**
-						 * Img window
-						 */
 						String imageUrl = "http://cdn.liquor.com/wp-content/uploads/2011/09/02120028/white-russian-720x720-recipe.jpg";
 						Image newImage = new Image(imageUrl);
 						
 						cocktailImage.setImage(newImage);
 				   }
 				   else if(cocktailName == "Whisky Sour"){
-						/**
-						 * Cocktail Detail Text
-						 */
 						cocktailInfo.setText("Cocktail name:  Whisky Sour\n Cocktail Ingredient: Bourbon Lemon Simple \n How to Make it: Pour and Stir");
-						
-						/**
-						 * Img window
-						 */
 						String imageUrl = "http://cdn.liquor.com/wp-content/uploads/2011/07/fa-Whiskey-Sour.jpg";
 						Image newImage = new Image(imageUrl);
 						
 						cocktailImage.setImage(newImage);
-				   }
+				   }*/
 				   
 		           System.out.println("clicked on " + cocktailName);
 			   }
@@ -419,7 +402,8 @@ public class MainViewController implements Initializable {
 	
 	public void ingredientArraylistMaker() {
 		whatCanIMakeButton.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override public void handle(ActionEvent e) {
+		    @SuppressWarnings("null")
+			@Override public void handle(ActionEvent e) {
 		    	filterIngredients.clear();
 		    	
 		    	if(ginCheckbox.isSelected()){
@@ -1392,7 +1376,16 @@ public class MainViewController implements Initializable {
 				}
 
 				SearchingIngredientsCode search = new SearchingIngredientsCode();
-				search.Search(filterIngredients);
+				cocktailResults = Driver.sqlDatabase.Query(search.Search(filterIngredients));
+				ObservableList<String> tempList = null;
+				ArrayList<String> drinkNames = new ArrayList<String>();
+				for (int i = 0; i < cocktailResults.size(); ++i) {
+					drinkNames.add(cocktailResults.get(i)[0]);
+					//System.out.println("In MVC");
+					//System.out.println(cocktailResults.get(i)[0]);
+				}
+				tempList = FXCollections.observableArrayList(drinkNames);
+				cocktailList.setItems(tempList);
 		    }
 		});
 	}
