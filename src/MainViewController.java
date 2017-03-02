@@ -1324,6 +1324,10 @@ public class MainViewController implements Initializable {
 					filterIngredients.add("juiceGrapefruit");
 				}
 				
+				if(juiceOrangeCheckbox.isSelected()){
+					filterIngredients.add("juiceOrange");
+				}
+				
 				if(juiceLemonCheckbox.isSelected()){
 					filterIngredients.add("juiceLemon");
 				}
