@@ -5,13 +5,13 @@ import java.util.ArrayList;
 
 public class SqlQueryBuilder {
 	public ArrayList<String> queriedList;
-	SqlQueryBuilder(int[] combined, Connection connection) {
+	SqlQueryBuilder(ArrayList<Integer> combined, Connection connection) {
 		queriedList = new ArrayList<String>();
 		try {
 			Statement statement = null;
 			statement = connection.createStatement();
-			for (int i = 0; i < combined.length; ++i) {
-				ResultSet rS = statement.executeQuery("SELECT * FROM DRINKS where ID = '" + combined[i] + "';");
+			for (int i = 0; i < combined.size(); ++i) {
+				ResultSet rS = statement.executeQuery("SELECT * FROM DRINKS where ID = '" + combined.get(i) + "';");
 				queriedList.add(i, rS.getString(2));
 				queriedList.add(i, rS.getString(5));
 			}

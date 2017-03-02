@@ -1,11 +1,17 @@
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class SearchingIngredientsCode {
-	public int[] Search(ArrayList<String> filterIngredients){
+	public ArrayList<Integer> Search(ArrayList<String> filterIngredients){
 		Ingredients ingredients = new Ingredients();
 		Spirits spirit = new Spirits();
-		int[] combined = new int[4000];
+		ArrayList<Integer> combined = new ArrayList<Integer>();
 		Class<? extends Ingredients> ingredientsClass = ingredients.getClass();
 		Field[] ingredientFields = ingredientsClass.getDeclaredFields();		
 		Class<? extends Spirits> spiritsClass = spirit.getClass();
@@ -15,7 +21,9 @@ public class SearchingIngredientsCode {
 			for (Field f : spiritFields) {
 				if (f.getName().equals(filterIngredients.get(i))) {
 					try {
-						combined = merge((int[]) f.get(spirit));
+						Integer[] boxedInts = IntStream.of((int[])f.get(spirit)).boxed().toArray(Integer[]::new);
+						List<Integer> tempList = Arrays.asList(boxedInts);
+						combined.addAll(tempList);
 					} catch (IllegalArgumentException | IllegalAccessException e) {
 						e.printStackTrace();
 					}
@@ -24,7 +32,9 @@ public class SearchingIngredientsCode {
 			for (Field f : ingredientFields) {
 				if (f.getName().equals(filterIngredients.get(i))) {
 					try {
-						combined = merge((int[]) f.get(ingredients));
+						Integer[] boxedInts = IntStream.of((int[])f.get(ingredients)).boxed().toArray(Integer[]::new);
+						List<Integer> tempList = Arrays.asList(boxedInts);
+						combined.addAll(tempList);
 					} catch (IllegalArgumentException | IllegalAccessException e) {
 						e.printStackTrace();
 					}
@@ -32,10 +42,9 @@ public class SearchingIngredientsCode {
 			}
 		}
 
-		MergeSort mms = new MergeSort();
-		mms.sort(combined);
+		Collections.sort(combined);
 		
-		int combinedSize = combined.length;
+		int combinedSize = combined.size();
 		
 		Integer[] twoIngredients = new Integer[combinedSize];
 		Integer[] threeIngredients = new Integer[combinedSize];
@@ -44,7 +53,7 @@ public class SearchingIngredientsCode {
 		int threeArrayPosition = 0;
 		int fourArrayPosition = 0;
 		int numIngredients = 1;
-		for(int i = 0; i < combined.length - 1; i++) {
+		/*for(int i = 0; i < combined.length - 1; i++) {
 			if(combined[i] == combined[i+1]){
 				numIngredients++;
 			} else {
@@ -70,7 +79,7 @@ public class SearchingIngredientsCode {
 					numIngredients = 1;
 				}
 			}
-		}
+		}*/
 		/*System.out.print("Two Ingredients List: ");
 				for (int i = 0; i < twoIngredients.length; i++){
 					if(twoIngredients[i] != null){
