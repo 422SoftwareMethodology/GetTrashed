@@ -1380,8 +1380,8 @@ public class MainViewController implements Initializable {
 					filterIngredients.add("juiceLemonade");
 				}
 
-				
-				System.out.println("Contents of Arraylist: " + filterIngredients);
+				SearchingIngredientsCode search = new SearchingIngredientsCode();
+				search.Search(filterIngredients);
 		    }
 		});
 	}

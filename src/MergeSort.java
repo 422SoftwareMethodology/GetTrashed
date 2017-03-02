@@ -1,13 +1,13 @@
 
 public class MergeSort {
-	private int[] numbers;
+	private Integer[] numbers;
     private int[] helper;
 
     private int number;
 
-    public void sort(int[] values) {
-            this.numbers = values;
-            number = values.length;
+    public void sort(Integer[] combined) {
+            this.numbers = combined;
+            number = combined.length;
             this.helper = new int[number];
             mergesort(0, number - 1);
     }

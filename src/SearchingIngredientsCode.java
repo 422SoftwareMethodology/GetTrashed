@@ -1,15 +1,44 @@
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 public class SearchingIngredientsCode {
 
-	public static void main(String[] args){
+	public void Search(ArrayList<String> filterIngredients){
 		
-		Ingredients ingred = new Ingredients();
-		Spirits spirit = new Spirits();;
+		Ingredients ingredients = new Ingredients();
+		Spirits spirit = new Spirits();
+		Integer[] combined = new Integer[4000];
+		Class<? extends Ingredients> ingredientsClass = ingredients.getClass();
+		Field[] ingredientFields = ingredientsClass.getDeclaredFields();		
+		Class<? extends Spirits> spiritsClass = spirit.getClass();
+		Field[] spiritFields = spiritsClass.getDeclaredFields();
 		
-		
-		int[] combined = merge(spirit.vodka, ingred.juiceApple, ingred.juiceOrange, ingred.baileysIrishCream);
-		
-
+		for (int i = 0; i < filterIngredients.size(); ++i) {
+			for (Field f : spiritFields) {
+				if (f.getName().equals(filterIngredients.get(i))) {
+					try {
+						combined = merge((int[]) f.get(spirit));
+					} catch (IllegalArgumentException | IllegalAccessException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			for (Field f : ingredientFields) {
+				if (f.getName().equals(filterIngredients.get(i))) {
+					try {
+						combined = merge((int[]) f.get(ingredients));
+					} catch (IllegalArgumentException | IllegalAccessException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		for (int i = 0; i < combined.length; ++i) {
+			if (combined[i] != null) {
+				System.out.println(combined[i]);
+			}
+		}
 		MergeSort mms = new MergeSort();
 		mms.sort(combined);
 		
@@ -77,21 +106,24 @@ System.out.print("\n");
 	}
 	//This function will take as many arrays as the user puts into it as arguments, and append them all together.  We could probably find
 	//another way to append all if this won't work with our checkbox implementation.
-	final static public int[] merge(final int[] ...arrays ) {
+	final static public Integer[] merge(final int[] ...arrays ) {
 	    int size = 0;
-	    for ( int[] a: arrays )
+	    for (int[] a : arrays) {
 	        size += a.length;
-
-	        int[] res = new int[size];
-
-	        int destPos = 0;
+	    }
+	    Integer[] res = new Integer[size];
+	    for (int[] a : arrays) {
+	    	Integer[] boxedInts = IntStream.of(a).boxed().toArray(Integer[]::new);
+	    	int destPos = 0;
 	        for ( int i = 0; i < arrays.length; i++ ) {
-	            if ( i > 0 ) destPos += arrays[i-1].length;
-	            int length = arrays[i].length;
-	            System.arraycopy(arrays[i], 0, res, destPos, length);
+	            if (i > 0) {
+	            	destPos += boxedInts.length;
+	            }
+	            int length = boxedInts.length;
+	            System.arraycopy(boxedInts, 0, res, destPos, length);
 	        }
-
-	        return res;
+	    }
+	    return res;
 	}
 }
 
