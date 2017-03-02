@@ -114,12 +114,23 @@ public class MainViewController implements Initializable {
 		cocktailList.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			   @Override
 		        public void handle(MouseEvent event) {
-				   Integer index = null;
-				   String cocktailName = cocktailList.getSelectionModel().getSelectedItem();
+				   Integer index = null;  
 				   index = cocktailList.getSelectionModel().getSelectedIndex();
 				   cocktailInfo.setText(drinkDirections.get(drinkDirections.size() - 1 - index));
-				   utilityArray = Driver.sqlDatabase.QueryByIngredients(search.Search(drinkNames.get(index)));
-			       utilityArray = Driver.sqlDatabase.QueryByMeasurements(search.Search(drinkNames.get(index)));
+				   utilityArray = Driver.sqlDatabase.QueryByIngredients(drinkNames.get(index));
+				   for (int i = 0; i < utilityArray.size(); ++i) {
+					   if (utilityArray.get(i) != null) {
+						   System.out.println(utilityArray.get(i));
+					   }
+				   }
+				   utilityArray.clear();
+			       utilityArray = Driver.sqlDatabase.QueryByMeasurements(drinkNames.get(index));
+			       for (int i = 0; i < utilityArray.size(); ++i) {
+					   if (utilityArray.get(i) != null) {
+						   System.out.println(utilityArray.get(i));
+					   }
+				   }
+			       utilityArray.clear();
 				   for (int i = 0; i < cocktailResults.size(); ++i) {
 					   if (i < cocktailResults.size()/2) {
 						   drinkDirections.add(cocktailResults.get(i));

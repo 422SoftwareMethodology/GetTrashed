@@ -4,7 +4,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class SqlQueryBuilder {
-	Integer index;
+	String name;
 	ArrayList<Integer> iDArray;
 	ArrayList<String> queriedList = new ArrayList<String>();
 	Connection localConnection;
@@ -13,8 +13,8 @@ public class SqlQueryBuilder {
 		localConnection = connection;
 	}
 	
-	SqlQueryBuilder(Integer drinkID, Connection connection) {
-		index = drinkID;
+	SqlQueryBuilder(String drinkName, Connection connection) {
+		name = drinkName;
 		localConnection = connection;
 	}
 	
@@ -35,7 +35,7 @@ public class SqlQueryBuilder {
 		try {
 			Statement statement = null;
 			statement = localConnection.createStatement();
-			ResultSet rS = statement.executeQuery("SELECT * FROM DRINKS where ID = '" + index + "';");
+			ResultSet rS = statement.executeQuery("SELECT * FROM DRINKS where NAME = '" + name + "';");
 			queriedList.add(rS.getString(7));
 			queriedList.add(rS.getString(8));
 			queriedList.add(rS.getString(9));
@@ -59,7 +59,7 @@ public class SqlQueryBuilder {
 		try {
 			Statement statement = null;
 			statement = localConnection.createStatement();
-			ResultSet rS = statement.executeQuery("SELECT * FROM DRINKS where ID = '" + index + "';");
+			ResultSet rS = statement.executeQuery("SELECT * FROM DRINKS where NAME = '" + name + "';");
 			queriedList.add(rS.getString(22));
 			queriedList.add(rS.getString(23));
 			queriedList.add(rS.getString(24));

@@ -27,13 +27,13 @@ public class SqlDatabase {
 		return sqlQuery.QueryForName();
 	}
 	
-	public ArrayList<String> QueryByIngredients(ArrayList<Integer> drinkNames) {
-		sqlQuery = new SqlQueryBuilder(drinkNames, connection);
+	public ArrayList<String> QueryByIngredients(String drinkName) {
+		sqlQuery = new SqlQueryBuilder(drinkName, connection);
 		return sqlQuery.QueryForIngredients();
 	}
 	
-	public ArrayList<String> QueryByMeasurements(ArrayList<Integer> drinkNames) {
-		sqlQuery = new SqlQueryBuilder(drinkNames, connection);
+	public ArrayList<String> QueryByMeasurements(String drinkName) {
+		sqlQuery = new SqlQueryBuilder(drinkName, connection);
 		return sqlQuery.QueryForMeasurements();
 	}
 }
