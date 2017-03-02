@@ -21,7 +21,7 @@ public class SqlDatabase {
 	    System.out.println("Opened database successfully");
     }
 	
-	public ArrayList<String[]> Query(Integer[] combined) {
+	public ArrayList<String> Query(Integer[] combined) {
 		SqlQueryBuilder sqlQuery = new SqlQueryBuilder(combined, connection);
 		//System.out.println("In SqlDatabase");
 		for (int i = 0; i < sqlQuery.queriedList.size(); ++i) {

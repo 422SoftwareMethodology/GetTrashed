@@ -48,7 +48,7 @@ public class MainViewController implements Initializable {
 	
 	//the ingredients arraylist
 	 ArrayList<String> filterIngredients = new ArrayList<String>();
-	 ArrayList<String[]> cocktailResults = new ArrayList<String[]>(); 
+	 ArrayList<String> cocktailResults = new ArrayList<String>(); 
 	 
 	// Select groups toggle
 	 private boolean selectAllStatus = true;
@@ -1379,8 +1379,8 @@ public class MainViewController implements Initializable {
 				cocktailResults = Driver.sqlDatabase.Query(search.Search(filterIngredients));
 				ObservableList<String> tempList = null;
 				ArrayList<String> drinkNames = new ArrayList<String>();
-				for (int i = 0; i < cocktailResults.size(); ++i) {
-					drinkNames.add(cocktailResults.get(i)[0]);
+				for (int i = cocktailResults.size()/2; i < cocktailResults.size(); ++i) {
+					drinkNames.add(cocktailResults.get(i));
 					//System.out.println("In MVC");
 					//System.out.println(cocktailResults.get(i)[0]);
 				}
