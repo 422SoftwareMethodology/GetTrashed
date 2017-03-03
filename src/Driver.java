@@ -18,7 +18,7 @@ public class Driver extends Application {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("MainView.fxml"));
 			Parent root = loader.load();
-			Scene scene = new Scene(root, 1000, 600);
+			Scene scene = new Scene(root, 1000, 700);
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch(Exception e) {

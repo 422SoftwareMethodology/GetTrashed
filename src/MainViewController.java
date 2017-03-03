@@ -54,6 +54,12 @@ public class MainViewController implements Initializable {
 	@FXML
 	public Button selectAllMixersButton;
 	@FXML
+	public Button selectAllWhiskey;
+	@FXML
+	public Button selectAllVodka;
+	@FXML
+	public Button selectAllRum;
+	@FXML
 	public Button whatCanIMakeButton;
 	
 	SearchingIngredientsCode search = new SearchingIngredientsCode();
@@ -89,6 +95,9 @@ public class MainViewController implements Initializable {
 		selectAllMixerCheckboxes();
 		selectAllIngredients();
 		ingredientArraylistMaker();
+		selectAllWhiskyCheckboxes();
+		selectAllVodkaCheckboxes();
+		selectAllRumCheckboxes();
 		
 		cocktailImage.fitWidthProperty().bind(imgPane.widthProperty());
 		cocktailImage.fitHeightProperty().bind(imgPane.heightProperty());
@@ -110,6 +119,33 @@ public class MainViewController implements Initializable {
 		    @Override public void handle(ActionEvent e) {
 		    	checkAllIngredients(true);
 
+		    }
+		});
+		
+	}
+	
+	public void selectAllWhiskyCheckboxes(){
+		selectAllWhiskey.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override public void handle(ActionEvent e) {
+		    	checkAllWhiskey();
+		    }
+		});
+		
+	}
+	
+	public void selectAllVodkaCheckboxes(){
+		selectAllVodka.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override public void handle(ActionEvent e) {
+		    	checkAllVodka();
+		    }
+		});
+		
+	}
+	
+	public void selectAllRumCheckboxes(){
+		selectAllRum.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override public void handle(ActionEvent e) {
+		    	checkAllRum();
 		    }
 		});
 		
@@ -525,6 +561,51 @@ public class MainViewController implements Initializable {
 		tiaMariaCheckbox.setSelected(checkStatus);
 		portCheckbox.setSelected(checkStatus);
 		redWineCheckbox.setSelected(checkStatus);
+	}
+	
+	public void checkAllWhiskey() {
+		whiskeyBlendedCheckbox.setSelected(true);
+		whiskeyBourbonCheckbox.setSelected(true);
+		whiskeyCanadianCheckbox.setSelected(true);
+		whiskeyIrishCheckbox.setSelected(true);
+		whiskeyJackDanielsCheckbox.setSelected(true);
+		whiskeyJimBeamCheckbox.setSelected(true);
+		whiskeyRyeCheckbox.setSelected(true);
+		whiskeyTennesseeCheckbox.setSelected(true);
+		whiskeyWildTurkeyCheckbox.setSelected(true);
+		whiskeyCheckbox.setSelected(true);
+		scotchCheckbox.setSelected(true);
+	}
+	
+	public void checkAllVodka() {
+		vodkaAbsolutCitronCheckbox.setSelected(true);
+		vodkaAbsolutKurantCheckbox.setSelected(true);
+		vodkaAbsolutPepparCheckbox.setSelected(true);
+		vodkaCitrusCheckbox.setSelected(true);
+		vodkaCranberryCheckbox.setSelected(true);
+		vodkaLemonCheckbox.setSelected(true);
+		vodkaLimeCheckbox.setSelected(true);
+		vodkaMelonCheckbox.setSelected(true);
+		vodkaOrangeCheckbox.setSelected(true);
+		vodkaPeachCheckbox.setSelected(true);
+		vodkaRaspberryCheckbox.setSelected(true);
+		vodkaVanillaCheckbox.setSelected(true);
+		vodkaCheckbox.setSelected(true);
+		
+	}
+	
+	public void checkAllRum() {
+		rumAnejoCheckbox.setSelected(true);
+		rumBacardiLimonCheckbox.setSelected(true);
+		rumBlackCheckbox.setSelected(true);
+		rumCoconutCheckbox.setSelected(true);
+		rumDarkCheckbox.setSelected(true);
+		rumGoldCheckbox.setSelected(true);
+		rumLightCheckbox.setSelected(true);
+		rumMalibuCheckbox.setSelected(true);
+		rumOrangeCheckbox.setSelected(true);
+		rumSpicedCheckbox.setSelected(true);
+		rumCheckbox.setSelected(true);
 	}
 	
 	public void ingredientArraylistMaker() {
