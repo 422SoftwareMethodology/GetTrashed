@@ -10,10 +10,8 @@ public class SearchingIngredientsCode {
 		Ingredients ingredients = new Ingredients();
 		Spirits spirit = new Spirits();
 		ArrayList<Integer> combined = new ArrayList<Integer>();
-		Class<? extends Ingredients> ingredientsClass = ingredients.getClass();
-		Field[] ingredientFields = ingredientsClass.getDeclaredFields();		
-		Class<? extends Spirits> spiritsClass = spirit.getClass();
-		Field[] spiritFields = spiritsClass.getDeclaredFields();
+		Field[] ingredientFields = ingredients.getClass().getDeclaredFields();		
+		Field[] spiritFields = spirit.getClass().getDeclaredFields();
 		
 		for (int i = 0; i < filterIngredients.size(); ++i) {
 			for (Field f : spiritFields) {
