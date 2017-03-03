@@ -1772,9 +1772,30 @@
                                     </AnchorPane>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                        <children>
-                                          <Label fx:id="cocktailInfo" alignment="CENTER" layoutX="-7.0" prefHeight="316.0" prefWidth="183.0" text="Drink text goes here..." textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="0.0">
+                                          <ScrollPane hbarPolicy="NEVER" prefHeight="215.0" prefWidth="247.0" AnchorPane.bottomAnchor="130.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <content>
+                                                <VBox prefHeight="210.0" prefWidth="229.0" spacing="2.0">
+                                                   <children>
+                                                      <Label fx:id="ingredientInfo1" text="ingredientInfo1" />
+                                                      <Label fx:id="ingredientInfo2" layoutX="10.0" layoutY="10.0" text="ingredientInfo2" />
+                                                      <Label fx:id="ingredientInfo3" layoutX="10.0" layoutY="27.0" text="ingredientInfo3" />
+                                                      <Label fx:id="ingredientInfo4" layoutX="10.0" layoutY="44.0" text="ingredientInfo4" />
+                                                      <Label fx:id="ingredientInfo5" layoutX="10.0" layoutY="61.0" text="ingredientInfo5" />
+                                                      <Label fx:id="ingredientInfo6" layoutX="10.0" layoutY="78.0" text="ingredientInfo6" />
+                                                      <Label fx:id="ingredientInfo7" layoutX="10.0" layoutY="95.0" text="ingredientInfo7" />
+                                                      <Label fx:id="ingredientInfo8" layoutX="10.0" layoutY="112.0" text="ingredientInfo8" />
+                                                      <Label fx:id="ingredientInfo9" layoutX="10.0" layoutY="129.0" text="ingredientInfo9" />
+                                                      <Label fx:id="ingredientInfo10" layoutX="10.0" layoutY="146.0" text="ingredientInfo10" />
+                                                      <Label fx:id="ingredientInfo11" layoutX="10.0" layoutY="163.0" text="ingredientInfo11" />
+                                                      <Label fx:id="ingredientInfo12" layoutX="10.0" layoutY="180.0" text="ingredientInfo12" />
+                                                      <Label fx:id="ingredientInfo13" layoutX="10.0" layoutY="197.0" text="ingredientInfo13" />
+                                                   </children>
+                                                </VBox>
+                                             </content>
+                                          </ScrollPane>
+                                          <Label fx:id="cocktailInfo" alignment="CENTER" layoutX="-7.0" prefHeight="129.0" prefWidth="241.0" text="Drink text goes here..." textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0">
                                              <font>
-                                                <Font size="18.0" />
+                                                <Font size="14.0" />
                                              </font></Label>
                                        </children>
                                     </AnchorPane>

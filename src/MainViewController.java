@@ -24,6 +24,23 @@ public class MainViewController implements Initializable {
 	private ListView<String> cocktailList;
 	@FXML// Detail of selected cocktail
 	public Label cocktailInfo;
+	public Label ingredientInfo1;
+	public Label ingredientInfo2;
+	public Label ingredientInfo3;
+	public Label ingredientInfo4;
+	public Label ingredientInfo5;
+	public Label ingredientInfo6;
+	public Label ingredientInfo7;
+	public Label ingredientInfo8;
+	public Label ingredientInfo9;
+	public Label ingredientInfo10;
+	public Label ingredientInfo11;
+	public Label ingredientInfo12;
+	public Label ingredientInfo13;
+	
+	
+	
+	
 	@FXML //Image of the selected cocktail
 	public ImageView cocktailImage;
 	@FXML
@@ -48,6 +65,10 @@ public class MainViewController implements Initializable {
 	ObservableList<String> tempList = null;
 	ArrayList<String> drinkNames = new ArrayList<String>();
 	ArrayList<String> drinkDirections = new ArrayList<String>();
+	
+	String ingredientsArr[] = new String[15];
+	String measuresArr[] = new String[15];
+	
 	 
 	// Select groups toggle
 	private boolean selectAllStatus = true;
@@ -59,6 +80,8 @@ public class MainViewController implements Initializable {
 		Image newImage = new Image(imageUrl);
 		
 		cocktailImage.setImage(newImage);
+		
+		loadDetailView();
 
 		//initialize the button actions
 		listClick();
@@ -112,14 +135,24 @@ public class MainViewController implements Initializable {
 		 * Clicking on cocktail from list
 		 */
 		cocktailList.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 			   @Override
 		        public void handle(MouseEvent event) {
 				   Integer index = null;  
+				   
+				   for (int i = 0; i < ingredientsArr.length; i++){
+					   ingredientsArr[i] = null;
+					   measuresArr[i] = null;
+				   }
+				   
+				   
 				   index = cocktailList.getSelectionModel().getSelectedIndex();
 				   cocktailInfo.setText(drinkDirections.get(drinkDirections.size() - 1 - index));
+				   
 				   utilityArray = Driver.sqlDatabase.QueryForIngredients(drinkNames.get(index));
 				   for (int i = 0; i < utilityArray.size(); ++i) {
 					   if (utilityArray.get(i) != null) {
+						   ingredientsArr[i] = utilityArray.get(i);
 						   System.out.println(utilityArray.get(i));
 					   }
 				   }
@@ -127,6 +160,7 @@ public class MainViewController implements Initializable {
 			       utilityArray = Driver.sqlDatabase.QueryForMeasurements(drinkNames.get(index));
 			       for (int i = 0; i < utilityArray.size(); ++i) {
 					   if (utilityArray.get(i) != null) {
+						   measuresArr[i] = utilityArray.get(i);
 						   System.out.println(utilityArray.get(i));
 					   }
 				   }
@@ -138,6 +172,10 @@ public class MainViewController implements Initializable {
 						   drinkNames.add(cocktailResults.get(i));
 					   }
 				   }
+				   
+				   //loading labels to Cocktail Detail View
+				   loadDetailView();
+				   
 				   String imageUrl = "http://cdn.liquor.com/wp-content/uploads/2011/09/02120028/white-russian-720x720-recipe.jpg";
 				   Image newImage = new Image(imageUrl);
 				   cocktailImage.setImage(newImage);
@@ -145,6 +183,99 @@ public class MainViewController implements Initializable {
 		});	
 	}
 
+	private void loadDetailView(){
+		if ((ingredientsArr[0]==null)||(measuresArr[0]==null)){
+			ingredientInfo1.setText(" ");
+		}
+		else {
+			ingredientInfo1.setText(ingredientsArr[0] + " : " + measuresArr[0]);
+		}
+		
+		if ((ingredientsArr[1]==null)||(measuresArr[1]==null)){
+			ingredientInfo2.setText(" ");
+			}
+			else {
+				ingredientInfo2.setText(ingredientsArr[1] + " : " + measuresArr[1]);
+			}
+		
+		if ((ingredientsArr[2]==null)||(measuresArr[2]==null)){
+			ingredientInfo3.setText(" ");
+			}
+			else {
+				ingredientInfo3.setText(ingredientsArr[2] + " : " + measuresArr[2]);
+			}
+		if ((ingredientsArr[3]==null)||(measuresArr[3]==null)){
+			ingredientInfo4.setText(" ");
+			}
+			else {
+				ingredientInfo4.setText(ingredientsArr[3] + " : " + measuresArr[3]);
+			}
+		if ((ingredientsArr[4]==null)||(measuresArr[4]==null)){
+			ingredientInfo5.setText(" ");
+			}
+			else {
+				ingredientInfo5.setText(ingredientsArr[4] + " : " + measuresArr[4]);
+			}
+		if ((ingredientsArr[5]==null)||(measuresArr[5]==null)){
+			ingredientInfo6.setText(" ");
+			}
+			else {
+				ingredientInfo6.setText(ingredientsArr[5] + " : " + measuresArr[5]);
+			}
+		
+		if ((ingredientsArr[6]==null)||(measuresArr[6]==null)){
+			ingredientInfo7.setText(" ");
+			}
+			else {
+				ingredientInfo7.setText(ingredientsArr[6] + " : " + measuresArr[6]);
+			}
+		
+		if ((ingredientsArr[7]==null)||(measuresArr[7]==null)){
+			ingredientInfo8.setText(" ");
+			}
+			else {
+				ingredientInfo8.setText(ingredientsArr[7] + " : " + measuresArr[7]);
+			}
+		
+		if ((ingredientsArr[8]==null)||(measuresArr[8]==null)){
+			ingredientInfo9.setText(" ");
+			}
+			else {
+				ingredientInfo9.setText(ingredientsArr[8] + " : " + measuresArr[8]);
+			}
+		
+		if ((ingredientsArr[9]==null)||(measuresArr[9]==null)){
+			ingredientInfo10.setText(" ");
+			}
+			else {
+				ingredientInfo10.setText(ingredientsArr[9] + " : " + measuresArr[9]);
+			}
+		
+		if ((ingredientsArr[10]==null)||(measuresArr[10]==null)){
+			ingredientInfo11.setText(" ");
+			}
+			else {
+				ingredientInfo11.setText(ingredientsArr[10] + " : " + measuresArr[10]);
+			}
+		
+		if ((ingredientsArr[11]==null)||(measuresArr[11]==null)){
+			ingredientInfo12.setText(" ");
+			}
+			else {
+				ingredientInfo12.setText(ingredientsArr[11] + " : " + measuresArr[11]);
+			}
+		
+		if ((ingredientsArr[12]==null)||(measuresArr[12]==null)){
+			ingredientInfo13.setText(" ");
+			}
+			else {
+				ingredientInfo13.setText(ingredientsArr[12] + " : " + measuresArr[12]);
+			}
+
+		
+		
+	}
+	
 // The Checkbox Functions
 	public void checkAllIngredients(boolean checkStatus) {
 		
@@ -1395,7 +1526,6 @@ public class MainViewController implements Initializable {
 	
 	// The javafx checkboxes~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//Base Spirits
-
 	@FXML
 	public CheckBox ginCheckbox;
 	@FXML
