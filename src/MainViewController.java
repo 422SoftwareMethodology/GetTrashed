@@ -19,7 +19,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 
-@SuppressWarnings("restriction")
 public class MainViewController implements Initializable {
 	@FXML// the list of all cocktails
 	private ListView<String> cocktailList;
@@ -96,7 +95,6 @@ public class MainViewController implements Initializable {
 		for (Label label : ingredientsInfo) {
 			label.setText("");
 		}
-		loadDetailView();
 
 		//initialize the button actions
 		listClick();
@@ -202,9 +200,15 @@ public class MainViewController implements Initializable {
 
 	private void loadDetailView(){
 		int min = Math.min(ingredientsArray.size(), measurementsArray.size());
-		for (int i = 0; i < min; ++i) {
-			if (ingredientsArray.get(i) != null && measurementsArray.get(i) != null) {
-				ingredientsInfo.get(i).setText(ingredientsArray.get(i) + " : " + measurementsArray.get(i));
+		int i = 0;
+		for (Label label : ingredientsInfo) {
+			label.setText("");
+			if (i < min && ingredientsArray.get(i) != null || (measurementsArray.get(i) == "")) {
+				ingredientsInfo.get(i).setText(measurementsArray.get(i) + " " + ingredientsArray.get(i));
+				++i;
+			} else if (i < min){
+				ingredientsInfo.get(i).setText(ingredientsArray.get(i));
+				++i;
 			}
 		}
 	}
