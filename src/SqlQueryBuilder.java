@@ -24,8 +24,8 @@ public class SqlQueryBuilder {
 			statement = localConnection.createStatement();
 			for (int i = 0; i < iDArray.size(); ++i) {
 				ResultSet rS = statement.executeQuery("SELECT * FROM DRINKS where ID = '" + iDArray.get(i) + "';");
-				queriedList.add(i, rS.getString(2));
-				queriedList.add(i, rS.getString(5));
+				queriedList.add(i, rS.getString(2)); //Name in DB
+				//queriedList.add(i, rS.getString(5)); //Directions in DB
 			}
 		} catch ( Exception e ) {}
 		return queriedList;
