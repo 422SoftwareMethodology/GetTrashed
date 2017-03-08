@@ -8,7 +8,7 @@ import java.util.TreeMap;
 import java.util.stream.IntStream;
 
 public class SearchingIngredientsCode {
-	public ArrayList<Integer> Search(ArrayList<String> filterIngredients){
+	public TreeMap<Integer, Integer> Search(ArrayList<String> filterIngredients){
 		TreeMap<Integer, Integer> occurrenceSet = new TreeMap<Integer, Integer>();
 		Ingredients ingredients = new Ingredients();
 		Spirits spirit = new Spirits();
@@ -44,10 +44,7 @@ public class SearchingIngredientsCode {
 		for (Integer index : combined) {
 			occurrenceSet.putIfAbsent(index, Collections.frequency(combined, index));
 		}
-		for (Map.Entry<Integer, Integer> entry : occurrenceSet.entrySet()) {
-			System.out.println(entry.getKey() + " " + entry.getValue());
-		}
 		
-		return combined;
+		return occurrenceSet;
 	}
 }

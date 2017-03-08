@@ -1,6 +1,8 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.ArrayList;
+import java.util.Map.Entry;
+import java.util.TreeMap;
 
 public class SqlDatabase {
 	private Connection connection = null;
@@ -22,9 +24,19 @@ public class SqlDatabase {
 	    System.out.println("Opened database successfully");
     }
 	
-	public ArrayList<String> QueryForName(ArrayList<Integer> combined) {
-		sqlQuery = new SqlQueryBuilder(combined, connection);
+	public String QueryForName(Entry<Integer, Integer> entry) {
+		sqlQuery = new SqlQueryBuilder(entry, connection);
 		return sqlQuery.QueryName();
+	}
+	
+	public Integer QueryForNumIngredients(Entry<Integer, Integer> entry) {
+		sqlQuery = new SqlQueryBuilder(entry, connection);
+		return sqlQuery.QueryNumIngredients();
+	}
+	
+	public String QueryForDirections(String drinkName) {
+		sqlQuery = new SqlQueryBuilder(drinkName, connection);
+		return sqlQuery.QueryDirections();
 	}
 	
 	public ArrayList<String> QueryForIngredients(String drinkName) {

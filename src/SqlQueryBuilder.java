@@ -2,14 +2,20 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.TreeMap;
 
 public class SqlQueryBuilder {
 	String name;
-	ArrayList<Integer> iDArray;
+	Entry<Integer, Integer> localEntry;
 	ArrayList<String> queriedList = new ArrayList<String>();
+	String tempString;
+	Integer numIngredients;
 	Connection localConnection;
-	SqlQueryBuilder(ArrayList<Integer> combined, Connection connection) {
-		iDArray = combined;
+	
+	SqlQueryBuilder(Entry<Integer, Integer> entry, Connection connection) {
+		localEntry = entry;
 		localConnection = connection;
 	}
 	
@@ -18,17 +24,34 @@ public class SqlQueryBuilder {
 		localConnection = connection;
 	}
 	
-	public ArrayList<String> QueryName() {
+	public String QueryName() {
 		try {
 			Statement statement = null;
 			statement = localConnection.createStatement();
-			for (int i = 0; i < iDArray.size(); ++i) {
-				ResultSet rS = statement.executeQuery("SELECT * FROM DRINKS where ID = '" + iDArray.get(i) + "';");
-				queriedList.add(i, rS.getString(2)); //Name in DB
-				//queriedList.add(i, rS.getString(5)); //Directions in DB
-			}
+			ResultSet rS = statement.executeQuery("SELECT * FROM DRINKS where ID = '" + localEntry.getKey() + "';");
+			tempString = rS.getString(2); //Name in DB
 		} catch ( Exception e ) {}
-		return queriedList;
+		return tempString;
+	}
+	
+	public Integer QueryNumIngredients() {
+		try {
+			Statement statement = null;
+			statement = localConnection.createStatement();
+			ResultSet rS = statement.executeQuery("SELECT * FROM DRINKS where ID = '" + localEntry.getKey() + "';");
+			numIngredients = Integer.parseInt(rS.getString(6)); //NumIngredients in the DB
+		} catch ( Exception e ) {}
+		return numIngredients;
+	}
+	
+	public String QueryDirections() {
+		try {
+			Statement statement = null;
+			statement = localConnection.createStatement();
+			ResultSet rS = statement.executeQuery("SELECT * FROM DRINKS where NAME = '" + name + "';");
+			tempString = rS.getString(5); //Directions in DB
+		} catch ( Exception e ) {}
+		return tempString;
 	}
 	
 	public ArrayList<String> QueryIngredients() {
