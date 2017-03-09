@@ -551,7 +551,7 @@
                                           </TitledPane>
                                       </panes>
                                     </Accordion>
-                                    <Button fx:id="selectAllLiquorsButton1" mnemonicParsing="false" text="Select All Spirits" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                    <Button fx:id="selectAllSpiritsButton" mnemonicParsing="false" text="Select All Spirits" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                                  </children>
                               </AnchorPane>
                            </content>
@@ -963,7 +963,7 @@
                                           </TitledPane>
                                        </panes>
                                     </Accordion>
-                                    <Button fx:id="selectAllLiquorsButton2" mnemonicParsing="false" text="Select All Spirits" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                    <Button fx:id="selectAllLiquorsButton" mnemonicParsing="false" text="Select All Liqueurs" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                                  </children>
                               </AnchorPane>
                            </content>
@@ -1053,7 +1053,7 @@
                                           </VBox>
                                        </content>
                                     </ScrollPane>
-                                    <Button fx:id="selectAllLiquorsButton" mnemonicParsing="false" text="Select All Spirits" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                    <Button fx:id="selectAllBeersButton" mnemonicParsing="false" text="Select All Beer &amp; Wines" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                                  </children>
                               </AnchorPane>
                            </content>
@@ -1065,7 +1065,7 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <Button fx:id="selectAllMixersButton1" mnemonicParsing="false" text="Select all Mixers" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="5.0" />
+                                    <Button fx:id="selectAllMixersButton" mnemonicParsing="false" text="Select All Mixers" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="5.0" />
                                     <Accordion prefHeight="434.0" prefWidth="198.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-0.0" AnchorPane.topAnchor="0.0">
                                        <panes>
                                           <TitledPane prefHeight="327.0" prefWidth="178.0" text="Soda">
@@ -1684,7 +1684,7 @@
                                           </TitledPane>
                                        </panes>
                                     </Accordion>
-                                    <Button fx:id="selectAllMixersButton" mnemonicParsing="false" text="Select all Mixers" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                    <Button fx:id="selectAllStockButton" mnemonicParsing="false" text="Select All Stock" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                                  </children>
                               </AnchorPane>
                            </content>
@@ -1703,7 +1703,42 @@
                     <items>
                       <AnchorPane maxWidth="500.0" prefHeight="628.0" prefWidth="500.0">
                            <children>
-                              <ListView fx:id="cocktailList" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0" />
+                              <Accordion AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+                                <panes>
+                                  <TitledPane text="You can make these right now">
+                                       <content>
+                                          <ListView fx:id="cocktailList" />
+                                       </content>
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </TitledPane>
+                                  <TitledPane animated="false" text="Missing One Ingredient">
+                                       <content>
+                                          <ListView fx:id="missingOneList" prefHeight="200.0" prefWidth="200.0" />
+                                       </content>
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </TitledPane>
+                                    <TitledPane animated="false" layoutX="10.0" layoutY="40.0" text="Missing Two Ingredients">
+                                       <content>
+                                          <ListView fx:id="missingTwoList" prefHeight="200.0" prefWidth="200.0" />
+                                       </content>
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </TitledPane>
+                                    <TitledPane animated="false" layoutX="10.0" layoutY="70.0" text="Missing Three or More Ingredients">
+                                       <content>
+                                          <ListView fx:id="missingThreePlusList" prefHeight="200.0" prefWidth="200.0" />
+                                       </content>
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </TitledPane>
+                                </panes>
+                              </Accordion>
                               <Button layoutX="227.0" layoutY="517.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Browse" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="280.0" />
                               <Button layoutX="260.0" layoutY="531.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Random" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="280.0" />
                               <Label layoutX="199.0" layoutY="1.0" prefHeight="27.0" prefWidth="75.0" text="Cocktails" textAlignment="CENTER">
