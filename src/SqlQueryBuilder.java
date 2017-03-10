@@ -29,6 +29,8 @@ public class SqlQueryBuilder {
 			ResultSet rS = statement.executeQuery("SELECT NAME, NUMINGREDIENTS FROM DRINKS INDEXED BY Idx1 where ID = '" + localEntry.getKey() + "';");
 			queriedList.add(rS.getString(1));
 			queriedList.add(rS.getString(2));
+			statement.close();
+			rS.close();
 		} catch ( Exception e ) {}
 		return queriedList;
 	}

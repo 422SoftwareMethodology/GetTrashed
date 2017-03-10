@@ -92,13 +92,11 @@ public class MainViewController implements Initializable {
 	ArrayList<String> ingredientsArray = new ArrayList<String>();
 	ArrayList<String> measurementsArray = new ArrayList<String>();
 	ArrayList<String> filterIngredients = new ArrayList<String>();
-	ArrayList<String> cocktailResults = new ArrayList<String>();
 	ArrayList<String> missingNone = new ArrayList<String>();
 	ArrayList<String> missingOne = new ArrayList<String>();
 	ArrayList<String> missingTwo = new ArrayList<String>();
 	ArrayList<String> missingThreePlus = new ArrayList<String>();
 	ObservableList<String> tempList = null;
-	ArrayList<String> drinkNames = new ArrayList<String>();
 	ArrayList<String> drinkDirections = new ArrayList<String>();
 	TreeMap<Integer, Integer> occurrenceSet;
 	ArrayList<String> list1 = new ArrayList<String>();
@@ -131,7 +129,6 @@ public class MainViewController implements Initializable {
 
 		//initialize the button actions
 		cocktailListClick();
-		//missingNoneListClick();
 		missingOneListClick();
 		missingTwoListClick();
 		missingThreePlusListClick();
@@ -174,7 +171,7 @@ public class MainViewController implements Initializable {
 		    catch ( Exception e ) {
 			      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 			      System.exit(0);
-			    }
+			}
 	}
 	
 	public void selectAllLiquorCheckboxes(){
@@ -277,26 +274,25 @@ public class MainViewController implements Initializable {
 			   Integer index = null;
 			   StringBuilder sb = new StringBuilder();
 			   index = cocktailList.getSelectionModel().getSelectedIndex();
-			   if (drinkNames.get(index).contains("'")) {
-				   for (int i = 0; i < drinkNames.get(index).length(); ++i) {
-					   if (drinkNames.get(index).charAt(i) == '\'') {
+			   if (missingNone.get(index).contains("'")) {
+				   for (int i = 0; i < missingNone.get(index).length(); ++i) {
+					   if (missingNone.get(index).charAt(i) == '\'') {
 						   sb.append("''");
 					   } else {
-						   sb.append(drinkNames.get(index).charAt(i));
+						   sb.append(missingNone.get(index).charAt(i));
 					   }
 				   }
 			   } else {
-				   sb.append(drinkNames.get(index));
+				   sb.append(missingNone.get(index));
 			   }
+			   Driver.sqlDatabase.OpenConnection();
 			   cocktailInfo.setText(Driver.sqlDatabase.QueryForDirections(sb.toString()));
 			   ingredientsArray = Driver.sqlDatabase.QueryForIngredients(sb.toString());
 		       measurementsArray = Driver.sqlDatabase.QueryForMeasurements(sb.toString());
+		       Driver.sqlDatabase.CloseConnection();
 		       loadDetailView();
 			   ingredientsArray.clear();
 		       measurementsArray.clear();
-			   for (int i = 0; i < cocktailResults.size(); ++i) {
-				   drinkNames.add(cocktailResults.get(i));
-			   }
 			   String imageUrl = "http://cdn.liquor.com/wp-content/uploads/2011/09/02120028/white-russian-720x720-recipe.jpg";
 			   Image newImage = new Image(imageUrl);
 			   cocktailImage.setImage(newImage);
@@ -311,26 +307,25 @@ public class MainViewController implements Initializable {
 			   Integer index = null;
 			   StringBuilder sb = new StringBuilder();
 			   index = missingOneList.getSelectionModel().getSelectedIndex();
-			   if (drinkNames.get(index).contains("'")) {
-				   for (int i = 0; i < drinkNames.get(index).length(); ++i) {
-					   if (drinkNames.get(index).charAt(i) == '\'') {
+			   if (missingOne.get(index).contains("'")) {
+				   for (int i = 0; i < missingOne.get(index).length(); ++i) {
+					   if (missingOne.get(index).charAt(i) == '\'') {
 						   sb.append("''");
 					   } else {
-						   sb.append(drinkNames.get(index).charAt(i));
+						   sb.append(missingOne.get(index).charAt(i));
 					   }
 				   }
 			   } else {
-				   sb.append(drinkNames.get(index));
+				   sb.append(missingOne.get(index));
 			   }
+			   Driver.sqlDatabase.OpenConnection();
 			   cocktailInfo.setText(Driver.sqlDatabase.QueryForDirections(sb.toString()));
 			   ingredientsArray = Driver.sqlDatabase.QueryForIngredients(sb.toString());
 		       measurementsArray = Driver.sqlDatabase.QueryForMeasurements(sb.toString());
+		       Driver.sqlDatabase.CloseConnection();
 		       loadDetailView();
 			   ingredientsArray.clear();
 		       measurementsArray.clear();
-			   for (int i = 0; i < cocktailResults.size(); ++i) {
-				   drinkNames.add(cocktailResults.get(i));
-			   }
 			   String imageUrl = "http://cdn.liquor.com/wp-content/uploads/2011/09/02120028/white-russian-720x720-recipe.jpg";
 			   Image newImage = new Image(imageUrl);
 			   cocktailImage.setImage(newImage);
@@ -345,26 +340,25 @@ public class MainViewController implements Initializable {
 			   Integer index = null;
 			   StringBuilder sb = new StringBuilder();
 			   index = missingTwoList.getSelectionModel().getSelectedIndex();
-			   if (drinkNames.get(index).contains("'")) {
-				   for (int i = 0; i < drinkNames.get(index).length(); ++i) {
-					   if (drinkNames.get(index).charAt(i) == '\'') {
+			   if (missingTwo.get(index).contains("'")) {
+				   for (int i = 0; i < missingTwo.get(index).length(); ++i) {
+					   if (missingTwo.get(index).charAt(i) == '\'') {
 						   sb.append("''");
 					   } else {
-						   sb.append(drinkNames.get(index).charAt(i));
+						   sb.append(missingTwo.get(index).charAt(i));
 					   }
 				   }
 			   } else {
-				   sb.append(drinkNames.get(index));
+				   sb.append(missingTwo.get(index));
 			   }
+			   Driver.sqlDatabase.OpenConnection();
 			   cocktailInfo.setText(Driver.sqlDatabase.QueryForDirections(sb.toString()));
 			   ingredientsArray = Driver.sqlDatabase.QueryForIngredients(sb.toString());
 		       measurementsArray = Driver.sqlDatabase.QueryForMeasurements(sb.toString());
+		       Driver.sqlDatabase.CloseConnection();
 		       loadDetailView();
 			   ingredientsArray.clear();
 		       measurementsArray.clear();
-			   for (int i = 0; i < cocktailResults.size(); ++i) {
-				   drinkNames.add(cocktailResults.get(i));
-			   }
 			   String imageUrl = "http://cdn.liquor.com/wp-content/uploads/2011/09/02120028/white-russian-720x720-recipe.jpg";
 			   Image newImage = new Image(imageUrl);
 			   cocktailImage.setImage(newImage);
@@ -379,26 +373,25 @@ public class MainViewController implements Initializable {
 			   Integer index = null;
 			   StringBuilder sb = new StringBuilder();
 			   index = missingThreePlusList.getSelectionModel().getSelectedIndex();
-			   if (drinkNames.get(index).contains("'")) {
-				   for (int i = 0; i < drinkNames.get(index).length(); ++i) {
-					   if (drinkNames.get(index).charAt(i) == '\'') {
+			   if (missingThreePlus.get(index).contains("'")) {
+				   for (int i = 0; i < missingThreePlus.get(index).length(); ++i) {
+					   if (missingThreePlus.get(index).charAt(i) == '\'') {
 						   sb.append("''");
 					   } else {
-						   sb.append(drinkNames.get(index).charAt(i));
+						   sb.append(missingThreePlus.get(index).charAt(i));
 					   }
 				   }
 			   } else {
-				   sb.append(drinkNames.get(index));
+				   sb.append(missingThreePlus.get(index));
 			   }
+			   Driver.sqlDatabase.OpenConnection();
 			   cocktailInfo.setText(Driver.sqlDatabase.QueryForDirections(sb.toString()));
 			   ingredientsArray = Driver.sqlDatabase.QueryForIngredients(sb.toString());
 		       measurementsArray = Driver.sqlDatabase.QueryForMeasurements(sb.toString());
+		       Driver.sqlDatabase.CloseConnection();
 		       loadDetailView();
 			   ingredientsArray.clear();
 		       measurementsArray.clear();
-			   for (int i = 0; i < cocktailResults.size(); ++i) {
-				   drinkNames.add(cocktailResults.get(i));
-			   }
 			   String imageUrl = "http://cdn.liquor.com/wp-content/uploads/2011/09/02120028/white-russian-720x720-recipe.jpg";
 			   Image newImage = new Image(imageUrl);
 			   cocktailImage.setImage(newImage);
@@ -1711,10 +1704,8 @@ public class MainViewController implements Initializable {
 				if(juiceLemonadeCheckbox.isSelected()){
 					filterIngredients.add("juiceLemonade");
 				}
-				drinkNames.clear();
-				cocktailResults.clear();
-		    	tempList = FXCollections.observableArrayList(drinkNames);
-				cocktailList.setItems(tempList);
+
+				missingNone.clear();
 				missingOneList.getItems().clear();
 				missingOne.clear();
 				missingTwoList.getItems().clear();
@@ -1735,7 +1726,6 @@ public class MainViewController implements Initializable {
 					String name = tempArray.get(0);
 					if ((numSelected - value) == 0) {
 						missingNone.add(name);
-						drinkNames.add(name);
 					} else if ((numSelected - value) == 1) {
 						missingOne.add(name);
 					} else if ((numSelected - value) == 2) {
@@ -1747,10 +1737,6 @@ public class MainViewController implements Initializable {
 				long endTime = System.nanoTime() - startTime;
 				String estimatedTime = String.valueOf(endTime/1E9);
 				System.out.println("Elapsed time: " + estimatedTime + " seconds");
-				for (int i = 0; i < cocktailResults.size(); ++i) {
-						drinkNames.add(cocktailResults.get(i));
-				}
-				
 				tempList = FXCollections.observableArrayList(missingNone);
 				cocktailList.setItems(tempList);
 				
