@@ -181,13 +181,13 @@ public class MainViewController implements Initializable {
 		selectAllLiquorsButton.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
 		    	checkAllLiqueure(true);
-				
+				System.out.println("FAAAAAAAAAAAAART");
 		    }
 		});
 		
 	}
 	public void selectAllSpiritsCheckboxes(){
-		selectAllLiquorsButton.setOnAction(new EventHandler<ActionEvent>() {
+		selectAllSpiritsButton.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
 		    	checkAllSpirits(true);
 				
@@ -208,7 +208,7 @@ public class MainViewController implements Initializable {
 	}
 	
 	public void selectAllStockCheckboxes(){
-		selectAllMixersButton.setOnAction(new EventHandler<ActionEvent>() {
+		selectAllStockButton.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
 		    	checkAllStock(true);
 
@@ -218,10 +218,9 @@ public class MainViewController implements Initializable {
 	}
 	
 	public void selectAllBeerCheckboxes(){
-		selectAllMixersButton.setOnAction(new EventHandler<ActionEvent>() {
+		selectAllBeersButton.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
 		    	checkAllBeer(true);
-
 		    }
 		});
 		
@@ -536,7 +535,16 @@ public class MainViewController implements Initializable {
     	worcestershireSauceCheckbox.setSelected(checkStatus);
     	chocolateSyrupCheckbox.setSelected(checkStatus);
     	
-
+    	brownSugarCheckbox.setSelected(checkStatus);
+    	sugarSyrupCheckbox.setSelected(checkStatus);
+    	sugarCheckbox.setSelected(checkStatus);
+    	
+    	gingerCheckbox.setSelected(checkStatus);
+    	clovesCheckbox.setSelected(checkStatus);
+    	cardamomCheckbox.setSelected(checkStatus);
+    	bittersCheckbox.setSelected(checkStatus);
+    	angosturaBittersCheckbox.setSelected(checkStatus);
+    	anisCheckbox.setSelected(checkStatus);
     	honeyCheckbox.setSelected(checkStatus);
     	mintCheckbox.setSelected(checkStatus);
     	orangeBittersCheckbox.setSelected(checkStatus);
@@ -634,7 +642,6 @@ public class MainViewController implements Initializable {
 		schnappsWatermelonCheckbox.setSelected(checkStatus);
 		schnappsWildberryCheckbox.setSelected(checkStatus);
 		rumpleMinzeCheckbox.setSelected(checkStatus);
-		creamOfCoconutCheckbox.setSelected(checkStatus);
 	}
 	
 	public void checkAllLiqueure(boolean checkStatus) {
@@ -643,6 +650,8 @@ public class MainViewController implements Initializable {
 		cremeDeCacaoCheckbox.setSelected(checkStatus);
 		cremeDeCassisCheckbox.setSelected(checkStatus);
 		cremeDeMentheCheckbox.setSelected(checkStatus);
+		creamOfCoconutCheckbox.setSelected(checkStatus);
+		
 		aftershockCheckbox.setSelected(checkStatus);
 		mauiCheckbox.setSelected(checkStatus);
 		goldschlagerCheckbox.setSelected(checkStatus);
@@ -1741,6 +1750,7 @@ public class MainViewController implements Initializable {
 		    	tempList = FXCollections.observableArrayList(drinkNames);
 				cocktailList.setItems(tempList);
 				
+				
 				//missingNoneList.setItems().clear();
 				//missingNone.clear();
 				missingOneList.getItems().clear();
@@ -1796,6 +1806,7 @@ public class MainViewController implements Initializable {
 	
 	// The javafx checkboxes~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//Base Spirits
+	
 	@FXML
 	public CheckBox ginCheckbox;
 	@FXML
