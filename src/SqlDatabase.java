@@ -1,17 +1,18 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map.Entry;
-import java.util.TreeMap;
 
 public class SqlDatabase {
 	private Connection connection = null;
 	private SqlQueryBuilder sqlQuery;
-	SqlDatabase() {
+	SqlDatabase() {}
+	
+	public void OpenConnection() {
 		String srcLocation = Driver.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 		String sTempDb = "drinks.db";
         String sJdbc = "jdbc:sqlite:" + srcLocation;
-        System.out.println(sJdbc);
         String sDbUrl = sJdbc + sTempDb;
         String sDriverName = "org.sqlite.JDBC";
 	    try {
@@ -21,15 +22,17 @@ public class SqlDatabase {
 	    	System.err.println(e.getClass().getName() + ": " + e.getMessage());
 	    	System.exit(0);
 	    }
-	    System.out.println("Opened database successfully");
-    }
-	
-	public String QueryForName(Entry<Integer, Integer> entry) {
-		sqlQuery = new SqlQueryBuilder(entry, connection);
-		return sqlQuery.QueryName();
 	}
 	
-	public Integer QueryForNumIngredients(Entry<Integer, Integer> entry) {
+	public void CloseConnection() {
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public ArrayList<String> QueryForNumIngredients(Entry<Integer, Integer> entry) {
 		sqlQuery = new SqlQueryBuilder(entry, connection);
 		return sqlQuery.QueryNumIngredients();
 	}

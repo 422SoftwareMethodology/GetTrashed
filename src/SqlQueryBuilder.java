@@ -2,9 +2,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Map.Entry;
-import java.util.TreeMap;
 
 public class SqlQueryBuilder {
 	String name;
@@ -24,24 +22,15 @@ public class SqlQueryBuilder {
 		localConnection = connection;
 	}
 	
-	public String QueryName() {
+	public ArrayList<String> QueryNumIngredients() {
 		try {
 			Statement statement = null;
 			statement = localConnection.createStatement();
-			ResultSet rS = statement.executeQuery("SELECT * FROM DRINKS where ID = '" + localEntry.getKey() + "';");
-			tempString = rS.getString(2); //Name in DB
+			ResultSet rS = statement.executeQuery("SELECT NAME, NUMINGREDIENTS FROM DRINKS INDEXED BY Idx1 where ID = '" + localEntry.getKey() + "';");
+			queriedList.add(rS.getString(1));
+			queriedList.add(rS.getString(2));
 		} catch ( Exception e ) {}
-		return tempString;
-	}
-	
-	public Integer QueryNumIngredients() {
-		try {
-			Statement statement = null;
-			statement = localConnection.createStatement();
-			ResultSet rS = statement.executeQuery("SELECT * FROM DRINKS where ID = '" + localEntry.getKey() + "';");
-			numIngredients = Integer.parseInt(rS.getString(6)); //NumIngredients in the DB
-		} catch ( Exception e ) {}
-		return numIngredients;
+		return queriedList;
 	}
 	
 	public String QueryDirections() {
