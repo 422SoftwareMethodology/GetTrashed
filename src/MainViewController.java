@@ -272,7 +272,7 @@ public class MainViewController implements Initializable {
 			browseButton.setText("Browse");
 		}
 		browseStatus = !browseStatus;
-		if (selectAllStatus)
+		if (!selectAllStatus)
 		selectAllIngredientsButton.fire();
 	}
 	
