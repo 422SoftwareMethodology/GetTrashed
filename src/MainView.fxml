@@ -1699,9 +1699,9 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="532.0" prefWidth="825.0">
                <children>
-                  <SplitPane dividerPositions="0.5771567436208992" layoutY="36.0" prefHeight="559.0" prefWidth="825.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <SplitPane dividerPositions="0.5255157437567861" layoutY="36.0" prefHeight="559.0" prefWidth="825.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <items>
-                      <AnchorPane maxWidth="500.0" prefHeight="628.0" prefWidth="500.0">
+                      <AnchorPane maxWidth="400.0" prefHeight="628.0" prefWidth="400.0">
                            <children>
                               <Accordion AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
                                 <panes>
@@ -1739,9 +1739,9 @@
                                     </TitledPane>
                                 </panes>
                               </Accordion>
-                              <Button fx:id="browseButton" layoutX="227.0" layoutY="517.0" mnemonicParsing="false" onAction="#browse" prefHeight="25.0" prefWidth="200.0" text="Browse" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="280.0" />
-                              <Button layoutX="260.0" layoutY="531.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Random" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="280.0" />
-                              <Label layoutX="199.0" layoutY="1.0" prefHeight="27.0" prefWidth="75.0" text="Cocktails" textAlignment="CENTER">
+                              <Button fx:id="browseButton" layoutX="227.0" layoutY="517.0" mnemonicParsing="false" onAction="#browse" prefHeight="25.0" prefWidth="200.0" text="Browse" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="240.0" AnchorPane.rightAnchor="10.0" />
+                              <Button layoutX="260.0" layoutY="531.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Random" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="240.0" AnchorPane.rightAnchor="10.0" />
+                              <Label layoutX="141.0" layoutY="1.0" prefHeight="27.0" prefWidth="119.0" text="Cocktails" textAlignment="CENTER">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -1764,7 +1764,7 @@
                                     </AnchorPane>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                        <children>
-                                          <ScrollPane hbarPolicy="NEVER" prefHeight="215.0" prefWidth="247.0" AnchorPane.bottomAnchor="130.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <ScrollPane hbarPolicy="NEVER" prefHeight="215.0" prefWidth="247.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <content>
                                                 <VBox prefHeight="210.0" prefWidth="229.0" spacing="2.0">
                                                    <children>
@@ -1773,6 +1773,7 @@
                                                             <Font name="System Bold" size="18.0" />
                                                          </font>
                                                       </Label>
+                                                      <Label fx:id="cocktailInfo" alignment="CENTER" prefHeight="129.0" prefWidth="241.0" text="Instructions Go Here" textAlignment="CENTER" wrapText="true" />
                                                       <Label fx:id="ingredientInfo1" text="ingredientInfo1" />
                                                       <Label fx:id="ingredientInfo2" layoutX="10.0" layoutY="10.0" text="ingredientInfo2" />
                                                       <Label fx:id="ingredientInfo3" layoutX="10.0" layoutY="27.0" text="ingredientInfo3" />
@@ -1790,7 +1791,6 @@
                                                 </VBox>
                                              </content>
                                           </ScrollPane>
-                                          <Label fx:id="cocktailInfo" alignment="CENTER" prefHeight="129.0" prefWidth="241.0" text="Drink text goes here..." textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" />
                                        </children>
                                     </AnchorPane>
                                 </items>
@@ -1799,7 +1799,7 @@
                         </AnchorPane>
                     </items>
                   </SplitPane>
-                  <Button fx:id="whatCanIMakeButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="What Can I Make?" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="30.0">
+                  <Button fx:id="whatCanIMakeButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="180.0" text="Ready To Make" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="10.0">
                      <effect>
                         <InnerShadow blurType="GAUSSIAN" color="#01650b" radius="15.19" width="41.76" />
                      </effect>
@@ -1807,7 +1807,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <TextField layoutX="14.0" layoutY="565.0" prefHeight="25.0" prefWidth="200.0" promptText="Search Recipe By Name" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="30.0" />
+                  <TextField layoutX="14.0" layoutY="565.0" prefHeight="25.0" prefWidth="180.0" promptText="Search Recipe By Name" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
                </children>
             </AnchorPane>
         </items>
