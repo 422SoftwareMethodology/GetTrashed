@@ -1707,13 +1707,13 @@
                                 <panes>
                                   <TitledPane text="You can make these right now">
                                        <content>
-                                          <ListView fx:id="cocktailList" />
+                                          <ListView fx:id="missingNoneList" />
                                        </content>
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </TitledPane>
-                                  <TitledPane animated="false" text="Missing One Ingredient">
+                                  <TitledPane text="Missing One Ingredient">
                                        <content>
                                           <ListView fx:id="missingOneList" prefHeight="200.0" prefWidth="200.0" />
                                        </content>
@@ -1721,7 +1721,7 @@
                                           <Font size="14.0" />
                                        </font>
                                     </TitledPane>
-                                    <TitledPane animated="false" layoutX="10.0" layoutY="40.0" text="Missing Two Ingredients">
+                                    <TitledPane layoutX="10.0" layoutY="40.0" text="Missing Two Ingredients">
                                        <content>
                                           <ListView fx:id="missingTwoList" prefHeight="200.0" prefWidth="200.0" />
                                        </content>
@@ -1729,7 +1729,7 @@
                                           <Font size="14.0" />
                                        </font>
                                     </TitledPane>
-                                    <TitledPane animated="false" layoutX="10.0" layoutY="70.0" text="Missing Three or More Ingredients">
+                                    <TitledPane layoutX="10.0" layoutY="70.0" text="Missing Three or More Ingredients">
                                        <content>
                                           <ListView fx:id="missingThreePlusList" prefHeight="200.0" prefWidth="200.0" />
                                        </content>
@@ -1739,13 +1739,14 @@
                                     </TitledPane>
                                 </panes>
                               </Accordion>
-                              <Button layoutX="227.0" layoutY="517.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Browse" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="280.0" />
+                              <Button fx:id="browseButton" layoutX="227.0" layoutY="517.0" mnemonicParsing="false" onAction="#browse" prefHeight="25.0" prefWidth="200.0" text="Browse" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="280.0" />
                               <Button layoutX="260.0" layoutY="531.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Random" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="280.0" />
                               <Label layoutX="199.0" layoutY="1.0" prefHeight="27.0" prefWidth="75.0" text="Cocktails" textAlignment="CENTER">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Label>
+                              <ListView id="browseList" fx:id="cocktailList" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="556.0" prefWidth="335.0">
@@ -1767,6 +1768,11 @@
                                              <content>
                                                 <VBox prefHeight="210.0" prefWidth="229.0" spacing="2.0">
                                                    <children>
+                                                      <Label fx:id="cocktailName" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" text="Cocktail Name" textAlignment="CENTER">
+                                                         <font>
+                                                            <Font name="System Bold" size="18.0" />
+                                                         </font>
+                                                      </Label>
                                                       <Label fx:id="ingredientInfo1" text="ingredientInfo1" />
                                                       <Label fx:id="ingredientInfo2" layoutX="10.0" layoutY="10.0" text="ingredientInfo2" />
                                                       <Label fx:id="ingredientInfo3" layoutX="10.0" layoutY="27.0" text="ingredientInfo3" />
