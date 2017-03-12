@@ -6,7 +6,9 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.ResourceBundle;
+import java.util.TreeMap;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,6 +29,14 @@ import javafx.scene.control.Label;
 public class MainViewController implements Initializable {
 	@FXML// the list of all cocktails
 	private ListView<String> cocktailList;
+	@FXML
+	private ListView<String> missingNoneList;
+	@FXML
+	private ListView<String> missingOneList;
+	@FXML
+	private ListView<String> missingTwoList;
+	@FXML
+	private ListView<String> missingThreePlusList;
 	@FXML// Detail of selected cocktail
 	public Label cocktailInfo;
 	public Label ingredientInfo1;
@@ -42,6 +52,7 @@ public class MainViewController implements Initializable {
 	public Label ingredientInfo11;
 	public Label ingredientInfo12;
 	public Label ingredientInfo13;
+	
 	public List<Label> ingredientsInfo;
 	public String str;
 	
@@ -49,6 +60,8 @@ public class MainViewController implements Initializable {
 	public ImageView cocktailImage;
 	@FXML
 	private AnchorPane imgPane;
+	@FXML
+	public Label cocktailName;
 	
 	// the javafx buttons
 	@FXML
@@ -56,7 +69,13 @@ public class MainViewController implements Initializable {
 	@FXML
 	public Button selectAllLiquorsButton;
 	@FXML
+	public Button selectAllSpiritsButton;
+	@FXML
 	public Button selectAllMixersButton;
+	@FXML
+	public Button selectAllBeersButton;
+	@FXML
+	public Button selectAllStockButton;
 	@FXML
 	public Button selectAllWhiskey;
 	@FXML
@@ -65,6 +84,8 @@ public class MainViewController implements Initializable {
 	public Button selectAllRum;
 	@FXML
 	public Button whatCanIMakeButton;
+	@FXML
+	public Button browseButton;
 	
 	// the javafx searchbar
 	@FXML
@@ -76,14 +97,22 @@ public class MainViewController implements Initializable {
 	ArrayList<String> ingredientsArray = new ArrayList<String>();
 	ArrayList<String> measurementsArray = new ArrayList<String>();
 	ArrayList<String> filterIngredients = new ArrayList<String>();
-	ArrayList<String> cocktailResults = new ArrayList<String>();
+	ArrayList<String> missingNone = new ArrayList<String>();
+	ArrayList<String> missingOne = new ArrayList<String>();
+	ArrayList<String> missingTwo = new ArrayList<String>();
+	ArrayList<String> missingThreePlus = new ArrayList<String>();
+	ArrayList<String> cocktailArrList = new ArrayList<String>();
 	ObservableList<String> tempList = null;
-	ArrayList<String> drinkNames = new ArrayList<String>();
 	ArrayList<String> drinkDirections = new ArrayList<String>();
+	TreeMap<Integer, Integer> occurrenceSet;
 	ArrayList<String> list1 = new ArrayList<String>();
-	 
+	
+	Integer missing;
+	String name;
+	
 	// Select groups toggle
 	private boolean selectAllStatus = true;
+	private boolean browseStatus = false;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -105,10 +134,17 @@ public class MainViewController implements Initializable {
 		for (Label label : ingredientsInfo) {
 			label.setText("");
 		}
-
+		cocktailName.setText("");
 		//initialize the button actions
-		listClick();
+		cocktailListClick();
+		missingNoneListClick();
+		missingOneListClick();
+		missingTwoListClick();
+		missingThreePlusListClick();
 		selectAllLiquorCheckboxes();
+		selectAllSpiritsCheckboxes();
+		selectAllStockCheckboxes();
+		selectAllBeerCheckboxes();
 		selectAllMixerCheckboxes();
 		selectAllIngredients();
 		ingredientArraylistMaker();
@@ -127,7 +163,7 @@ public class MainViewController implements Initializable {
 		list1.clear();
 		    try{
 		    	Class.forName("org.sqlite.JDBC");
-			      c = DriverManager.getConnection("jdbc:sqlite:drinks.db");
+			      c = DriverManager.getConnection("jdbc:sqlite::resource:drinks.db");
 			      c.setAutoCommit(false);
 			      Statement stmt = c.createStatement();
 			      ResultSet rs = stmt.executeQuery("SELECT * FROM DRINKS WHERE NAME LIKE" + "'%" + str + "%';");
@@ -145,22 +181,49 @@ public class MainViewController implements Initializable {
 			      System.exit(0);
 			    }
 	}
-	
 	public void selectAllLiquorCheckboxes(){
 		selectAllLiquorsButton.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
-		    	checkAllLiquor(true);
-				
+		    	checkAllLiqueure(true);
+				System.out.println("FAAAAAAAAAAAAART");
+		    }
+		});
+		
+	}
+	public void selectAllSpiritsCheckboxes(){
+		selectAllSpiritsButton.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override public void handle(ActionEvent e) {
+		    	checkAllSpirits(true);
 		    }
 		});
 		
 	}
 	
+	
 	public void selectAllMixerCheckboxes(){
 		selectAllMixersButton.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
-		    	checkAllIngredients(true);
+		    	checkAllMixers(true);
 
+		    }
+		});
+		
+	}
+	
+	public void selectAllStockCheckboxes(){
+		selectAllStockButton.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override public void handle(ActionEvent e) {
+		    	checkAllStock(true);
+
+		    }
+		});
+		
+	}
+	
+	public void selectAllBeerCheckboxes(){
+		selectAllBeersButton.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override public void handle(ActionEvent e) {
+		    	checkAllBeer(true);
 		    }
 		});
 		
@@ -193,11 +256,31 @@ public class MainViewController implements Initializable {
 		
 	}
 	
+	public void browse () {
+		if (selectAllStatus)
+			selectAllIngredientsButton.fire();
+		whatCanIMakeButton.fire();
+		if (!browseStatus){
+			cocktailList.setVisible(true);
+			browseButton.setText("Stop Browsing");
+		}
+		else {
+			cocktailList.setVisible(false);
+			browseButton.setText("Browse");
+		}
+		browseStatus = !browseStatus;
+		if (!selectAllStatus)
+		selectAllIngredientsButton.fire();
+	}
+	
 	public void selectAllIngredients(){
 		selectAllIngredientsButton.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
-		    	checkAllIngredients(selectAllStatus);
-		    	checkAllLiquor(selectAllStatus);
+		    	checkAllMixers(selectAllStatus);
+		    	checkAllStock(selectAllStatus);
+		    	checkAllSpirits(selectAllStatus);
+		    	checkAllLiqueure(selectAllStatus);
+		    	checkAllBeer(selectAllStatus);
 		    	selectAllStatus = !selectAllStatus;
 		    	if (selectAllStatus) {
 		    		selectAllIngredientsButton.setText("Select All Ingredients");
@@ -208,38 +291,181 @@ public class MainViewController implements Initializable {
 		});
 	}
 	
-	public void listClick() {
+	public void cocktailListClick() {
 		cocktailList.setOnMouseClicked(new EventHandler<MouseEvent>() {
 	        public void handle(MouseEvent event) {
-			   Integer index = null;  
+			   Integer index = null;
+			   StringBuilder sb = new StringBuilder();
+			   name = cocktailList.getSelectionModel().getSelectedItem();
 			   index = cocktailList.getSelectionModel().getSelectedIndex();
-			   cocktailInfo.setText(drinkDirections.get(drinkDirections.size() - 1 - index));
-			   ingredientsArray = Driver.sqlDatabase.QueryForIngredients(drinkNames.get(index));
-		       measurementsArray = Driver.sqlDatabase.QueryForMeasurements(drinkNames.get(index));
+			   if (missingNone.get(index).contains("'")) {
+				   for (int i = 0; i < missingNone.get(index).length(); ++i) {
+					   if (missingNone.get(index).charAt(i) == '\'') {
+						   sb.append("''");
+					   } else {
+						   sb.append(missingNone.get(index).charAt(i));
+					   }
+				   }
+			   } else {
+				   sb.append(missingNone.get(index));
+			   }
+			   Driver.sqlDatabase.OpenConnection();
+			   cocktailInfo.setText(Driver.sqlDatabase.QueryForDirections(sb.toString()));
+			   ingredientsArray = Driver.sqlDatabase.QueryForIngredients(sb.toString());
+		       measurementsArray = Driver.sqlDatabase.QueryForMeasurements(sb.toString());
+		       Driver.sqlDatabase.CloseConnection();
 		       loadDetailView();
 			   ingredientsArray.clear();
 		       measurementsArray.clear();
-			   for (int i = 0; i < cocktailResults.size(); ++i) {
-				   if (i < cocktailResults.size()/2) {
-					   drinkDirections.add(cocktailResults.get(i));
-				   } else {
-					   drinkNames.add(cocktailResults.get(i));
-				   }
-			   }
 			   String imageUrl = "http://cdn.liquor.com/wp-content/uploads/2011/09/02120028/white-russian-720x720-recipe.jpg";
 			   Image newImage = new Image(imageUrl);
 			   cocktailImage.setImage(newImage);
 			}		   
 		});	
+		
+	}
+	
+	public void missingNoneListClick() {
+		missingNoneList.setOnMouseClicked(new EventHandler<MouseEvent>() {
+	        public void handle(MouseEvent event) {
+			   Integer index = null;
+			   StringBuilder sb = new StringBuilder();
+			   index = missingNoneList.getSelectionModel().getSelectedIndex();
+			   if (missingNone.get(index).contains("'")) {
+				   for (int i = 0; i < missingNone.get(index).length(); ++i) {
+					   if (missingNone.get(index).charAt(i) == '\'') {
+						   sb.append("''");
+					   } else {
+						   sb.append(missingNone.get(index).charAt(i));
+					   }
+				   }
+			   } else {
+				   sb.append(missingNone.get(index));
+			   }
+			   Driver.sqlDatabase.OpenConnection();
+			   cocktailInfo.setText(Driver.sqlDatabase.QueryForDirections(sb.toString()));
+			   ingredientsArray = Driver.sqlDatabase.QueryForIngredients(sb.toString());
+		       measurementsArray = Driver.sqlDatabase.QueryForMeasurements(sb.toString());
+		       Driver.sqlDatabase.CloseConnection();
+		       loadDetailView();
+			   ingredientsArray.clear();
+		       measurementsArray.clear();
+			   String imageUrl = "http://cdn.liquor.com/wp-content/uploads/2011/09/02120028/white-russian-720x720-recipe.jpg";
+			   Image newImage = new Image(imageUrl);
+			   cocktailImage.setImage(newImage);
+			}		   
+		});	
+		
+	}
+	
+	
+	public void missingOneListClick() {
+		missingOneList.setOnMouseClicked(new EventHandler<MouseEvent>() {
+	        public void handle(MouseEvent event) {
+			   Integer index = null;
+			   StringBuilder sb = new StringBuilder();
+			   index = missingOneList.getSelectionModel().getSelectedIndex();
+			   if (missingOne.get(index).contains("'")) {
+				   for (int i = 0; i < missingOne.get(index).length(); ++i) {
+					   if (missingOne.get(index).charAt(i) == '\'') {
+						   sb.append("''");
+					   } else {
+						   sb.append(missingOne.get(index).charAt(i));
+					   }
+				   }
+			   } else {
+				   sb.append(missingOne.get(index));
+			   }
+			   Driver.sqlDatabase.OpenConnection();
+			   cocktailInfo.setText(Driver.sqlDatabase.QueryForDirections(sb.toString()));
+			   ingredientsArray = Driver.sqlDatabase.QueryForIngredients(sb.toString());
+		       measurementsArray = Driver.sqlDatabase.QueryForMeasurements(sb.toString());
+		       Driver.sqlDatabase.CloseConnection();
+		       loadDetailView();
+			   ingredientsArray.clear();
+		       measurementsArray.clear();
+			   String imageUrl = "http://cdn.liquor.com/wp-content/uploads/2011/09/02120028/white-russian-720x720-recipe.jpg";
+			   Image newImage = new Image(imageUrl);
+			   cocktailImage.setImage(newImage);
+			}		   
+		});	
+		
+	}
+	
+	public void missingTwoListClick() {
+		missingTwoList.setOnMouseClicked(new EventHandler<MouseEvent>() {
+	        public void handle(MouseEvent event) {
+			   Integer index = null;
+			   StringBuilder sb = new StringBuilder();
+			   index = missingTwoList.getSelectionModel().getSelectedIndex();
+			   if (missingTwo.get(index).contains("'")) {
+				   for (int i = 0; i < missingTwo.get(index).length(); ++i) {
+					   if (missingTwo.get(index).charAt(i) == '\'') {
+						   sb.append("''");
+					   } else {
+						   sb.append(missingTwo.get(index).charAt(i));
+					   }
+				   }
+			   } else {
+				   sb.append(missingTwo.get(index));
+			   }
+			   Driver.sqlDatabase.OpenConnection();
+			   cocktailInfo.setText(Driver.sqlDatabase.QueryForDirections(sb.toString()));
+			   ingredientsArray = Driver.sqlDatabase.QueryForIngredients(sb.toString());
+		       measurementsArray = Driver.sqlDatabase.QueryForMeasurements(sb.toString());
+		       Driver.sqlDatabase.CloseConnection();
+		       loadDetailView();
+			   ingredientsArray.clear();
+		       measurementsArray.clear();
+			   String imageUrl = "http://cdn.liquor.com/wp-content/uploads/2011/09/02120028/white-russian-720x720-recipe.jpg";
+			   Image newImage = new Image(imageUrl);
+			   cocktailImage.setImage(newImage);
+			}		   
+		});	
+		
+	}
+	
+	public void missingThreePlusListClick() {
+		missingThreePlusList.setOnMouseClicked(new EventHandler<MouseEvent>() {
+	        public void handle(MouseEvent event) {
+			   Integer index = null;
+			   StringBuilder sb = new StringBuilder();
+			   index = missingThreePlusList.getSelectionModel().getSelectedIndex();
+			   if (missingThreePlus.get(index).contains("'")) {
+				   for (int i = 0; i < missingThreePlus.get(index).length(); ++i) {
+					   if (missingThreePlus.get(index).charAt(i) == '\'') {
+						   sb.append("''");
+					   } else {
+						   sb.append(missingThreePlus.get(index).charAt(i));
+					   }
+				   }
+			   } else {
+				   sb.append(missingThreePlus.get(index));
+			   }
+			   Driver.sqlDatabase.OpenConnection();
+			   cocktailInfo.setText(Driver.sqlDatabase.QueryForDirections(sb.toString()));
+			   ingredientsArray = Driver.sqlDatabase.QueryForIngredients(sb.toString());
+		       measurementsArray = Driver.sqlDatabase.QueryForMeasurements(sb.toString());
+		       Driver.sqlDatabase.CloseConnection();
+		       loadDetailView();
+			   ingredientsArray.clear();
+		       measurementsArray.clear();
+			   String imageUrl = "http://cdn.liquor.com/wp-content/uploads/2011/09/02120028/white-russian-720x720-recipe.jpg";
+			   Image newImage = new Image(imageUrl);
+			   cocktailImage.setImage(newImage);
+			}		   
+		});	
+		
 	}
 
 	private void loadDetailView(){
 		int min = Math.min(ingredientsArray.size(), measurementsArray.size());
 		int i = 0;
+		cocktailName.setText(name);
 		for (Label label : ingredientsInfo) {
 			label.setText("");
 			if (i < min && ingredientsArray.get(i) != null || (measurementsArray.get(i) == "")) {
-				ingredientsInfo.get(i).setText(measurementsArray.get(i) + " " + ingredientsArray.get(i));
+				ingredientsInfo.get(i).setText(ingredientsArray.get(i) + " " + measurementsArray.get(i));
 				++i;
 			} else if (i < min){
 				ingredientsInfo.get(i).setText(ingredientsArray.get(i));
@@ -249,8 +475,7 @@ public class MainViewController implements Initializable {
 	}
 
 // The Checkbox Functions
-	public void checkAllIngredients(boolean checkStatus) {
-		
+	public void checkAllMixers(boolean checkStatus) {
     	sodaWaterCheckbox.setSelected(checkStatus);
     	sodaCherryColaCheckbox.setSelected(checkStatus);
     	sodaColaCheckbox.setSelected(checkStatus);
@@ -263,8 +488,6 @@ public class MainViewController implements Initializable {
     	schweppesRusschianCheckbox.setSelected(checkStatus);
     	chocolateMilkCheckbox.setSelected(checkStatus);
     	creamCheckbox.setSelected(checkStatus);
-    	eggYolkCheckbox.setSelected(checkStatus);
-    	eggCheckbox.setSelected(checkStatus);
     	eggnogCheckbox.setSelected(checkStatus);
     	condensedMilkCheckbox.setSelected(checkStatus);
     	milkCheckbox.setSelected(checkStatus);
@@ -273,51 +496,19 @@ public class MainViewController implements Initializable {
     	yoghurtCheckbox.setSelected(checkStatus);
     	chocolateIceCreamCheckbox.setSelected(checkStatus);
     	brownSugarCheckbox.setSelected(checkStatus);
-    	worcestershireSauceCheckbox.setSelected(checkStatus);
-    	chocolateSyrupCheckbox.setSelected(checkStatus);
-    	chocolateCheckbox.setSelected(checkStatus);
-    	cocoaPowderCheckbox.setSelected(checkStatus);
-    	cocoaPowderCheckbox.setSelected(checkStatus);
     	coconutMilkCheckbox.setSelected(checkStatus);
     	coffeeCheckbox.setSelected(checkStatus);
-    	beefBouillonCheckbox.setSelected(checkStatus);
-    	almondCheckbox.setSelected(checkStatus);
     	espressoCheckbox.setSelected(checkStatus);
-    	iceCheckbox.setSelected(checkStatus);
     	icedTeaCheckbox.setSelected(checkStatus);
-    	jelloCheckbox.setSelected(checkStatus);
-    	saltCheckbox.setSelected(checkStatus);
-    	sherbetCheckbox.setSelected(checkStatus);
     	sugarSyrupCheckbox.setSelected(checkStatus);
     	sugarCheckbox.setSelected(checkStatus);
-    	tabascoSauceCheckbox.setSelected(checkStatus);
+    	
     	tangCheckbox.setSelected(checkStatus);
     	teaCheckbox.setSelected(checkStatus);
     	waterCheckbox.setSelected(checkStatus);
-    	anisCheckbox.setSelected(checkStatus);
-    	angosturaBittersCheckbox.setSelected(checkStatus);
-    	bittersCheckbox.setSelected(checkStatus);
-    	cardamomCheckbox.setSelected(checkStatus);
-    	clovesCheckbox.setSelected(checkStatus);
-    	gingerCheckbox.setSelected(checkStatus);
     	halfAndHalfCheckbox.setSelected(checkStatus);
     	heavyCreamCheckbox.setSelected(checkStatus);
-    	honeyCheckbox.setSelected(checkStatus);
     	hotChocolateCheckbox.setSelected(checkStatus);
-    	mintCheckbox.setSelected(checkStatus);
-    	orangeBittersCheckbox.setSelected(checkStatus);
-    	fruitAppleCheckbox.setSelected(checkStatus);
-    	fruitBananaCheckbox.setSelected(checkStatus);
-    	fruitCranberriesCheckbox.setSelected(checkStatus);
-    	fruitGrapesCheckbox.setSelected(checkStatus);
-    	fruitKiwiCheckbox.setSelected(checkStatus);
-    	fruitLemonCheckbox.setSelected(checkStatus);
-    	fruitLimeCheckbox.setSelected(checkStatus);
-    	fruitMangoCheckbox.setSelected(checkStatus);
-    	fruitOrangeCheckbox.setSelected(checkStatus);
-    	fruitPineappleCheckbox.setSelected(checkStatus);
-    	fruitRasinsCheckbox.setSelected(checkStatus);
-    	fruitStrawberriesCheckbox.setSelected(checkStatus);
     	juiceAppleCheckbox.setSelected(checkStatus);
     	juiceCiderCheckbox.setSelected(checkStatus);
     	juiceClamatoCheckbox.setSelected(checkStatus);
@@ -332,10 +523,6 @@ public class MainViewController implements Initializable {
     	juicePineappleCheckbox.setSelected(checkStatus);
     	juiceTomatoCheckbox.setSelected(checkStatus);
     	peachNectarCheckbox.setSelected(checkStatus);
-    	sourMixCheckbox.setSelected(checkStatus);
-    	sweetAndSourCheckbox.setSelected(checkStatus);
-    	orangePeelCheckbox.setSelected(checkStatus);
-    	lemonPeelCheckbox.setSelected(checkStatus);
     	limeJuiceCordialCheckbox.setSelected(checkStatus);
     	grenadineCheckbox.setSelected(checkStatus);
     	juiceGrapefruitCheckbox.setSelected(checkStatus);
@@ -346,9 +533,57 @@ public class MainViewController implements Initializable {
     	juiceLimeadeCheckbox.setSelected(checkStatus);
     	juiceLemonadeCheckbox.setSelected(checkStatus);
     	juiceOrangeCheckbox.setSelected(checkStatus);
+    	sourMixCheckbox.setSelected(checkStatus);
+    	sweetAndSourCheckbox.setSelected(checkStatus);
 	}
 	
-	public void checkAllLiquor(boolean checkStatus) {
+	public void checkAllStock(boolean checkStatus){
+		
+		tabascoSauceCheckbox.setSelected(checkStatus);
+    	sherbetCheckbox.setSelected(checkStatus);
+    	jelloCheckbox.setSelected(checkStatus);
+    	saltCheckbox.setSelected(checkStatus);
+    	eggYolkCheckbox.setSelected(checkStatus);
+    	eggCheckbox.setSelected(checkStatus);
+    	iceCheckbox.setSelected(checkStatus);
+    	almondCheckbox.setSelected(checkStatus);
+    	beefBouillonCheckbox.setSelected(checkStatus);
+    	cocoaPowderCheckbox.setSelected(checkStatus);
+    	chocolateCheckbox.setSelected(checkStatus);
+    	worcestershireSauceCheckbox.setSelected(checkStatus);
+    	chocolateSyrupCheckbox.setSelected(checkStatus);
+    	
+    	brownSugarCheckbox.setSelected(checkStatus);
+    	sugarSyrupCheckbox.setSelected(checkStatus);
+    	sugarCheckbox.setSelected(checkStatus);
+    	
+    	gingerCheckbox.setSelected(checkStatus);
+    	clovesCheckbox.setSelected(checkStatus);
+    	cardamomCheckbox.setSelected(checkStatus);
+    	bittersCheckbox.setSelected(checkStatus);
+    	angosturaBittersCheckbox.setSelected(checkStatus);
+    	anisCheckbox.setSelected(checkStatus);
+    	honeyCheckbox.setSelected(checkStatus);
+    	mintCheckbox.setSelected(checkStatus);
+    	orangeBittersCheckbox.setSelected(checkStatus);
+    	fruitAppleCheckbox.setSelected(checkStatus);
+    	fruitBananaCheckbox.setSelected(checkStatus);
+    	fruitCranberriesCheckbox.setSelected(checkStatus);
+    	fruitGrapesCheckbox.setSelected(checkStatus);
+    	fruitKiwiCheckbox.setSelected(checkStatus);
+    	fruitLemonCheckbox.setSelected(checkStatus);
+    	fruitLimeCheckbox.setSelected(checkStatus);
+    	fruitMangoCheckbox.setSelected(checkStatus);
+    	fruitOrangeCheckbox.setSelected(checkStatus);
+    	fruitPineappleCheckbox.setSelected(checkStatus);
+    	fruitRasinsCheckbox.setSelected(checkStatus);
+    	fruitStrawberriesCheckbox.setSelected(checkStatus);
+    	orangePeelCheckbox.setSelected(checkStatus);
+    	lemonPeelCheckbox.setSelected(checkStatus);
+
+	}
+	
+	public void checkAllSpirits(boolean checkStatus) {
 		ginCheckbox.setSelected(checkStatus);
 		sloeGinCheckbox.setSelected(checkStatus);
 		scotchCheckbox.setSelected(checkStatus);
@@ -425,30 +660,22 @@ public class MainViewController implements Initializable {
 		schnappsWatermelonCheckbox.setSelected(checkStatus);
 		schnappsWildberryCheckbox.setSelected(checkStatus);
 		rumpleMinzeCheckbox.setSelected(checkStatus);
-		creamOfCoconutCheckbox.setSelected(checkStatus);
+	}
+	
+	public void checkAllLiqueure(boolean checkStatus) {
 		cremeDeNoyauxCheckbox.setSelected(checkStatus);
 		cremeDeBananaCheckbox.setSelected(checkStatus);
 		cremeDeCacaoCheckbox.setSelected(checkStatus);
 		cremeDeCassisCheckbox.setSelected(checkStatus);
 		cremeDeMentheCheckbox.setSelected(checkStatus);
+		creamOfCoconutCheckbox.setSelected(checkStatus);
+		
 		aftershockCheckbox.setSelected(checkStatus);
 		mauiCheckbox.setSelected(checkStatus);
 		goldschlagerCheckbox.setSelected(checkStatus);
 		hotDamnCheckbox.setSelected(checkStatus);
 		hypnotiqCheckbox.setSelected(checkStatus);
 		sourApplePuckerCheckbox.setSelected(checkStatus);
-		aleCheckbox.setSelected(checkStatus);
-		beerCheckbox.setSelected(checkStatus);
-		champagneCheckbox.setSelected(checkStatus);
-		dubonnetBlancCheckbox.setSelected(checkStatus);
-		dubonnetRougeCheckbox.setSelected(checkStatus);
-		whiteWineCheckbox.setSelected(checkStatus);
-		coronaCheckbox.setSelected(checkStatus);
-		guinessStoutCheckbox.setSelected(checkStatus);
-		lagerCheckbox.setSelected(checkStatus);
-		sakeCheckbox.setSelected(checkStatus);
-		sherryCheckbox.setSelected(checkStatus);
-		zimaCheckbox.setSelected(checkStatus);
 		kummelCheckbox.setSelected(checkStatus);
 		greenChartreuseCheckbox.setSelected(checkStatus);
 		gallianoCheckbox.setSelected(checkStatus);
@@ -495,6 +722,21 @@ public class MainViewController implements Initializable {
 		kahluaCheckbox.setSelected(checkStatus);
 		baileysIrishCreamCheckbox.setSelected(checkStatus);
 		tiaMariaCheckbox.setSelected(checkStatus);
+	}
+	
+	public void checkAllBeer(boolean checkStatus) {
+		aleCheckbox.setSelected(checkStatus);
+		beerCheckbox.setSelected(checkStatus);
+		champagneCheckbox.setSelected(checkStatus);
+		dubonnetBlancCheckbox.setSelected(checkStatus);
+		dubonnetRougeCheckbox.setSelected(checkStatus);
+		whiteWineCheckbox.setSelected(checkStatus);
+		coronaCheckbox.setSelected(checkStatus);
+		guinessStoutCheckbox.setSelected(checkStatus);
+		lagerCheckbox.setSelected(checkStatus);
+		sakeCheckbox.setSelected(checkStatus);
+		sherryCheckbox.setSelected(checkStatus);
+		zimaCheckbox.setSelected(checkStatus);
 		portCheckbox.setSelected(checkStatus);
 		redWineCheckbox.setSelected(checkStatus);
 	}
@@ -543,6 +785,7 @@ public class MainViewController implements Initializable {
 		rumSpicedCheckbox.setSelected(true);
 		rumCheckbox.setSelected(true);
 	}
+	
 	
 	public void ingredientArraylistMaker() {
 		whatCanIMakeButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -1521,28 +1764,63 @@ public class MainViewController implements Initializable {
 				if(juiceLemonadeCheckbox.isSelected()){
 					filterIngredients.add("juiceLemonade");
 				}
-				
-		    	drinkNames.clear();
-		    	drinkDirections.clear();
-		    	tempList = FXCollections.observableArrayList(drinkNames);
-				cocktailList.setItems(tempList);
 
-				cocktailResults = Driver.sqlDatabase.QueryForName(search.Search(filterIngredients));
-				for (int i = 0; i < cocktailResults.size(); ++i) {
-					if (i < cocktailResults.size()/2) {
-						drinkDirections.add(cocktailResults.get(i));
+				missingNone.clear();
+				missingOneList.getItems().clear();
+				missingOne.clear();
+				missingTwoList.getItems().clear();
+				missingTwo.clear();
+				missingThreePlusList.getItems().clear();
+				missingThreePlus.clear();
+				cocktailArrList.clear();
+
+				Driver.sqlDatabase.OpenConnection();			
+				occurrenceSet = search.Search(filterIngredients);
+				ArrayList<String> tempArray;
+				Integer numSelected;
+				Integer value;
+				long startTime = System.nanoTime();
+				for (Entry<Integer, Integer> entry : occurrenceSet.entrySet()) {
+					tempArray = Driver.sqlDatabase.QueryForNumIngredients(entry);
+					numSelected = Integer.parseInt(tempArray.get(1));
+					value = entry.getValue();
+					String name = tempArray.get(0);
+					cocktailArrList.add(name);
+					if ((numSelected - value) == 0) {
+						missingNone.add(name);
+					} else if ((numSelected - value) == 1) {
+						missingOne.add(name);
+					} else if ((numSelected - value) == 2) {
+						missingTwo.add(name);
 					} else {
-						drinkNames.add(cocktailResults.get(i));
+						missingThreePlus.add(name);
 					}
 				}
-				tempList = FXCollections.observableArrayList(drinkNames);
+				long endTime = System.nanoTime() - startTime;
+				String estimatedTime = String.valueOf(endTime/1E9);
+				System.out.println("Elapsed time: " + estimatedTime + " seconds");
+				
+				tempList = FXCollections.observableArrayList(cocktailArrList);
 				cocktailList.setItems(tempList);
+				
+				ObservableList<String> missingNoneitems =FXCollections.observableArrayList (missingNone);
+				missingNoneList.setItems(missingNoneitems);
+				
+				ObservableList<String> missingOneitems =FXCollections.observableArrayList (missingOne);
+				missingOneList.setItems(missingOneitems);
+				
+				ObservableList<String> missingTwoitems =FXCollections.observableArrayList (missingTwo);
+				missingTwoList.setItems(missingTwoitems);
+				
+				ObservableList<String> missingThreeitems =FXCollections.observableArrayList (missingThreePlus);
+				missingThreePlusList.setItems(missingThreeitems);
 		    }
 		});
 	}
 	
 	// The javafx checkboxes~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//Base Spirits
+	
 	@FXML
 	public CheckBox ginCheckbox;
 	@FXML

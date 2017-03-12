@@ -3,10 +3,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.IntStream;
 
 public class SearchingIngredientsCode {
-	public ArrayList<Integer> Search(ArrayList<String> filterIngredients){
+	public TreeMap<Integer, Integer> Search(ArrayList<String> filterIngredients){
+		TreeMap<Integer, Integer> occurrenceSet = new TreeMap<Integer, Integer>();
 		Ingredients ingredients = new Ingredients();
 		Spirits spirit = new Spirits();
 		ArrayList<Integer> combined = new ArrayList<Integer>();
@@ -38,6 +41,10 @@ public class SearchingIngredientsCode {
 			}
 		}
 		Collections.sort(combined);
-		return combined;
+		for (Integer index : combined) {
+			occurrenceSet.putIfAbsent(index, Collections.frequency(combined, index));
+		}
+		
+		return occurrenceSet;
 	}
 }
