@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map.Entry;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
 
@@ -29,14 +29,6 @@ import javafx.scene.control.Label;
 public class MainViewController implements Initializable {
 	@FXML// the list of all cocktails
 	private ListView<String> cocktailList;
-	@FXML
-	private ListView<String> missingNoneList;
-	@FXML
-	private ListView<String> missingOneList;
-	@FXML
-	private ListView<String> missingTwoList;
-	@FXML
-	private ListView<String> missingThreePlusList;
 	@FXML// Detail of selected cocktail
 	public Label cocktailInfo;
 	public Label ingredientInfo1;
@@ -52,30 +44,21 @@ public class MainViewController implements Initializable {
 	public Label ingredientInfo11;
 	public Label ingredientInfo12;
 	public Label ingredientInfo13;
-	
 	public List<Label> ingredientsInfo;
 	public String str;
-	
+
 	@FXML //Image of the selected cocktail
 	public ImageView cocktailImage;
 	@FXML
 	private AnchorPane imgPane;
-	@FXML
-	public Label cocktailName;
-	
+
 	// the javafx buttons
 	@FXML
 	public Button selectAllIngredientsButton;
 	@FXML
 	public Button selectAllLiquorsButton;
 	@FXML
-	public Button selectAllSpiritsButton;
-	@FXML
 	public Button selectAllMixersButton;
-	@FXML
-	public Button selectAllBeersButton;
-	@FXML
-	public Button selectAllStockButton;
 	@FXML
 	public Button selectAllWhiskey;
 	@FXML
@@ -84,42 +67,39 @@ public class MainViewController implements Initializable {
 	public Button selectAllRum;
 	@FXML
 	public Button whatCanIMakeButton;
-	@FXML
-	public Button browseButton;
-	
+
 	// the javafx searchbar
 	@FXML
 	public TextField searchbar;
-	
+
 	SearchingIngredientsCode search = new SearchingIngredientsCode();
 
 	//the ingredients arraylist
 	ArrayList<String> ingredientsArray = new ArrayList<String>();
 	ArrayList<String> measurementsArray = new ArrayList<String>();
 	ArrayList<String> filterIngredients = new ArrayList<String>();
+	ArrayList<String> cocktailResults = new ArrayList<String>();
 	ArrayList<String> missingNone = new ArrayList<String>();
 	ArrayList<String> missingOne = new ArrayList<String>();
 	ArrayList<String> missingTwo = new ArrayList<String>();
 	ArrayList<String> missingThreePlus = new ArrayList<String>();
-	ArrayList<String> cocktailArrList = new ArrayList<String>();
 	ObservableList<String> tempList = null;
+	ArrayList<String> drinkNames = new ArrayList<String>();
 	ArrayList<String> drinkDirections = new ArrayList<String>();
 	TreeMap<Integer, Integer> occurrenceSet;
 	ArrayList<String> list1 = new ArrayList<String>();
-	
+
 	Integer missing;
-	String name;
-	
+
 	// Select groups toggle
 	private boolean selectAllStatus = true;
-	private boolean browseStatus = false;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		//Default img load
 		String imageUrl = "http://cdn.playbuzz.com/cdn/f6b9bbfb-8708-49ad-a164-cdea284a0845/2bfcacf2-c580-4b60-aa95-8b5616d5c350.jpg";
 		Image newImage = new Image(imageUrl);
-		
+
 		cocktailImage.setImage(newImage);
 		ingredientsInfo = new ArrayList<>();
 		for (int i = 1; i < 14; ++i) {
@@ -134,29 +114,22 @@ public class MainViewController implements Initializable {
 		for (Label label : ingredientsInfo) {
 			label.setText("");
 		}
-		cocktailName.setText("");
+
 		//initialize the button actions
-		cocktailListClick();
-		missingNoneListClick();
-		missingOneListClick();
-		missingTwoListClick();
-		missingThreePlusListClick();
+		listClick();
 		selectAllLiquorCheckboxes();
-		selectAllSpiritsCheckboxes();
-		selectAllStockCheckboxes();
-		selectAllBeerCheckboxes();
 		selectAllMixerCheckboxes();
 		selectAllIngredients();
 		ingredientArraylistMaker();
 		selectAllWhiskyCheckboxes();
 		selectAllVodkaCheckboxes();
 		selectAllRumCheckboxes();
-		
+
 		cocktailImage.fitWidthProperty().bind(imgPane.widthProperty());
 		cocktailImage.fitHeightProperty().bind(imgPane.heightProperty());
-		
+
 	}
-	
+
 	public void partialsearch(){
 		str = searchbar.getText();
 		Connection c = null;
@@ -164,7 +137,7 @@ public class MainViewController implements Initializable {
 		    try{
 		    	Class.forName("org.sqlite.JDBC");
 		    	String srcLocation = Driver.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-			      c = DriverManager.getConnection("jdbc:sqlite:" + srcLocation);
+			      c = DriverManager.getConnection("jdbc:sqlite::resource:drinks.db");
 			      c.setAutoCommit(false);
 			      Statement stmt = c.createStatement();
 			      ResultSet rs = stmt.executeQuery("SELECT * FROM DRINKS WHERE NAME LIKE" + "'%" + str + "%';");
@@ -173,117 +146,68 @@ public class MainViewController implements Initializable {
 			    	  list1.add(name);
 			      }
 			      stmt.close();
-			      rs.close(); 
+			      rs.close();
 			      tempList = FXCollections.observableArrayList(list1);
 			      cocktailList.setItems(tempList);
 		    }
 		    catch ( Exception e ) {
 			      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 			      System.exit(0);
-			}
+			    }
 	}
-	
+
 	public void selectAllLiquorCheckboxes(){
 		selectAllLiquorsButton.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
-		    	checkAllLiqueure(true);
-				System.out.println("FAAAAAAAAAAAAART");
+		    	checkAllLiquor(true);
+
 		    }
 		});
-		
+
 	}
-	public void selectAllSpiritsCheckboxes(){
-		selectAllSpiritsButton.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override public void handle(ActionEvent e) {
-		    	checkAllSpirits(true);
-				
-		    }
-		});
-		
-	}
-	
-	
+
 	public void selectAllMixerCheckboxes(){
 		selectAllMixersButton.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
-		    	checkAllMixers(true);
+		    	checkAllIngredients(true);
 
 		    }
 		});
-		
-	}
-	
-	public void selectAllStockCheckboxes(){
-		selectAllStockButton.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override public void handle(ActionEvent e) {
-		    	checkAllStock(true);
 
-		    }
-		});
-		
 	}
-	
-	public void selectAllBeerCheckboxes(){
-		selectAllBeersButton.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override public void handle(ActionEvent e) {
-		    	checkAllBeer(true);
-		    }
-		});
-		
-	}
-	
+
 	public void selectAllWhiskyCheckboxes(){
 		selectAllWhiskey.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
 		    	checkAllWhiskey();
 		    }
 		});
-		
+
 	}
-	
+
 	public void selectAllVodkaCheckboxes(){
 		selectAllVodka.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
 		    	checkAllVodka();
 		    }
 		});
-		
+
 	}
-	
+
 	public void selectAllRumCheckboxes(){
 		selectAllRum.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
 		    	checkAllRum();
 		    }
 		});
-		
+
 	}
-	
-	public void browse () {
-		if (selectAllStatus)
-			selectAllIngredientsButton.fire();
-		whatCanIMakeButton.fire();
-		if (!browseStatus){
-			cocktailList.setVisible(true);
-			browseButton.setText("Stop Browsing");
-		}
-		else {
-			cocktailList.setVisible(false);
-			browseButton.setText("Browse");
-		}
-		browseStatus = !browseStatus;
-		if (!selectAllStatus)
-		selectAllIngredientsButton.fire();
-	}
-	
+
 	public void selectAllIngredients(){
 		selectAllIngredientsButton.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
-		    	checkAllMixers(selectAllStatus);
-		    	checkAllStock(selectAllStatus);
-		    	checkAllSpirits(selectAllStatus);
-		    	checkAllLiqueure(selectAllStatus);
-		    	checkAllBeer(selectAllStatus);
+		    	checkAllIngredients(selectAllStatus);
+		    	checkAllLiquor(selectAllStatus);
 		    	selectAllStatus = !selectAllStatus;
 		    	if (selectAllStatus) {
 		    		selectAllIngredientsButton.setText("Select All Ingredients");
@@ -293,178 +217,43 @@ public class MainViewController implements Initializable {
 		    }
 		});
 	}
-	
-	public void cocktailListClick() {
+
+	public void listClick() {
 		cocktailList.setOnMouseClicked(new EventHandler<MouseEvent>() {
 	        public void handle(MouseEvent event) {
 			   Integer index = null;
 			   StringBuilder sb = new StringBuilder();
-			   name = cocktailList.getSelectionModel().getSelectedItem();
 			   index = cocktailList.getSelectionModel().getSelectedIndex();
-			   if (missingNone.get(index).contains("'")) {
-				   for (int i = 0; i < missingNone.get(index).length(); ++i) {
-					   if (missingNone.get(index).charAt(i) == '\'') {
+			   if (drinkNames.get(index).contains("'")) {
+				   for (int i = 0; i < drinkNames.get(index).length(); ++i) {
+					   if (drinkNames.get(index).charAt(i) == '\'') {
 						   sb.append("''");
 					   } else {
-						   sb.append(missingNone.get(index).charAt(i));
+						   sb.append(drinkNames.get(index).charAt(i));
 					   }
 				   }
 			   } else {
-				   sb.append(missingNone.get(index));
+				   sb.append(drinkNames.get(index));
 			   }
-			   Driver.sqlDatabase.OpenConnection();
 			   cocktailInfo.setText(Driver.sqlDatabase.QueryForDirections(sb.toString()));
 			   ingredientsArray = Driver.sqlDatabase.QueryForIngredients(sb.toString());
 		       measurementsArray = Driver.sqlDatabase.QueryForMeasurements(sb.toString());
-		       Driver.sqlDatabase.CloseConnection();
 		       loadDetailView();
 			   ingredientsArray.clear();
 		       measurementsArray.clear();
-			   String imageUrl = "http://cdn.liquor.com/wp-content/uploads/2011/09/02120028/white-russian-720x720-recipe.jpg";
-			   Image newImage = new Image(imageUrl);
-			   cocktailImage.setImage(newImage);
-			}		   
-		});	
-		
-	}
-	
-	public void missingNoneListClick() {
-		missingNoneList.setOnMouseClicked(new EventHandler<MouseEvent>() {
-	        public void handle(MouseEvent event) {
-			   Integer index = null;
-			   StringBuilder sb = new StringBuilder();
-			   index = missingNoneList.getSelectionModel().getSelectedIndex();
-			   if (missingNone.get(index).contains("'")) {
-				   for (int i = 0; i < missingNone.get(index).length(); ++i) {
-					   if (missingNone.get(index).charAt(i) == '\'') {
-						   sb.append("''");
-					   } else {
-						   sb.append(missingNone.get(index).charAt(i));
-					   }
-				   }
-			   } else {
-				   sb.append(missingNone.get(index));
+			   for (int i = 0; i < cocktailResults.size(); ++i) {
+				   drinkNames.add(cocktailResults.get(i));
 			   }
-			   Driver.sqlDatabase.OpenConnection();
-			   cocktailInfo.setText(Driver.sqlDatabase.QueryForDirections(sb.toString()));
-			   ingredientsArray = Driver.sqlDatabase.QueryForIngredients(sb.toString());
-		       measurementsArray = Driver.sqlDatabase.QueryForMeasurements(sb.toString());
-		       Driver.sqlDatabase.CloseConnection();
-		       loadDetailView();
-			   ingredientsArray.clear();
-		       measurementsArray.clear();
 			   String imageUrl = "http://cdn.liquor.com/wp-content/uploads/2011/09/02120028/white-russian-720x720-recipe.jpg";
 			   Image newImage = new Image(imageUrl);
 			   cocktailImage.setImage(newImage);
-			}		   
-		});	
-		
-	}
-	
-	
-	public void missingOneListClick() {
-		missingOneList.setOnMouseClicked(new EventHandler<MouseEvent>() {
-	        public void handle(MouseEvent event) {
-			   Integer index = null;
-			   StringBuilder sb = new StringBuilder();
-			   index = missingOneList.getSelectionModel().getSelectedIndex();
-			   if (missingOne.get(index).contains("'")) {
-				   for (int i = 0; i < missingOne.get(index).length(); ++i) {
-					   if (missingOne.get(index).charAt(i) == '\'') {
-						   sb.append("''");
-					   } else {
-						   sb.append(missingOne.get(index).charAt(i));
-					   }
-				   }
-			   } else {
-				   sb.append(missingOne.get(index));
-			   }
-			   Driver.sqlDatabase.OpenConnection();
-			   cocktailInfo.setText(Driver.sqlDatabase.QueryForDirections(sb.toString()));
-			   ingredientsArray = Driver.sqlDatabase.QueryForIngredients(sb.toString());
-		       measurementsArray = Driver.sqlDatabase.QueryForMeasurements(sb.toString());
-		       Driver.sqlDatabase.CloseConnection();
-		       loadDetailView();
-			   ingredientsArray.clear();
-		       measurementsArray.clear();
-			   String imageUrl = "http://cdn.liquor.com/wp-content/uploads/2011/09/02120028/white-russian-720x720-recipe.jpg";
-			   Image newImage = new Image(imageUrl);
-			   cocktailImage.setImage(newImage);
-			}		   
-		});	
-		
-	}
-	
-	public void missingTwoListClick() {
-		missingTwoList.setOnMouseClicked(new EventHandler<MouseEvent>() {
-	        public void handle(MouseEvent event) {
-			   Integer index = null;
-			   StringBuilder sb = new StringBuilder();
-			   index = missingTwoList.getSelectionModel().getSelectedIndex();
-			   if (missingTwo.get(index).contains("'")) {
-				   for (int i = 0; i < missingTwo.get(index).length(); ++i) {
-					   if (missingTwo.get(index).charAt(i) == '\'') {
-						   sb.append("''");
-					   } else {
-						   sb.append(missingTwo.get(index).charAt(i));
-					   }
-				   }
-			   } else {
-				   sb.append(missingTwo.get(index));
-			   }
-			   Driver.sqlDatabase.OpenConnection();
-			   cocktailInfo.setText(Driver.sqlDatabase.QueryForDirections(sb.toString()));
-			   ingredientsArray = Driver.sqlDatabase.QueryForIngredients(sb.toString());
-		       measurementsArray = Driver.sqlDatabase.QueryForMeasurements(sb.toString());
-		       Driver.sqlDatabase.CloseConnection();
-		       loadDetailView();
-			   ingredientsArray.clear();
-		       measurementsArray.clear();
-			   String imageUrl = "http://cdn.liquor.com/wp-content/uploads/2011/09/02120028/white-russian-720x720-recipe.jpg";
-			   Image newImage = new Image(imageUrl);
-			   cocktailImage.setImage(newImage);
-			}		   
-		});	
-		
-	}
-	
-	public void missingThreePlusListClick() {
-		missingThreePlusList.setOnMouseClicked(new EventHandler<MouseEvent>() {
-	        public void handle(MouseEvent event) {
-			   Integer index = null;
-			   StringBuilder sb = new StringBuilder();
-			   index = missingThreePlusList.getSelectionModel().getSelectedIndex();
-			   if (missingThreePlus.get(index).contains("'")) {
-				   for (int i = 0; i < missingThreePlus.get(index).length(); ++i) {
-					   if (missingThreePlus.get(index).charAt(i) == '\'') {
-						   sb.append("''");
-					   } else {
-						   sb.append(missingThreePlus.get(index).charAt(i));
-					   }
-				   }
-			   } else {
-				   sb.append(missingThreePlus.get(index));
-			   }
-			   Driver.sqlDatabase.OpenConnection();
-			   cocktailInfo.setText(Driver.sqlDatabase.QueryForDirections(sb.toString()));
-			   ingredientsArray = Driver.sqlDatabase.QueryForIngredients(sb.toString());
-		       measurementsArray = Driver.sqlDatabase.QueryForMeasurements(sb.toString());
-		       Driver.sqlDatabase.CloseConnection();
-		       loadDetailView();
-			   ingredientsArray.clear();
-		       measurementsArray.clear();
-			   String imageUrl = "http://cdn.liquor.com/wp-content/uploads/2011/09/02120028/white-russian-720x720-recipe.jpg";
-			   Image newImage = new Image(imageUrl);
-			   cocktailImage.setImage(newImage);
-			}		   
-		});	
-		
+			}
+		});
 	}
 
 	private void loadDetailView(){
 		int min = Math.min(ingredientsArray.size(), measurementsArray.size());
 		int i = 0;
-		cocktailName.setText(name);
 		for (Label label : ingredientsInfo) {
 			label.setText("");
 			if (i < min && ingredientsArray.get(i) != null || (measurementsArray.get(i) == "")) {
@@ -478,7 +267,8 @@ public class MainViewController implements Initializable {
 	}
 
 // The Checkbox Functions
-	public void checkAllMixers(boolean checkStatus) {
+	public void checkAllIngredients(boolean checkStatus) {
+
     	sodaWaterCheckbox.setSelected(checkStatus);
     	sodaCherryColaCheckbox.setSelected(checkStatus);
     	sodaColaCheckbox.setSelected(checkStatus);
@@ -491,6 +281,8 @@ public class MainViewController implements Initializable {
     	schweppesRusschianCheckbox.setSelected(checkStatus);
     	chocolateMilkCheckbox.setSelected(checkStatus);
     	creamCheckbox.setSelected(checkStatus);
+    	eggYolkCheckbox.setSelected(checkStatus);
+    	eggCheckbox.setSelected(checkStatus);
     	eggnogCheckbox.setSelected(checkStatus);
     	condensedMilkCheckbox.setSelected(checkStatus);
     	milkCheckbox.setSelected(checkStatus);
@@ -499,74 +291,37 @@ public class MainViewController implements Initializable {
     	yoghurtCheckbox.setSelected(checkStatus);
     	chocolateIceCreamCheckbox.setSelected(checkStatus);
     	brownSugarCheckbox.setSelected(checkStatus);
+    	worcestershireSauceCheckbox.setSelected(checkStatus);
+    	chocolateSyrupCheckbox.setSelected(checkStatus);
+    	chocolateCheckbox.setSelected(checkStatus);
+    	cocoaPowderCheckbox.setSelected(checkStatus);
+    	cocoaPowderCheckbox.setSelected(checkStatus);
     	coconutMilkCheckbox.setSelected(checkStatus);
     	coffeeCheckbox.setSelected(checkStatus);
+    	beefBouillonCheckbox.setSelected(checkStatus);
+    	almondCheckbox.setSelected(checkStatus);
     	espressoCheckbox.setSelected(checkStatus);
+    	iceCheckbox.setSelected(checkStatus);
     	icedTeaCheckbox.setSelected(checkStatus);
+    	jelloCheckbox.setSelected(checkStatus);
+    	saltCheckbox.setSelected(checkStatus);
+    	sherbetCheckbox.setSelected(checkStatus);
     	sugarSyrupCheckbox.setSelected(checkStatus);
     	sugarCheckbox.setSelected(checkStatus);
-    	
+    	tabascoSauceCheckbox.setSelected(checkStatus);
     	tangCheckbox.setSelected(checkStatus);
     	teaCheckbox.setSelected(checkStatus);
     	waterCheckbox.setSelected(checkStatus);
+    	anisCheckbox.setSelected(checkStatus);
+    	angosturaBittersCheckbox.setSelected(checkStatus);
+    	bittersCheckbox.setSelected(checkStatus);
+    	cardamomCheckbox.setSelected(checkStatus);
+    	clovesCheckbox.setSelected(checkStatus);
+    	gingerCheckbox.setSelected(checkStatus);
     	halfAndHalfCheckbox.setSelected(checkStatus);
     	heavyCreamCheckbox.setSelected(checkStatus);
-    	hotChocolateCheckbox.setSelected(checkStatus);
-    	juiceAppleCheckbox.setSelected(checkStatus);
-    	juiceCiderCheckbox.setSelected(checkStatus);
-    	juiceClamatoCheckbox.setSelected(checkStatus);
-    	juiceCranberryCheckbox.setSelected(checkStatus);
-    	juiceFruitCheckbox.setSelected(checkStatus);
-    	juiceFruitPunchCheckbox.setSelected(checkStatus);
-    	juiceGrapeCheckbox.setSelected(checkStatus);
-    	juiceHawaiianPunchCheckbox.setSelected(checkStatus);
-    	juiceKoolAidCheckbox.setSelected(checkStatus);
-    	juiceMaraschinoCherryCheckbox.setSelected(checkStatus);
-    	juicePassionFruitCheckbox.setSelected(checkStatus);
-    	juicePineappleCheckbox.setSelected(checkStatus);
-    	juiceTomatoCheckbox.setSelected(checkStatus);
-    	peachNectarCheckbox.setSelected(checkStatus);
-    	limeJuiceCordialCheckbox.setSelected(checkStatus);
-    	grenadineCheckbox.setSelected(checkStatus);
-    	juiceGrapefruitCheckbox.setSelected(checkStatus);
-    	juiceLemonCheckbox.setSelected(checkStatus);
-    	juiceLimeCheckbox.setSelected(checkStatus);
-    	juiceTropicanaCheckbox.setSelected(checkStatus);
-    	juicePinkLemonadeCheckbox.setSelected(checkStatus);
-    	juiceLimeadeCheckbox.setSelected(checkStatus);
-    	juiceLemonadeCheckbox.setSelected(checkStatus);
-    	juiceOrangeCheckbox.setSelected(checkStatus);
-    	sourMixCheckbox.setSelected(checkStatus);
-    	sweetAndSourCheckbox.setSelected(checkStatus);
-	}
-	
-	public void checkAllStock(boolean checkStatus){
-		
-		tabascoSauceCheckbox.setSelected(checkStatus);
-    	sherbetCheckbox.setSelected(checkStatus);
-    	jelloCheckbox.setSelected(checkStatus);
-    	saltCheckbox.setSelected(checkStatus);
-    	eggYolkCheckbox.setSelected(checkStatus);
-    	eggCheckbox.setSelected(checkStatus);
-    	iceCheckbox.setSelected(checkStatus);
-    	almondCheckbox.setSelected(checkStatus);
-    	beefBouillonCheckbox.setSelected(checkStatus);
-    	cocoaPowderCheckbox.setSelected(checkStatus);
-    	chocolateCheckbox.setSelected(checkStatus);
-    	worcestershireSauceCheckbox.setSelected(checkStatus);
-    	chocolateSyrupCheckbox.setSelected(checkStatus);
-    	
-    	brownSugarCheckbox.setSelected(checkStatus);
-    	sugarSyrupCheckbox.setSelected(checkStatus);
-    	sugarCheckbox.setSelected(checkStatus);
-    	
-    	gingerCheckbox.setSelected(checkStatus);
-    	clovesCheckbox.setSelected(checkStatus);
-    	cardamomCheckbox.setSelected(checkStatus);
-    	bittersCheckbox.setSelected(checkStatus);
-    	angosturaBittersCheckbox.setSelected(checkStatus);
-    	anisCheckbox.setSelected(checkStatus);
     	honeyCheckbox.setSelected(checkStatus);
+    	hotChocolateCheckbox.setSelected(checkStatus);
     	mintCheckbox.setSelected(checkStatus);
     	orangeBittersCheckbox.setSelected(checkStatus);
     	fruitAppleCheckbox.setSelected(checkStatus);
@@ -581,12 +336,37 @@ public class MainViewController implements Initializable {
     	fruitPineappleCheckbox.setSelected(checkStatus);
     	fruitRasinsCheckbox.setSelected(checkStatus);
     	fruitStrawberriesCheckbox.setSelected(checkStatus);
+    	juiceAppleCheckbox.setSelected(checkStatus);
+    	juiceCiderCheckbox.setSelected(checkStatus);
+    	juiceClamatoCheckbox.setSelected(checkStatus);
+    	juiceCranberryCheckbox.setSelected(checkStatus);
+    	juiceFruitCheckbox.setSelected(checkStatus);
+    	juiceFruitPunchCheckbox.setSelected(checkStatus);
+    	juiceGrapeCheckbox.setSelected(checkStatus);
+    	juiceHawaiianPunchCheckbox.setSelected(checkStatus);
+    	juiceKoolAidCheckbox.setSelected(checkStatus);
+    	juiceMaraschinoCherryCheckbox.setSelected(checkStatus);
+    	juicePassionFruitCheckbox.setSelected(checkStatus);
+    	juicePineappleCheckbox.setSelected(checkStatus);
+    	juiceTomatoCheckbox.setSelected(checkStatus);
+    	peachNectarCheckbox.setSelected(checkStatus);
+    	sourMixCheckbox.setSelected(checkStatus);
+    	sweetAndSourCheckbox.setSelected(checkStatus);
     	orangePeelCheckbox.setSelected(checkStatus);
     	lemonPeelCheckbox.setSelected(checkStatus);
-
+    	limeJuiceCordialCheckbox.setSelected(checkStatus);
+    	grenadineCheckbox.setSelected(checkStatus);
+    	juiceGrapefruitCheckbox.setSelected(checkStatus);
+    	juiceLemonCheckbox.setSelected(checkStatus);
+    	juiceLimeCheckbox.setSelected(checkStatus);
+    	juiceTropicanaCheckbox.setSelected(checkStatus);
+    	juicePinkLemonadeCheckbox.setSelected(checkStatus);
+    	juiceLimeadeCheckbox.setSelected(checkStatus);
+    	juiceLemonadeCheckbox.setSelected(checkStatus);
+    	juiceOrangeCheckbox.setSelected(checkStatus);
 	}
-	
-	public void checkAllSpirits(boolean checkStatus) {
+
+	public void checkAllLiquor(boolean checkStatus) {
 		ginCheckbox.setSelected(checkStatus);
 		sloeGinCheckbox.setSelected(checkStatus);
 		scotchCheckbox.setSelected(checkStatus);
@@ -663,22 +443,30 @@ public class MainViewController implements Initializable {
 		schnappsWatermelonCheckbox.setSelected(checkStatus);
 		schnappsWildberryCheckbox.setSelected(checkStatus);
 		rumpleMinzeCheckbox.setSelected(checkStatus);
-	}
-	
-	public void checkAllLiqueure(boolean checkStatus) {
+		creamOfCoconutCheckbox.setSelected(checkStatus);
 		cremeDeNoyauxCheckbox.setSelected(checkStatus);
 		cremeDeBananaCheckbox.setSelected(checkStatus);
 		cremeDeCacaoCheckbox.setSelected(checkStatus);
 		cremeDeCassisCheckbox.setSelected(checkStatus);
 		cremeDeMentheCheckbox.setSelected(checkStatus);
-		creamOfCoconutCheckbox.setSelected(checkStatus);
-		
 		aftershockCheckbox.setSelected(checkStatus);
 		mauiCheckbox.setSelected(checkStatus);
 		goldschlagerCheckbox.setSelected(checkStatus);
 		hotDamnCheckbox.setSelected(checkStatus);
 		hypnotiqCheckbox.setSelected(checkStatus);
 		sourApplePuckerCheckbox.setSelected(checkStatus);
+		aleCheckbox.setSelected(checkStatus);
+		beerCheckbox.setSelected(checkStatus);
+		champagneCheckbox.setSelected(checkStatus);
+		dubonnetBlancCheckbox.setSelected(checkStatus);
+		dubonnetRougeCheckbox.setSelected(checkStatus);
+		whiteWineCheckbox.setSelected(checkStatus);
+		coronaCheckbox.setSelected(checkStatus);
+		guinessStoutCheckbox.setSelected(checkStatus);
+		lagerCheckbox.setSelected(checkStatus);
+		sakeCheckbox.setSelected(checkStatus);
+		sherryCheckbox.setSelected(checkStatus);
+		zimaCheckbox.setSelected(checkStatus);
 		kummelCheckbox.setSelected(checkStatus);
 		greenChartreuseCheckbox.setSelected(checkStatus);
 		gallianoCheckbox.setSelected(checkStatus);
@@ -725,25 +513,10 @@ public class MainViewController implements Initializable {
 		kahluaCheckbox.setSelected(checkStatus);
 		baileysIrishCreamCheckbox.setSelected(checkStatus);
 		tiaMariaCheckbox.setSelected(checkStatus);
-	}
-	
-	public void checkAllBeer(boolean checkStatus) {
-		aleCheckbox.setSelected(checkStatus);
-		beerCheckbox.setSelected(checkStatus);
-		champagneCheckbox.setSelected(checkStatus);
-		dubonnetBlancCheckbox.setSelected(checkStatus);
-		dubonnetRougeCheckbox.setSelected(checkStatus);
-		whiteWineCheckbox.setSelected(checkStatus);
-		coronaCheckbox.setSelected(checkStatus);
-		guinessStoutCheckbox.setSelected(checkStatus);
-		lagerCheckbox.setSelected(checkStatus);
-		sakeCheckbox.setSelected(checkStatus);
-		sherryCheckbox.setSelected(checkStatus);
-		zimaCheckbox.setSelected(checkStatus);
 		portCheckbox.setSelected(checkStatus);
 		redWineCheckbox.setSelected(checkStatus);
 	}
-	
+
 	public void checkAllWhiskey() {
 		whiskeyBlendedCheckbox.setSelected(true);
 		whiskeyBourbonCheckbox.setSelected(true);
@@ -757,7 +530,7 @@ public class MainViewController implements Initializable {
 		whiskeyCheckbox.setSelected(true);
 		scotchCheckbox.setSelected(true);
 	}
-	
+
 	public void checkAllVodka() {
 		vodkaAbsolutCitronCheckbox.setSelected(true);
 		vodkaAbsolutKurantCheckbox.setSelected(true);
@@ -772,9 +545,9 @@ public class MainViewController implements Initializable {
 		vodkaRaspberryCheckbox.setSelected(true);
 		vodkaVanillaCheckbox.setSelected(true);
 		vodkaCheckbox.setSelected(true);
-		
+
 	}
-	
+
 	public void checkAllRum() {
 		rumAnejoCheckbox.setSelected(true);
 		rumBacardiLimonCheckbox.setSelected(true);
@@ -788,17 +561,16 @@ public class MainViewController implements Initializable {
 		rumSpicedCheckbox.setSelected(true);
 		rumCheckbox.setSelected(true);
 	}
-	
-	
+
 	public void ingredientArraylistMaker() {
 		whatCanIMakeButton.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
 		    	filterIngredients.clear();
-		    	
+
 		    	if(ginCheckbox.isSelected()){
 					filterIngredients.add("gin");
 				}
-		    	
+
 		    	if(sloeGinCheckbox.isSelected()){
 		    		filterIngredients.add("sloeGin");
 				}
@@ -806,7 +578,7 @@ public class MainViewController implements Initializable {
 				if(scotchCheckbox.isSelected()){
 					filterIngredients.add("scotch");
 				}
-				
+
 				if(tequilaCheckbox.isSelected()){
 					filterIngredients.add("tequila");
 				}
@@ -814,1016 +586,989 @@ public class MainViewController implements Initializable {
 				if(absintheCheckbox.isSelected()){
 					filterIngredients.add("absinthe");
 				}
-				
+
 				if(amarettoCheckbox.isSelected()){
 					filterIngredients.add("amaretto");
 				}
 				if(appleJackCheckbox.isSelected()){
 					filterIngredients.add("appleJack");
 				}
-				
+
 				if(cognacCheckbox.isSelected()){
 					filterIngredients.add("cognac");
 				}
-				
+
 				if(everclearCheckbox.isSelected()){
 					filterIngredients.add("everclear");
 				}
-				
-				
+
+
 				if(grainAlcoholCheckbox.isSelected()){
 					filterIngredients.add("grainAlcohol");
 				}
-				
+
 				if(cachacaCheckbox.isSelected()){
 					filterIngredients.add("cachaca");
 				}
-				
+
 				if(firewaterCheckbox.isSelected()){
 					filterIngredients.add("firewater");
 				}
-				
+
 				if(rumAnejoCheckbox.isSelected()){
 					filterIngredients.add("rumAnejo");
 				}
-				
+
 				if(rumBacardiLimonCheckbox.isSelected()){
 					filterIngredients.add("rumBacardiLimon");
 				}
-				
+
 				if(rumBlackCheckbox.isSelected()){
 					filterIngredients.add("rumBlack");
 				}
-				
+
 				if(rumCoconutCheckbox.isSelected()){
 					filterIngredients.add("rumCoconut");
 				}
-				
+
 				if(rumDarkCheckbox.isSelected()){
 					filterIngredients.add("rumDark");
 				}
-				
+
 				if(rumGoldCheckbox.isSelected()){
 					filterIngredients.add("rumGold");
 				}
-				
+
 				if(rumLightCheckbox.isSelected()){
 					filterIngredients.add("rumLight");
 				}
-				
+
 				if(rumMalibuCheckbox.isSelected()){
 					filterIngredients.add("rumMalibu");
 				}
-				
+
 				if(rumOrangeCheckbox.isSelected()){
 					filterIngredients.add("rumOrange");
 				}
-				
+
 				if(rumSpicedCheckbox.isSelected()){
 					filterIngredients.add("rumSpiced");
 				}
-				
+
 				if(rumCheckbox.isSelected()){
 					filterIngredients.add("rum");
 				}
-				
+
 				if(vodkaAbsolutCitronCheckbox.isSelected()){
 					filterIngredients.add("vodkaAbsolutCitron");
 				}
-				
+
 				if(vodkaAbsolutKurantCheckbox.isSelected()){
 					filterIngredients.add("vodkaAbsolutKurant");
 				}
-				
+
 				if(vodkaAbsolutPepparCheckbox.isSelected()){
 					filterIngredients.add("vodkaAbsolutPeppar");
 				}
-				
+
 				if(vodkaCitrusCheckbox.isSelected()){
 					filterIngredients.add("vodkaCitrus");
 				}
-				
+
 				if(vodkaCranberryCheckbox.isSelected()){
 					filterIngredients.add("vodkaCranberry");
 				}
-				
+
 				if(vodkaLemonCheckbox.isSelected()){
 					filterIngredients.add("vodkaLemon");
 				}
-				
+
 				if(vodkaLimeCheckbox.isSelected()){
 					filterIngredients.add("vodkaLime");
 				}
-				
+
 				if(vodkaMelonCheckbox.isSelected()){
 					filterIngredients.add("vodkaMelon");
 				}
-				
+
 				if(vodkaOrangeCheckbox.isSelected()){
 					filterIngredients.add("vodkaOrange");
 				}
-				
+
 				if(vodkaPeachCheckbox.isSelected()){
 					filterIngredients.add("vodkaPeach");
 				}
-				
+
 				if(vodkaRaspberryCheckbox.isSelected()){
 					filterIngredients.add("vodkaRaspberry");
 				}
-				
+
 				if(vodkaVanillaCheckbox.isSelected()){
 					filterIngredients.add("vodkaVanilla");
 				}
-				
+
 				if(vodkaCheckbox.isSelected()){
 					filterIngredients.add("vodka");
 					filterIngredients.add("vodkaAbsolut");
 				}
-				
+
 				if(whiskeyBlendedCheckbox.isSelected()){
 					filterIngredients.add("whiskeyBlended");
 				}
-				
+
 				if(whiskeyBourbonCheckbox.isSelected()){
 					filterIngredients.add("whiskeyBourbon");
 				}
-				
+
 				if(whiskeyCanadianCheckbox.isSelected()){
 					filterIngredients.add("whiskeyCanadian");
 				}
-				
+
 				if(whiskeyIrishCheckbox.isSelected()){
 					filterIngredients.add("whiskeyIrish");
 				}
-				
+
 				if(whiskeyJackDanielsCheckbox.isSelected()){
 					filterIngredients.add("whiskeyJackDaniels");
 				}
-				
+
 				if(whiskeyJimBeamCheckbox.isSelected()){
 					filterIngredients.add("whiskeyJimBeam");
 				}
-				
+
 				if(whiskeyRyeCheckbox.isSelected()){
 					filterIngredients.add("whiskeyRye");
 				}
-				
+
 				if(whiskeyTennesseeCheckbox.isSelected()){
 					filterIngredients.add("whiskeyTennessee");
 				}
-				
+
 				if(whiskeyWildTurkeyCheckbox.isSelected()){
 					filterIngredients.add("whiskeyWildTurkey");
 				}
-				
+
 				if(whiskeyCheckbox.isSelected()){
 					filterIngredients.add("whiskey");
 				}
-				
+
 				if(brandyAppleCheckbox.isSelected()){
 					filterIngredients.add("brandyApple");
 				}
-				
+
 				if(brandyApricotCheckbox.isSelected()){
 					filterIngredients.add("brandyApricot");
 				}
-				
+
 				if(brandyBlackberryCheckbox.isSelected()){
 					filterIngredients.add("brandyBlackberry");
 				}
-				
+
 				if(brandyCherryCheckbox.isSelected()){
 					filterIngredients.add("brandyCherry");
 				}
-				
+
 				if(brandyCoffeeCheckbox.isSelected()){
 					filterIngredients.add("brandyCoffee");
 				}
-				
+
 				if(brandyPeachCheckbox.isSelected()){
 					filterIngredients.add("brandyPeach");
 				}
-				
+
 				if(brandyCheckbox.isSelected()){
 					filterIngredients.add("brandy");
 				}
-				
+
 				if(calvadosCheckbox.isSelected()){
 					filterIngredients.add("calvados");
 				}
-				
+
 				if(cherryHeeringCheckbox.isSelected()){
 					filterIngredients.add("cherryHeering");
 				}
-				
+
 				if(piscoCheckbox.isSelected()){
 					filterIngredients.add("pisco");
 				}
-				
+
 				if(vermouthCheckbox.isSelected()){
 					filterIngredients.add("vermouth");
 				}
-				
+
 				if(vermouthDryCheckbox.isSelected()){
 					filterIngredients.add("vermouthDry");
 				}
-				
+
 				if(vermouthSweetCheckbox.isSelected()){
 					filterIngredients.add("vermouthSweet");
 				}
-				
+
 				if(schnappsCheckbox.isSelected()){
 					filterIngredients.add("schnapps");
 				}
-				
+
 				if(schnappsAppleCheckbox.isSelected()){
 					filterIngredients.add("schnappsApple");
 				}
-				
+
 				if(schnappsBlackberryCheckbox.isSelected()){
 					filterIngredients.add("schnappsBlackberry");
 				}
-				
+
 				if(schnappsBlueberryCheckbox.isSelected()){
 					filterIngredients.add("schnappsBlueberry");
 				}
-				
+
 				if(schnappsButterscotchCheckbox.isSelected()){
 					filterIngredients.add("schnappsButterscotch");
 				}
-				
+
 				if(schnappsCinnamonCheckbox.isSelected()){
 					filterIngredients.add("schnappsCinnamon");
 				}
-				
+
 				if(schnappsKeyLargoCheckbox.isSelected()){
 					filterIngredients.add("schnappsKeyLargo");
 				}
-				
+
 				if(schnappsPeachCheckbox.isSelected()){
 					filterIngredients.add("schnappsPeach");
 				}
-				
+
 				if(schnappsPeachTreeCheckbox.isSelected()){
 					filterIngredients.add("schnappsPeachTree");
 				}
-				
+
 				if(schnappsPeppermintCheckbox.isSelected()){
 					filterIngredients.add("schnappsPeppermint");
 				}
-				
+
 				if(schnappsRaspberryCheckbox.isSelected()){
 					filterIngredients.add("schnappsRaspberry");
 				}
-				
+
 				if(schnappsRootBeerCheckbox.isSelected()){
 					filterIngredients.add("schnappsRootBeer");
 				}
-				
+
 				if(schnappsCheckbox.isSelected()){
 					filterIngredients.add("schnapps");
 				}
-				
+
 				if(schnappsStrawberryCheckbox.isSelected()){
 					filterIngredients.add("schnappsStrawberry");
 				}
-				
+
 				if(schnappsVanillaCheckbox.isSelected()){
 					filterIngredients.add("schnappsVanilla");
 				}
-				
+
 				if(schnappsWatermelonCheckbox.isSelected()){
 					filterIngredients.add("schnappsWatermelon");
 				}
-				
+
 				if(schnappsWildberryCheckbox.isSelected()){
 					filterIngredients.add("schnappsWildberry");
 				}
-				
+
 				if(rumpleMinzeCheckbox.isSelected()){
 					filterIngredients.add("rumpleMinze");
 				}
-				
+
 				if(creamOfCoconutCheckbox.isSelected()){
 					filterIngredients.add("creamOfCoconut");
 				}
-				
+
 				if(cremeDeNoyauxCheckbox.isSelected()){
 					filterIngredients.add("cremeDeNoyaux");
 				}
-				
+
 				if(cremeDeBananaCheckbox.isSelected()){
 					filterIngredients.add("cremeDeBanana");
 				}
-				
+
 				if(cremeDeCacaoCheckbox.isSelected()){
 					filterIngredients.add("cremeDeCacao");
 				}
-				
+
 				if(cremeDeCassisCheckbox.isSelected()){
 					filterIngredients.add("cremeDeCassis");
 				}
-				
+
 				if(cremeDeMentheCheckbox.isSelected()){
 					filterIngredients.add("cremeDeMenthe");
 				}
-				
+
 				if(aftershockCheckbox.isSelected()){
 					filterIngredients.add("aftershock");
 				}
-				
+
 				if(mauiCheckbox.isSelected()){
 					filterIngredients.add("maui");
 				}
-				
+
 				if(goldschlagerCheckbox.isSelected()){
 					filterIngredients.add("goldschlager");
 				}
-				
+
 				if(hotDamnCheckbox.isSelected()){
 					filterIngredients.add("hotDamn");
 				}
-				
+
 				if(hypnotiqCheckbox.isSelected()){
 					filterIngredients.add("hypnotiq");
 				}
-				
+
 				if(sourApplePuckerCheckbox.isSelected()){
 					filterIngredients.add("sourApplePucker");
 				}
-				
+
 				if(aleCheckbox.isSelected()){
 					filterIngredients.add("ale");
 				}
-				
+
 				if(beerCheckbox.isSelected()){
 					filterIngredients.add("beer");
 				}
-				
+
 				if(champagneCheckbox.isSelected()){
 					filterIngredients.add("champagne");
 				}
-				
+
 				if(dubonnetBlancCheckbox.isSelected()){
 					filterIngredients.add("dubonnetBlanc");
 				}
-				
+
 				if(dubonnetRougeCheckbox.isSelected()){
 					filterIngredients.add("dubonnetRouge");
 				}
-				
+
 				if(whiteWineCheckbox.isSelected()){
 					filterIngredients.add("whiteWine");
 				}
-				
+
 				if(coronaCheckbox.isSelected()){
 					filterIngredients.add("corona");
 				}
-				
+
 				if(guinessStoutCheckbox.isSelected()){
 					filterIngredients.add("guinessStout");
 				}
-				
+
 				if(lagerCheckbox.isSelected()){
 					filterIngredients.add("lager");
 				}
-				
+
 				if(sakeCheckbox.isSelected()){
 					filterIngredients.add("sake");
 				}
-				
+
 				if(sherryCheckbox.isSelected()){
 					filterIngredients.add("sherry");
 				}
-				
+
 				if(zimaCheckbox.isSelected()){
 					filterIngredients.add("zima");
 				}
-				
+
 				if(kummelCheckbox.isSelected()){
 					filterIngredients.add("kummel");
 				}
-				
+
 				if(greenChartreuseCheckbox.isSelected()){
 					filterIngredients.add("greenChartreuse");
 				}
-				
+
 				if(gallianoCheckbox.isSelected()){
 					filterIngredients.add("galliano");
 				}
-				
+
 				if(benedictineCheckbox.isSelected()){
 					filterIngredients.add("benedictine");
 				}
-				
+
 				if(aquavitCheckbox.isSelected()){
 					filterIngredients.add("aquavit");
 				}
-				
+
 				if(yellowChartreuseCheckbox.isSelected()){
 					filterIngredients.add("yellowChartreuse");
 				}
-				
+
 				if(tripleSecCheckbox.isSelected()){
 					filterIngredients.add("tripleSec");
 				}
-				
+
 				if(CuracaoCheckbox.isSelected()){
 					filterIngredients.add("Curacao");
 				}
-				
+
 				if(orangeCuracaoCheckbox.isSelected()){
 					filterIngredients.add("orangeCuracao");
 				}
-				
+
 				if(blueCuracaoCheckbox.isSelected()){
 					filterIngredients.add("blueCuracao");
 				}
-				
+
 				if(cointreauCheckbox.isSelected()){
 					filterIngredients.add("cointreau");
 				}
-				
+
 				if(grandMarnierCheckbox.isSelected()){
 					filterIngredients.add("grandMarnier");
 				}
-				
+
 				if(tuacaCheckbox.isSelected()){
 					filterIngredients.add("tuaca");
 				}
-				
+
 				if(liqueurOrangeCheckbox.isSelected()){
 					filterIngredients.add("liqueurOrange");
 				}
-				
+
 				if(liqueurBananaCheckbox.isSelected()){
 					filterIngredients.add("liqueurBanana");
 				}
-				
+
 				if(liqueurRaspberryCheckbox.isSelected()){
 					filterIngredients.add("liqueurRaspberry");
 				}
-				
+
 				if(liqueurKiwiCheckbox.isSelected()){
 					filterIngredients.add("liqueurKiwi");
 				}
-				
+
 				if(liqueurMelonCheckbox.isSelected()){
 					filterIngredients.add("liqueurMelon");
 				}
-				
+
 				if(liqueurMidoriMelonCheckbox.isSelected()){
 					filterIngredients.add("liqueurMidoriMelon");
 				}
-				
+
 				if(liqueurPeachCheckbox.isSelected()){
 					filterIngredients.add("liqueurPeach");
 				}
-				
+
 				if(liqueurStrawberryCheckbox.isSelected()){
 					filterIngredients.add("liqueurStrawberry");
 				}
-				
+
 				if(liqueurCoconutCheckbox.isSelected()){
 					filterIngredients.add("liqueurCoconut");
 				}
-				
+
 				if(tequilaRoseCheckbox.isSelected()){
 					filterIngredients.add("tequilaRose");
 				}
-				
+
 				if(anisetteCheckbox.isSelected()){
 					filterIngredients.add("anisette");
 				}
-				
+
 				if(apfelkornCheckbox.isSelected()){
 					filterIngredients.add("apfelkorn");
 				}
-				
+
 				if(OuzoCheckbox.isSelected()){
 					filterIngredients.add("Ouzo");
 				}
-				
+
 				if(barenjagerCheckbox.isSelected()){
 					filterIngredients.add("barenjager");
 				}
-				
+
 				if(pernodCheckbox.isSelected()){
 					filterIngredients.add("pernod");
 				}
-				
+
 				if(blackSambucaCheckbox.isSelected()){
 					filterIngredients.add("blackSambuca");
 				}
-				
+
 				if(campariCheckbox.isSelected()){
 					filterIngredients.add("campari");
 				}
-				
+
 				if(drambuieCheckbox.isSelected()){
 					filterIngredients.add("drambuie");
 				}
-				
+
 				if(frangelicoCheckbox.isSelected()){
 					filterIngredients.add("frangelico");
 				}
-				
+
 				if(pisangAmbonCheckbox.isSelected()){
 					filterIngredients.add("pisangAmbon");
 				}
-				
+
 				if(jagermeisterCheckbox.isSelected()){
 					filterIngredients.add("jagermeister");
 				}
-				
+
 				if(ricardCheckbox.isSelected()){
 					filterIngredients.add("ricard");
 				}
-				
+
 				if(sambucaCheckbox.isSelected()){
 					filterIngredients.add("sambuca");
 				}
-				
+
 				if(southernComfortCheckbox.isSelected()){
 					filterIngredients.add("southernComfort");
 				}
-				
+
 				if(swedishPunschCheckbox.isSelected()){
 					filterIngredients.add("swedishPunsch");
 				}
-				
+
 				if(yukonJackCheckbox.isSelected()){
 					filterIngredients.add("yukonJack");
 				}
-				
+
 				if(advocaatCheckbox.isSelected()){
 					filterIngredients.add("advocaat");
 				}
-				
+
 				if(liqueurChocolateCheckbox.isSelected()){
 					filterIngredients.add("liqueurChocolate");
 				}
-				
+
 				if(liqueurCoffeeCheckbox.isSelected()){
 					filterIngredients.add("liqueurCoffee");
 				}
-				
+
 				if(liqueurGodivaCheckbox.isSelected()){
 					filterIngredients.add("liqueurGodiva");
 				}
-				
+
 				if(kahluaCheckbox.isSelected()){
 					filterIngredients.add("kahlua");
 				}
-				
+
 				if(baileysIrishCreamCheckbox.isSelected()){
 					filterIngredients.add("baileysIrishCream");
 				}
-				
+
 				if(tiaMariaCheckbox.isSelected()){
 					filterIngredients.add("tiaMaria");
 				}
-				
+
 				if(sodaWaterCheckbox.isSelected()){
 					filterIngredients.add("sodaWater");
 				}
-				
+
 				if(sodaCherryColaCheckbox.isSelected()){
 					filterIngredients.add("sodaCherryCola");
 				}
-				
+
 				if(sodaColaCheckbox.isSelected()){
 					filterIngredients.add("sodaCola");
 				}
-				
+
 				if(sodaDrPepperCheckbox.isSelected()){
 					filterIngredients.add("sodaDrPepper");
 				}
-				
+
 				if(sodaGingerAleCheckbox.isSelected()){
 					filterIngredients.add("sodaGingerAle");
 				}
-				
+
 				if(sodaLemonLimeCheckbox.isSelected()){
 					filterIngredients.add("sodaLemonLime");
 				}
-				
+
 				if(sodaMountainDewCheckbox.isSelected()){
 					filterIngredients.add("sodaMountainDew");
 				}
-				
+
 				if(sodaOrangeCheckbox.isSelected()){
 					filterIngredients.add("sodaOrange");
 				}
-				
+
 				if(sodaRootBeerCheckbox.isSelected()){
 					filterIngredients.add("sodaRootBeer");
 				}
-				
+
 				if(schweppesRusschianCheckbox.isSelected()){
 					filterIngredients.add("schweppesRusschian");
 				}
-				
+
 				if(chocolateMilkCheckbox.isSelected()){
 					filterIngredients.add("chocolateMilk");
 				}
-				
+
 				if(creamCheckbox.isSelected()){
 					filterIngredients.add("cream");
 				}
-				
+
 				if(eggYolkCheckbox.isSelected()){
 					filterIngredients.add("eggYolk");
 				}
-				
+
 				if(eggCheckbox.isSelected()){
 					filterIngredients.add("egg");
 				}
-				
+
 				if(eggnogCheckbox.isSelected()){
 					filterIngredients.add("eggnog");
 				}
-				
+
 				if(condensedMilkCheckbox.isSelected()){
 					filterIngredients.add("condensedMilk");
 				}
-				
+
 				if(milkCheckbox.isSelected()){
 					filterIngredients.add("milk");
 				}
-				
+
 				if(vanillaIceCreamCheckbox.isSelected()){
 					filterIngredients.add("vanillaIceCream");
 				}
-				
+
 				if(whippingCreamCheckbox.isSelected()){
 					filterIngredients.add("whippingCream");
 				}
-				
+
 				if(yoghurtCheckbox.isSelected()){
 					filterIngredients.add("yoghurt");
 				}
-				
+
 				if(chocolateIceCreamCheckbox.isSelected()){
 					filterIngredients.add("chocolateIceCream");
 				}
-				
+
 				if(brownSugarCheckbox.isSelected()){
 					filterIngredients.add("brownSugar");
 				}
-				
+
 				if(worcestershireSauceCheckbox.isSelected()){
 					filterIngredients.add("worcestershireSauce");
 				}
-				
+
 				if(chocolateSyrupCheckbox.isSelected()){
 					filterIngredients.add("chocolateSyrup");
 				}
-				
+
 				if(chocolateCheckbox.isSelected()){
 					filterIngredients.add("chocolate");
 				}
-				
+
 				if(cocoaPowderCheckbox.isSelected()){
 					filterIngredients.add("cocoaPowder");
 				}
-				
+
 				if(coconutMilkCheckbox.isSelected()){
 					filterIngredients.add("coconutMilk");
 				}
-				
+
 				if(coffeeCheckbox.isSelected()){
 					filterIngredients.add("coffee");
 				}
-				
+
 				if(beefBouillonCheckbox.isSelected()){
 					filterIngredients.add("beefBouillon");
 				}
-				
+
 				if(almondCheckbox.isSelected()){
 					filterIngredients.add("almond");
 				}
-				
+
 				if(espressoCheckbox.isSelected()){
 					filterIngredients.add("espresso");
 				}
-				
+
 				if(iceCheckbox.isSelected()){
 					filterIngredients.add("ice");
 				}
-				
+
 				if(icedTeaCheckbox.isSelected()){
 					filterIngredients.add("icedTea");
 				}
-				
+
 				if(jelloCheckbox.isSelected()){
 					filterIngredients.add("jello");
 				}
-				
+
 				if(saltCheckbox.isSelected()){
 					filterIngredients.add("salt");
 				}
-				
+
 				if(sherbetCheckbox.isSelected()){
 					filterIngredients.add("sherbet");
 				}
-				
+
 				if(sugarSyrupCheckbox.isSelected()){
 					filterIngredients.add("sugarSyrup");
 				}
-				
+
 				if(sugarCheckbox.isSelected()){
 					filterIngredients.add("sugar");
 				}
-				
+
 				if(tabascoSauceCheckbox.isSelected()){
 					filterIngredients.add("tabascoSauce");
 				}
-				
+
 				if(tangCheckbox.isSelected()){
 					filterIngredients.add("tang");
 				}
-				
+
 				if(teaCheckbox.isSelected()){
 					filterIngredients.add("tea");
 				}
-				
+
 				if(waterCheckbox.isSelected()){
 					filterIngredients.add("water");
 				}
-				
+
 				if(anisCheckbox.isSelected()){
 					filterIngredients.add("anis");
 				}
-				
+
 				if(angosturaBittersCheckbox.isSelected()){
 					filterIngredients.add("angosturaBitters");
 				}
-				
+
 				if(bittersCheckbox.isSelected()){
 					filterIngredients.add("bitters");
 				}
-				
+
 				if(cardamomCheckbox.isSelected()){
 					filterIngredients.add("cardamom");
 				}
-				
+
 				if(clovesCheckbox.isSelected()){
 					filterIngredients.add("cloves");
 				}
-				
+
 				if(gingerCheckbox.isSelected()){
 					filterIngredients.add("ginger");
 				}
-				
+
 				if(halfAndHalfCheckbox.isSelected()){
 					filterIngredients.add("halfAndHalf");
 				}
-				
+
 				if(heavyCreamCheckbox.isSelected()){
 					filterIngredients.add("heavyCream");
 				}
-				
+
 				if(honeyCheckbox.isSelected()){
 					filterIngredients.add("honey");
 				}
-				
+
 				if(hotChocolateCheckbox.isSelected()){
 					filterIngredients.add("hotChocolate");
 				}
-				
+
 				if(mintCheckbox.isSelected()){
 					filterIngredients.add("mint");
 				}
-				
+
 				if(orangeBittersCheckbox.isSelected()){
 					filterIngredients.add("orangeBitters");
 				}
-				
+
 				if(portCheckbox.isSelected()){
 					filterIngredients.add("port");
 				}
-				
+
 				if(redWineCheckbox.isSelected()){
 					filterIngredients.add("redWine");
 				}
-				
+
 				if(fruitAppleCheckbox.isSelected()){
 					filterIngredients.add("fruitApple");
 				}
-				
+
 				if(fruitBananaCheckbox.isSelected()){
 					filterIngredients.add("fruitBanana");
 				}
-				
+
 				if(fruitCranberriesCheckbox.isSelected()){
 					filterIngredients.add("fruitCranberries");
 				}
-				
+
 				if(fruitGrapesCheckbox.isSelected()){
 					filterIngredients.add("fruitGrapes");
 				}
-				
+
 				if(fruitKiwiCheckbox.isSelected()){
 					filterIngredients.add("fruitKiwi");
 				}
-				
+
 				if(fruitLemonCheckbox.isSelected()){
 					filterIngredients.add("fruitLemon");
 				}
-				
+
 				if(fruitLimeCheckbox.isSelected()){
 					filterIngredients.add("fruitLime");
 				}
-				
+
 				if(fruitMangoCheckbox.isSelected()){
 					filterIngredients.add("fruitMango");
 				}
-				
+
 				if(fruitOrangeCheckbox.isSelected()){
 					filterIngredients.add("fruitOrange");
 				}
-				
+
 				if(fruitPineappleCheckbox.isSelected()){
 					filterIngredients.add("fruitPineapple");
 				}
-				
+
 				if(fruitRasinsCheckbox.isSelected()){
 					filterIngredients.add("fruitRasins");
 				}
-				
+
 				if(fruitStrawberriesCheckbox.isSelected()){
 					filterIngredients.add("fruitStrawberries");
 				}
-				
+
 				if(juiceAppleCheckbox.isSelected()){
 					filterIngredients.add("juiceApple");
 				}
-				
+
 				if(juiceCiderCheckbox.isSelected()){
 					filterIngredients.add("juiceCider");
 				}
-				
+
 				if(juiceClamatoCheckbox.isSelected()){
 					filterIngredients.add("juiceClamato");
 				}
-				
+
 				if(juiceCranberryCheckbox.isSelected()){
 					filterIngredients.add("juiceCranberry");
 				}
-				
+
 				if(juiceFruitCheckbox.isSelected()){
 					filterIngredients.add("juiceFruit");
 				}
-				
+
 				if(juiceFruitPunchCheckbox.isSelected()){
 					filterIngredients.add("juiceFruitPunch");
 				}
-				
+
 				if(juiceGrapeCheckbox.isSelected()){
 					filterIngredients.add("juiceGrape");
 				}
-				
+
 				if(juiceHawaiianPunchCheckbox.isSelected()){
 					filterIngredients.add("juiceHawaiianPunch");
 				}
-				
+
 				if(juiceKoolAidCheckbox.isSelected()){
 					filterIngredients.add("juiceKoolAid");
 				}
-				
+
 				if(juiceMaraschinoCherryCheckbox.isSelected()){
 					filterIngredients.add("juiceMaraschinoCherry");
 				}
-				
+
 				if(juicePassionFruitCheckbox.isSelected()){
 					filterIngredients.add("juicePassionFruit");
 				}
-				
+
 				if(juicePineappleCheckbox.isSelected()){
 					filterIngredients.add("juicePineapple");
 				}
-				
+
 				if(juiceTomatoCheckbox.isSelected()){
 					filterIngredients.add("juiceTomato");
 				}
-				
+
 				if(peachNectarCheckbox.isSelected()){
 					filterIngredients.add("peachNectar");
 				}
-				
+
 				if(sourMixCheckbox.isSelected()){
 					filterIngredients.add("sourMix");
 				}
-				
+
 				if(sweetAndSourCheckbox.isSelected()){
 					filterIngredients.add("sweetAndSour");
 				}
-				
+
 				if(orangePeelCheckbox.isSelected()){
 					filterIngredients.add("orangePeel");
 				}
-				
+
 				if(lemonPeelCheckbox.isSelected()){
 					filterIngredients.add("lemonPeel");
 				}
-				
+
 				if(limeJuiceCordialCheckbox.isSelected()){
 					filterIngredients.add("limeJuiceCordial");
 				}
-				
+
 				if(grenadineCheckbox.isSelected()){
 					filterIngredients.add("grenadine");
 				}
-				
+
 				if(juiceGrapefruitCheckbox.isSelected()){
 					filterIngredients.add("juiceGrapefruit");
 				}
-				
+
 				if(juiceOrangeCheckbox.isSelected()){
 					filterIngredients.add("juiceOrange");
 				}
-				
+
 				if(juiceLemonCheckbox.isSelected()){
 					filterIngredients.add("juiceLemon");
 				}
-				
+
 				if(juiceLimeCheckbox.isSelected()){
 					filterIngredients.add("juiceLime");
 				}
-				
+
 				if(juiceTropicanaCheckbox.isSelected()){
 					filterIngredients.add("juiceTropicana");
 				}
-				
+
 				if(juicePinkLemonadeCheckbox.isSelected()){
 					filterIngredients.add("juicePinkLemonade");
 				}
-				
+
 				if(juiceLimeadeCheckbox.isSelected()){
 					filterIngredients.add("juiceLimeade");
 				}
-				
+
 				if(juiceLemonadeCheckbox.isSelected()){
 					filterIngredients.add("juiceLemonade");
 				}
-
-				missingNone.clear();
-				missingOneList.getItems().clear();
-				missingOne.clear();
-				missingTwoList.getItems().clear();
-				missingTwo.clear();
-				missingThreePlusList.getItems().clear();
-				missingThreePlus.clear();
-				cocktailArrList.clear();
-
-				Driver.sqlDatabase.OpenConnection();			
+				drinkNames.clear();
+				cocktailResults.clear();
+		    	tempList = FXCollections.observableArrayList(drinkNames);
+				cocktailList.setItems(tempList);
 				occurrenceSet = search.Search(filterIngredients);
-				ArrayList<String> tempArray;
 				Integer numSelected;
-				Integer value;
-				long startTime = System.nanoTime();
-				for (Entry<Integer, Integer> entry : occurrenceSet.entrySet()) {
-					tempArray = Driver.sqlDatabase.QueryForNumIngredients(entry);
-					numSelected = Integer.parseInt(tempArray.get(1));
-					value = entry.getValue();
-					String name = tempArray.get(0);
-					cocktailArrList.add(name);
-					if ((numSelected - value) == 0) {
-						missingNone.add(name);
-					} else if ((numSelected - value) == 1) {
-						missingOne.add(name);
-					} else if ((numSelected - value) == 2) {
-						missingTwo.add(name);
+				for (Map.Entry<Integer, Integer> entry : occurrenceSet.entrySet()) {
+					cocktailResults.add(Driver.sqlDatabase.QueryForName(entry));
+					numSelected = Driver.sqlDatabase.QueryForNumIngredients(entry);
+					if ((numSelected - entry.getValue()) == 0) {
+						missingNone.add(Driver.sqlDatabase.QueryForName(entry));
+					} else if ((numSelected - entry.getValue()) == 1) {
+						missingOne.add(Driver.sqlDatabase.QueryForName(entry));
+					} else if ((numSelected - entry.getValue()) == 2) {
+						missingTwo.add(Driver.sqlDatabase.QueryForName(entry));
 					} else {
-						missingThreePlus.add(name);
+						missingThreePlus.add(Driver.sqlDatabase.QueryForName(entry));
 					}
 				}
-				long endTime = System.nanoTime() - startTime;
-				String estimatedTime = String.valueOf(endTime/1E9);
-				System.out.println("Elapsed time: " + estimatedTime + " seconds");
-				
-				tempList = FXCollections.observableArrayList(cocktailArrList);
+				for (int i = 0; i < cocktailResults.size(); ++i) {
+						drinkNames.add(cocktailResults.get(i));
+				}
+				tempList = FXCollections.observableArrayList(drinkNames);
 				cocktailList.setItems(tempList);
-				
-				ObservableList<String> missingNoneitems =FXCollections.observableArrayList (missingNone);
-				missingNoneList.setItems(missingNoneitems);
-				
-				ObservableList<String> missingOneitems =FXCollections.observableArrayList (missingOne);
-				missingOneList.setItems(missingOneitems);
-				
-				ObservableList<String> missingTwoitems =FXCollections.observableArrayList (missingTwo);
-				missingTwoList.setItems(missingTwoitems);
-				
-				ObservableList<String> missingThreeitems =FXCollections.observableArrayList (missingThreePlus);
-				missingThreePlusList.setItems(missingThreeitems);
 		    }
 		});
 	}
-	
+
 	// The javafx checkboxes~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//Base Spirits
-	
 	@FXML
 	public CheckBox ginCheckbox;
 	@FXML
@@ -2231,7 +1976,7 @@ public class MainViewController implements Initializable {
 	@FXML
 	public CheckBox honeyCheckbox;
 
-	
+
 	//Drinks
 	@FXML
 	public CheckBox tangCheckbox;
