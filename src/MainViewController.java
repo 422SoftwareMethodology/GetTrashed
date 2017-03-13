@@ -166,8 +166,7 @@ public class MainViewController implements Initializable {
 		list1.clear();
 		    try{
 		    	Class.forName("org.sqlite.JDBC");
-		    	String srcLocation = Driver.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-			      c = DriverManager.getConnection("jdbc:sqlite:" + srcLocation);
+			      c = DriverManager.getConnection("jdbc:sqlite::resource:drinks.db");
 			      c.setAutoCommit(false);
 			      Statement stmt = c.createStatement();
 			      ResultSet rs = stmt.executeQuery("SELECT * FROM DRINKS WHERE NAME LIKE" + "'%" + str + "%';");
@@ -183,7 +182,7 @@ public class MainViewController implements Initializable {
 		    catch ( Exception e ) {
 			      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 			      System.exit(0);
-			}
+			    }
 	}
 	
 	public void selectAllLiquorCheckboxes(){
