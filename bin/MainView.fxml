@@ -1748,8 +1748,8 @@
                                     </TitledPane>
                                 </panes>
                               </Accordion>
-                              <Button fx:id="browseButton" layoutX="227.0" layoutY="517.0" mnemonicParsing="false" onAction="#browse" prefHeight="25.0" prefWidth="200.0" text="Browse" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="240.0" AnchorPane.rightAnchor="10.0" />
-                              <Button layoutX="260.0" layoutY="531.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Random" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
+                              <Button fx:id="browseButton" layoutX="203.0" layoutY="561.0" maxWidth="180.0" minWidth="180.0" mnemonicParsing="false" onAction="#browse" prefHeight="25.0" prefWidth="180.0" text="Browse" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="203.0" />
+                              <Button layoutX="260.0" layoutY="531.0" maxWidth="180.0" minWidth="180.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Random" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
                               <Label layoutX="141.0" layoutY="1.0" prefHeight="27.0" prefWidth="119.0" text="Cocktails" textAlignment="CENTER">
                                  <font>
                                     <Font size="18.0" />
@@ -1809,7 +1809,7 @@
                         </AnchorPane>
                     </items>
                   </SplitPane>
-                  <TextField fx:id="searchbar" layoutX="14.0" layoutY="565.0" onKeyTyped="#partialsearch" prefHeight="27.0" prefWidth="382.0" promptText="Search Recipe By Name" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="531.0" />
+                  <TextField fx:id="searchbar" layoutX="14.0" layoutY="565.0" maxWidth="380.0" minWidth="380.0" onKeyTyped="#partialsearch" prefHeight="30.0" prefWidth="380.0" promptText="Search Recipe By Name" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="10.0" />
                </children>
             </AnchorPane>
         </items>
