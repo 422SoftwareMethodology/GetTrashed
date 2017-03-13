@@ -189,7 +189,6 @@ public class MainViewController implements Initializable {
 		selectAllLiquorsButton.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
 		    	checkAllLiqueure(true);
-				System.out.println("FAAAAAAAAAAAAART");
 		    }
 		});
 		
@@ -261,7 +260,7 @@ public class MainViewController implements Initializable {
 		
 	}
 	
-	public void browse () {
+	public void browse() {
 		if (selectAllStatus)
 			selectAllIngredientsButton.fire();
 		whatCanIMakeButton.fire();
@@ -303,16 +302,16 @@ public class MainViewController implements Initializable {
 			   StringBuilder sb = new StringBuilder();
 			   name = cocktailList.getSelectionModel().getSelectedItem();
 			   index = cocktailList.getSelectionModel().getSelectedIndex();
-			   if (missingNone.get(index).contains("'")) {
-				   for (int i = 0; i < missingNone.get(index).length(); ++i) {
-					   if (missingNone.get(index).charAt(i) == '\'') {
+			   if (cocktailArrList.get(index).contains("'")) {
+				   for (int i = 0; i < cocktailArrList.get(index).length(); ++i) {
+					   if (cocktailArrList.get(index).charAt(i) == '\'') {
 						   sb.append("''");
 					   } else {
-						   sb.append(missingNone.get(index).charAt(i));
+						   sb.append(cocktailArrList.get(index).charAt(i));
 					   }
 				   }
 			   } else {
-				   sb.append(missingNone.get(index));
+				   sb.append(cocktailArrList.get(index));
 			   }
 			   Driver.sqlDatabase.OpenConnection();
 			   cocktailInfo.setText(Driver.sqlDatabase.QueryForDirections(sb.toString()));
@@ -356,12 +355,8 @@ public class MainViewController implements Initializable {
 		       loadDetailView();
 			   ingredientsArray.clear();
 		       measurementsArray.clear();
-			   String imageUrl = "http://cdn.liquor.com/wp-content/uploads/2011/09/02120028/white-russian-720x720-recipe.jpg";
-			   Image newImage = new Image(imageUrl);
-			   cocktailImage.setImage(newImage);
 			}		   
 		});	
-		
 	}
 	
 	
@@ -391,12 +386,8 @@ public class MainViewController implements Initializable {
 		       loadDetailView();
 			   ingredientsArray.clear();
 		       measurementsArray.clear();
-			   String imageUrl = "http://cdn.liquor.com/wp-content/uploads/2011/09/02120028/white-russian-720x720-recipe.jpg";
-			   Image newImage = new Image(imageUrl);
-			   cocktailImage.setImage(newImage);
 			}		   
 		});	
-		
 	}
 	
 	public void missingTwoListClick() {
@@ -425,12 +416,8 @@ public class MainViewController implements Initializable {
 		       loadDetailView();
 			   ingredientsArray.clear();
 		       measurementsArray.clear();
-			   String imageUrl = "http://cdn.liquor.com/wp-content/uploads/2011/09/02120028/white-russian-720x720-recipe.jpg";
-			   Image newImage = new Image(imageUrl);
-			   cocktailImage.setImage(newImage);
 			}		   
-		});	
-		
+		});		
 	}
 	
 	public void missingThreePlusListClick() {
@@ -459,12 +446,8 @@ public class MainViewController implements Initializable {
 		       loadDetailView();
 			   ingredientsArray.clear();
 		       measurementsArray.clear();
-			   String imageUrl = "http://cdn.liquor.com/wp-content/uploads/2011/09/02120028/white-russian-720x720-recipe.jpg";
-			   Image newImage = new Image(imageUrl);
-			   cocktailImage.setImage(newImage);
 			}		   
-		});	
-		
+		});		
 	}
 
 	private void loadDetailView(){
@@ -1774,7 +1757,6 @@ public class MainViewController implements Initializable {
 				if(juiceLemonadeCheckbox.isSelected()){
 					filterIngredients.add("juiceLemonade");
 				}
-
 				missingNone.clear();
 				missingOneList.getItems().clear();
 				missingOne.clear();
@@ -1783,6 +1765,11 @@ public class MainViewController implements Initializable {
 				missingThreePlusList.getItems().clear();
 				missingThreePlus.clear();
 				cocktailArrList.clear();
+				if (browseStatus) {
+					cocktailList.setVisible(false);
+					browseButton.setText("Browse");
+					browseStatus = !browseStatus;
+				}
 
 				Driver.sqlDatabase.OpenConnection();			
 				occurrenceSet = search.Search(filterIngredients);
