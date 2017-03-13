@@ -20,6 +20,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
@@ -62,6 +63,8 @@ public class MainViewController implements Initializable {
 	private AnchorPane imgPane;
 	@FXML
 	public Label cocktailName;
+	@FXML
+	public TitledPane canMake;
 	
 	// the javafx buttons
 	@FXML
@@ -117,7 +120,7 @@ public class MainViewController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		//Default img load
-		String imageUrl = "http://cdn.playbuzz.com/cdn/f6b9bbfb-8708-49ad-a164-cdea284a0845/2bfcacf2-c580-4b60-aa95-8b5616d5c350.jpg";
+		String imageUrl = "http://www.vectorfree.com/media/vectors/cocktail-neon.jpg";
 		Image newImage = new Image(imageUrl);
 		
 		cocktailImage.setImage(newImage);
@@ -320,7 +323,7 @@ public class MainViewController implements Initializable {
 		       loadDetailView();
 			   ingredientsArray.clear();
 		       measurementsArray.clear();
-			   String imageUrl = "http://cdn.liquor.com/wp-content/uploads/2011/09/02120028/white-russian-720x720-recipe.jpg";
+			   String imageUrl = "http://www.vectorfree.com/media/vectors/cocktail-neon.jpg";
 			   Image newImage = new Image(imageUrl);
 			   cocktailImage.setImage(newImage);
 			}		   
@@ -333,6 +336,7 @@ public class MainViewController implements Initializable {
 	        public void handle(MouseEvent event) {
 			   Integer index = null;
 			   StringBuilder sb = new StringBuilder();
+			   name = missingNoneList.getSelectionModel().getSelectedItem();
 			   index = missingNoneList.getSelectionModel().getSelectedIndex();
 			   if (missingNone.get(index).contains("'")) {
 				   for (int i = 0; i < missingNone.get(index).length(); ++i) {
@@ -367,6 +371,7 @@ public class MainViewController implements Initializable {
 	        public void handle(MouseEvent event) {
 			   Integer index = null;
 			   StringBuilder sb = new StringBuilder();
+			   name = missingOneList.getSelectionModel().getSelectedItem();
 			   index = missingOneList.getSelectionModel().getSelectedIndex();
 			   if (missingOne.get(index).contains("'")) {
 				   for (int i = 0; i < missingOne.get(index).length(); ++i) {
@@ -400,6 +405,7 @@ public class MainViewController implements Initializable {
 	        public void handle(MouseEvent event) {
 			   Integer index = null;
 			   StringBuilder sb = new StringBuilder();
+			   name = missingTwoList.getSelectionModel().getSelectedItem();
 			   index = missingTwoList.getSelectionModel().getSelectedIndex();
 			   if (missingTwo.get(index).contains("'")) {
 				   for (int i = 0; i < missingTwo.get(index).length(); ++i) {
@@ -433,6 +439,7 @@ public class MainViewController implements Initializable {
 	        public void handle(MouseEvent event) {
 			   Integer index = null;
 			   StringBuilder sb = new StringBuilder();
+			   name = missingThreePlusList.getSelectionModel().getSelectedItem();
 			   index = missingThreePlusList.getSelectionModel().getSelectedIndex();
 			   if (missingThreePlus.get(index).contains("'")) {
 				   for (int i = 0; i < missingThreePlus.get(index).length(); ++i) {
@@ -794,6 +801,7 @@ public class MainViewController implements Initializable {
 		whatCanIMakeButton.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
 		    	filterIngredients.clear();
+		    	canMake.setExpanded(true);
 		    	
 		    	if(ginCheckbox.isSelected()){
 					filterIngredients.add("gin");
