@@ -154,6 +154,7 @@ public class MainViewController implements Initializable {
 		selectAllWhiskyCheckboxes();
 		selectAllVodkaCheckboxes();
 		selectAllRumCheckboxes();
+		searchbar.setVisible(false);
 		
 		cocktailImage.fitWidthProperty().bind(imgPane.widthProperty());
 		cocktailImage.fitHeightProperty().bind(imgPane.heightProperty());
@@ -262,10 +263,12 @@ public class MainViewController implements Initializable {
 		whatCanIMakeButton.fire();
 		if (!browseStatus){
 			cocktailList.setVisible(true);
+			searchbar.setVisible(true);
 			browseButton.setText("Stop Browsing");
 		}
 		else {
 			cocktailList.setVisible(false);
+			searchbar.setVisible(false);
 			browseButton.setText("Browse");
 		}
 		browseStatus = !browseStatus;
@@ -780,7 +783,8 @@ public class MainViewController implements Initializable {
 		    @Override public void handle(ActionEvent e) {
 		    	filterIngredients.clear();
 		    	canMake.setExpanded(true);
-		    	
+
+		    		
 		    	if(ginCheckbox.isSelected()){
 					filterIngredients.add("gin");
 				}
@@ -1807,6 +1811,9 @@ public class MainViewController implements Initializable {
 				
 				ObservableList<String> missingThreeitems =FXCollections.observableArrayList (missingThreePlus);
 				missingThreePlusList.setItems(missingThreeitems);
+				
+		    	if (browseStatus){
+		    		browseButton.fire();}
 		    }
 		});
 	}
