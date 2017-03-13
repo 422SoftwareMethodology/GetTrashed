@@ -1694,6 +1694,14 @@
                         </TitledPane>
                      </panes>
                   </Accordion>
+                  <Button fx:id="whatCanIMakeButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="180.0" text="Ready To Make" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
+                     <effect>
+                        <InnerShadow blurType="GAUSSIAN" color="#01650b" radius="15.19" width="41.76" />
+                     </effect>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
                   <Button fx:id="selectAllIngredientsButton" layoutY="572.0" mnemonicParsing="false" text="Select All Ingredients" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
                </children>
             </AnchorPane>
@@ -1740,7 +1748,7 @@
                                 </panes>
                               </Accordion>
                               <Button fx:id="browseButton" layoutX="227.0" layoutY="517.0" mnemonicParsing="false" onAction="#browse" prefHeight="25.0" prefWidth="200.0" text="Browse" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="240.0" AnchorPane.rightAnchor="10.0" />
-                              <Button layoutX="260.0" layoutY="531.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Random" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="240.0" AnchorPane.rightAnchor="10.0" />
+                              <Button layoutX="260.0" layoutY="531.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Random" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
                               <Label layoutX="141.0" layoutY="1.0" prefHeight="27.0" prefWidth="119.0" text="Cocktails" textAlignment="CENTER">
                                  <font>
                                     <Font size="18.0" />
@@ -1799,15 +1807,7 @@
                         </AnchorPane>
                     </items>
                   </SplitPane>
-                  <Button fx:id="whatCanIMakeButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="180.0" text="Ready To Make" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="10.0">
-                     <effect>
-                        <InnerShadow blurType="GAUSSIAN" color="#01650b" radius="15.19" width="41.76" />
-                     </effect>
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <TextField layoutX="14.0" layoutY="565.0" prefHeight="25.0" prefWidth="180.0" promptText="Search Recipe By Name" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
+                  <TextField layoutX="14.0" layoutY="565.0" prefHeight="27.0" prefWidth="382.0" promptText="Search Recipe By Name" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="531.0" />
                </children>
             </AnchorPane>
         </items>
