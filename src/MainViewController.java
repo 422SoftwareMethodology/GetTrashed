@@ -164,25 +164,21 @@ public class MainViewController implements Initializable {
 		str = searchbar.getText();
 		Connection c = null;
 		list1.clear();
-		    try{
-		    	Class.forName("org.sqlite.JDBC");
-			      c = DriverManager.getConnection("jdbc:sqlite::resource:drinks.db");
-			      c.setAutoCommit(false);
-			      Statement stmt = c.createStatement();
-			      ResultSet rs = stmt.executeQuery("SELECT * FROM DRINKS WHERE NAME LIKE" + "'%" + str + "%';");
-			      while(rs.next()){
-			    	  String name = rs.getString("NAME");
-			    	  list1.add(name);
-			      }
-			      stmt.close();
-			      rs.close(); 
-			      tempList = FXCollections.observableArrayList(list1);
-			      cocktailList.setItems(tempList);
+		try {
+			Class.forName("org.sqlite.JDBC");
+		    c = DriverManager.getConnection("jdbc:sqlite::resource:drinks.db");
+		    c.setAutoCommit(false);
+		    Statement stmt = c.createStatement();
+		    ResultSet rs = stmt.executeQuery("SELECT NAME FROM DRINKS INDEXED BY Idx1 WHERE NAME LIKE" + "'%" + str + "%';");
+		    while(rs.next()) {
+		    	String name = rs.getString("NAME");
+		    	list1.add(name);
 		    }
-		    catch ( Exception e ) {
-			      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-			      System.exit(0);
-			    }
+		    stmt.close();
+		    rs.close(); 
+		    tempList = FXCollections.observableArrayList(list1);
+		    cocktailList.setItems(tempList);
+		} catch (Exception e) {}
 	}
 	
 	public void selectAllLiquorCheckboxes(){
