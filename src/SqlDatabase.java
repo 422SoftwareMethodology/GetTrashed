@@ -10,14 +10,10 @@ public class SqlDatabase {
 	SqlDatabase() {}
 	
 	public void OpenConnection() {
-		String srcLocation = Driver.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-		String sTempDb = "drinks.db";
-        String sJdbc = "jdbc:sqlite:" + srcLocation;
-        String sDbUrl = sJdbc + sTempDb;
         String sDriverName = "org.sqlite.JDBC";
 	    try {
 	    	Class.forName(sDriverName);
-	    	connection = DriverManager.getConnection(sDbUrl);
+	    	connection = DriverManager.getConnection("jdbc:sqlite::resource:drinks.db");
 	    } catch ( Exception e ) {
 	    	System.err.println(e.getClass().getName() + ": " + e.getMessage());
 	    	System.exit(0);

@@ -1,3 +1,7 @@
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.net.URL;
 import java.sql.Connection;
@@ -9,6 +13,9 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
+import java.util.Random;
+
+import javax.imageio.ImageIO;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,6 +33,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.embed.swing.SwingFXUtils;
 
 public class MainViewController implements Initializable {
 	@FXML// These ListView  are the results of the cocktail search
@@ -91,6 +99,8 @@ public class MainViewController implements Initializable {
 	public Button whatCanIMakeButton;
 	@FXML
 	public Button browseButton;
+	@FXML
+	public Button randomButton;
 	
 	// the javafx searchbar
 	@FXML
@@ -122,10 +132,16 @@ public class MainViewController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		//Default img load
-		String imageUrl = "http://www.vectorfree.com/media/vectors/cocktail-neon.jpg";
-		Image newImage = new Image(imageUrl);
-		
-		cocktailImage.setImage(newImage);
+		BufferedImage bufferedImage = null;
+		ClassLoader cldr = getClass().getClassLoader();
+	    URL url = cldr.getResource("cocktail-neon.jpg");
+	    try {
+			bufferedImage = ImageIO.read(url);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	    Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+	    cocktailImage.setImage(image);
 		ingredientsInfo = new ArrayList<>();
 		for (int i = 1; i < 14; ++i) {
             try {
@@ -164,7 +180,7 @@ public class MainViewController implements Initializable {
 		//Allows the image to automatically resize
 		cocktailImage.fitWidthProperty().bind(imgPane.widthProperty());
 		cocktailImage.fitHeightProperty().bind(imgPane.heightProperty());
-		
+		randomButton.fire();
 	}
 	
 	public void partialsearch(){
@@ -195,38 +211,31 @@ public class MainViewController implements Initializable {
 		    @Override public void handle(ActionEvent e) {
 		    	checkAllLiqueure(true);
 		    }
-		});
-		
+		});	
 	}
+	
 	public void selectAllSpiritsCheckboxes(){
 		selectAllSpiritsButton.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
 		    	checkAllSpirits(true);
-				
 		    }
-		});
-		
+		});	
 	}
-	
 	
 	public void selectAllMixerCheckboxes(){
 		selectAllMixersButton.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
 		    	checkAllMixers(true);
-
 		    }
-		});
-		
+		});	
 	}
 	
 	public void selectAllStockCheckboxes(){
 		selectAllStockButton.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
 		    	checkAllStock(true);
-
 		    }
-		});
-		
+		});	
 	}
 	
 	public void selectAllBeerCheckboxes(){
@@ -234,8 +243,7 @@ public class MainViewController implements Initializable {
 		    @Override public void handle(ActionEvent e) {
 		    	checkAllBeer(true);
 		    }
-		});
-		
+		});	
 	}
 	
 	public void selectAllWhiskyCheckboxes(){
@@ -243,8 +251,7 @@ public class MainViewController implements Initializable {
 		    @Override public void handle(ActionEvent e) {
 		    	checkAllWhiskey();
 		    }
-		});
-		
+		});	
 	}
 	
 	public void selectAllVodkaCheckboxes(){
@@ -253,7 +260,6 @@ public class MainViewController implements Initializable {
 		    	checkAllVodka();
 		    }
 		});
-		
 	}
 	
 	public void selectAllRumCheckboxes(){
@@ -262,27 +268,38 @@ public class MainViewController implements Initializable {
 		    	checkAllRum();
 		    }
 		});
-		
 	}
 	
 	//Makes a list of all possible cocktails, makes a hidden listView visible
-	public void browse() {
-		if (selectAllStatus)
+	public void Browse() {
+		if (selectAllStatus) {
 			selectAllIngredientsButton.fire();
-		whatCanIMakeButton.fire();
-		if (!browseStatus){
-			cocktailList.setVisible(true);
-			searchbar.setVisible(true);
-			browseButton.setText("Stop Browsing");
 		}
-		else {
+		whatCanIMakeButton.fire();
+		if (browseStatus) {
+			browseStatus = false;
 			cocktailList.setVisible(false);
 			searchbar.setVisible(false);
-			browseButton.setText("Browse");
+		} else {
+			browseStatus = true;
+			cocktailList.setVisible(true);
+			searchbar.setVisible(true);
 		}
-		browseStatus = !browseStatus;
-		if (!selectAllStatus)
-		selectAllIngredientsButton.fire();
+		if (!selectAllStatus) {
+			selectAllIngredientsButton.fire();
+		}
+	}
+	
+	public void Random() {
+		randomButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override public void handle(ActionEvent e) {
+	    		list1.clear();
+	    		Random random = new Random();
+	    		list1.add(cocktailArrList.get(random.nextInt(cocktailArrList.size())));
+	    		tempList = FXCollections.observableArrayList(list1);
+			    cocktailList.setItems(tempList);
+		    }
+		});
 	}
 	
 	public void selectAllIngredients(){
@@ -307,21 +324,20 @@ public class MainViewController implements Initializable {
 	public void cocktailListClick() {
 		cocktailList.setOnMouseClicked(new EventHandler<MouseEvent>() {
 	        public void handle(MouseEvent event) {
-			   Integer index = null;
-			   StringBuilder sb = new StringBuilder();
 			   name = cocktailList.getSelectionModel().getSelectedItem();
-			   index = cocktailList.getSelectionModel().getSelectedIndex();
-			   if (cocktailArrList.get(index).contains("'")) {
-				   for (int i = 0; i < cocktailArrList.get(index).length(); ++i) {
-					   if (cocktailArrList.get(index).charAt(i) == '\'') {
-						   sb.append("''");
-					   } else {
-						   sb.append(cocktailArrList.get(index).charAt(i));
-					   }
-				   }
-			   } else {
-				   sb.append(cocktailArrList.get(index));
-			   }
+			   cocktailName.setText(name);
+			   StringBuilder sb = new StringBuilder();
+			   if (name.contains("'")) {
+	    		   for (int i = 0; i < name.length(); ++i) {
+	    			   if (name.charAt(i) == '\'') {
+	    				   sb.append("''");
+	    			   } else {
+	    				   sb.append(name.charAt(i));
+	    			   }
+	    		   }
+	    	   } else {
+	    		   sb.append(name);
+	    	   }
 			   Driver.sqlDatabase.OpenConnection();
 			   cocktailInfo.setText(Driver.sqlDatabase.QueryForDirections(sb.toString()));
 			   ingredientsArray = Driver.sqlDatabase.QueryForIngredients(sb.toString());
@@ -330,12 +346,8 @@ public class MainViewController implements Initializable {
 		       loadDetailView();
 			   ingredientsArray.clear();
 		       measurementsArray.clear();
-			   String imageUrl = "http://www.vectorfree.com/media/vectors/cocktail-neon.jpg";
-			   Image newImage = new Image(imageUrl);
-			   cocktailImage.setImage(newImage);
 			}		   
-		});	
-		
+		});		
 	}
 	
 	public void missingNoneListClick() {
@@ -367,7 +379,6 @@ public class MainViewController implements Initializable {
 			}		   
 		});	
 	}
-	
 	
 	public void missingOneListClick() {
 		missingOneList.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -459,7 +470,7 @@ public class MainViewController implements Initializable {
 		});		
 	}
 
-	private void loadDetailView(){
+	private void loadDetailView() {
 		int min = Math.min(ingredientsArray.size(), measurementsArray.size());
 		int i = 0;
 		cocktailName.setText(name);
@@ -1777,7 +1788,7 @@ public class MainViewController implements Initializable {
 				cocktailArrList.clear();
 				if (browseStatus) {
 					cocktailList.setVisible(false);
-					browseButton.setText("Browse");
+					searchbar.setVisible(false);
 					browseStatus = !browseStatus;
 				}
 //opens up the SQL Database and pulls the potential cocktails, matching them against the number of missing ingredients
@@ -1786,7 +1797,6 @@ public class MainViewController implements Initializable {
 				ArrayList<String> tempArray;
 				Integer numSelected;
 				Integer value;
-				long startTime = System.nanoTime();
 				for (Entry<Integer, Integer> entry : occurrenceSet.entrySet()) {
 					tempArray = Driver.sqlDatabase.QueryForNumIngredients(entry);
 					numSelected = Integer.parseInt(tempArray.get(1));
@@ -1803,9 +1813,6 @@ public class MainViewController implements Initializable {
 						missingThreePlus.add(name);
 					}
 				}
-				long endTime = System.nanoTime() - startTime;
-				String estimatedTime = String.valueOf(endTime/1E9);
-				System.out.println("Elapsed time: " + estimatedTime + " seconds");
 				
 				tempList = FXCollections.observableArrayList(cocktailArrList);
 				cocktailList.setItems(tempList);
@@ -1821,9 +1828,6 @@ public class MainViewController implements Initializable {
 				
 				ObservableList<String> missingThreeitems =FXCollections.observableArrayList (missingThreePlus);
 				missingThreePlusList.setItems(missingThreeitems);
-				
-		    	if (browseStatus){
-		    		browseButton.fire();}
 		    }
 		});
 	}
