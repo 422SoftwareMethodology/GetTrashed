@@ -28,7 +28,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 
 public class MainViewController implements Initializable {
-	@FXML// the list of all cocktails
+	@FXML// These ListView  are the results of the cocktail search
 	private ListView<String> cocktailList;
 	@FXML
 	private ListView<String> missingNoneList;
@@ -38,7 +38,9 @@ public class MainViewController implements Initializable {
 	private ListView<String> missingTwoList;
 	@FXML
 	private ListView<String> missingThreePlusList;
-	@FXML// Detail of selected cocktail
+	
+	
+	@FXML// Detail of selected cocktail. These are shown in the cocktail detail menu
 	public Label cocktailInfo;
 	public Label ingredientInfo1;
 	public Label ingredientInfo2;
@@ -96,7 +98,7 @@ public class MainViewController implements Initializable {
 	
 	SearchingIngredientsCode search = new SearchingIngredientsCode();
 
-	//the ingredients arraylist
+	//the ingredients arraylist. These are used in the filtering process
 	ArrayList<String> ingredientsArray = new ArrayList<String>();
 	ArrayList<String> measurementsArray = new ArrayList<String>();
 	ArrayList<String> filterIngredients = new ArrayList<String>();
@@ -113,7 +115,7 @@ public class MainViewController implements Initializable {
 	Integer missing;
 	String name;
 	
-	// Select groups toggle
+	// Select groups toggle. Used in the browse and select all buttons
 	private boolean selectAllStatus = true;
 	private boolean browseStatus = false;
 
@@ -138,7 +140,8 @@ public class MainViewController implements Initializable {
 			label.setText("");
 		}
 		cocktailName.setText("");
-		//initialize the button actions
+		
+		//initialize the button actions to their JavaFX process
 		cocktailListClick();
 		missingNoneListClick();
 		missingOneListClick();
@@ -154,8 +157,11 @@ public class MainViewController implements Initializable {
 		selectAllWhiskyCheckboxes();
 		selectAllVodkaCheckboxes();
 		selectAllRumCheckboxes();
+		
+		//Hides the search bar until the Browse button is clicked
 		searchbar.setVisible(false);
 		
+		//Allows the image to automatically resize
 		cocktailImage.fitWidthProperty().bind(imgPane.widthProperty());
 		cocktailImage.fitHeightProperty().bind(imgPane.heightProperty());
 		
@@ -181,6 +187,8 @@ public class MainViewController implements Initializable {
 		    cocktailList.setItems(tempList);
 		} catch (Exception e) {}
 	}
+	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~Listeners for button clicks
 	
 	public void selectAllLiquorCheckboxes(){
 		selectAllLiquorsButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -257,6 +265,7 @@ public class MainViewController implements Initializable {
 		
 	}
 	
+	//Makes a list of all possible cocktails, makes a hidden listView visible
 	public void browse() {
 		if (selectAllStatus)
 			selectAllIngredientsButton.fire();
@@ -294,6 +303,7 @@ public class MainViewController implements Initializable {
 		});
 	}
 	
+	//~~~~~~~~~~ Loads the cocktail information in the detail view when you click a specific item in a specific listView
 	public void cocktailListClick() {
 		cocktailList.setOnMouseClicked(new EventHandler<MouseEvent>() {
 	        public void handle(MouseEvent event) {
@@ -777,7 +787,7 @@ public class MainViewController implements Initializable {
 		rumCheckbox.setSelected(true);
 	}
 	
-	
+//Cycles through every checkbox and adds it to an arraylist if checked
 	public void ingredientArraylistMaker() {
 		whatCanIMakeButton.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
@@ -1770,7 +1780,7 @@ public class MainViewController implements Initializable {
 					browseButton.setText("Browse");
 					browseStatus = !browseStatus;
 				}
-
+//opens up the SQL Database and pulls the potential cocktails, matching them against the number of missing ingredients
 				Driver.sqlDatabase.OpenConnection();			
 				occurrenceSet = search.Search(filterIngredients);
 				ArrayList<String> tempArray;
@@ -1898,7 +1908,7 @@ public class MainViewController implements Initializable {
 	@FXML
 	public CheckBox vodkaCheckbox;
 
-	//WHISKY
+	//WHISKEY
 	@FXML
 	public CheckBox whiskeyBlendedCheckbox;
 	@FXML
