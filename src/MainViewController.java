@@ -80,6 +80,8 @@ public class MainViewController implements Initializable {
 	@FXML
 	public Button selectAllIngredientsButton;
 	@FXML
+	public Button deselectAllButton;
+	@FXML
 	public Button selectAllLiquorsButton;
 	@FXML
 	public Button selectAllSpiritsButton;
@@ -169,6 +171,7 @@ public class MainViewController implements Initializable {
 		selectAllBeerCheckboxes();
 		selectAllMixerCheckboxes();
 		selectAllIngredients();
+		deselectAll();
 		ingredientArraylistMaker();
 		selectAllWhiskyCheckboxes();
 		selectAllVodkaCheckboxes();
@@ -286,7 +289,7 @@ public class MainViewController implements Initializable {
 			searchbar.setVisible(true);
 		}
 		if (!selectAllStatus) {
-			selectAllIngredientsButton.fire();
+			deselectAllButton.fire();
 		}
 	}
 	
@@ -305,17 +308,29 @@ public class MainViewController implements Initializable {
 	public void selectAllIngredients(){
 		selectAllIngredientsButton.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
+		    	selectAllStatus = true;
 		    	checkAllMixers(selectAllStatus);
 		    	checkAllStock(selectAllStatus);
 		    	checkAllSpirits(selectAllStatus);
 		    	checkAllLiqueure(selectAllStatus);
 		    	checkAllBeer(selectAllStatus);
 		    	selectAllStatus = !selectAllStatus;
-		    	if (selectAllStatus) {
-		    		selectAllIngredientsButton.setText("Select All Ingredients");
-		    	} else {
-		    		selectAllIngredientsButton.setText("Deselect All Ingredients");
-		    	}
+
+		    }
+		});
+	}
+	
+	public void deselectAll() {
+		deselectAllButton.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override public void handle(ActionEvent e) {
+		    	selectAllStatus = false;
+		    	checkAllMixers(selectAllStatus);
+		    	checkAllStock(selectAllStatus);
+		    	checkAllSpirits(selectAllStatus);
+		    	checkAllLiqueure(selectAllStatus);
+		    	checkAllBeer(selectAllStatus);
+		    	selectAllStatus = !selectAllStatus;
+
 		    }
 		});
 	}

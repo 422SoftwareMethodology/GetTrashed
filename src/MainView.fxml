@@ -15,7 +15,7 @@
         <items>
           <AnchorPane maxWidth="250.0" minWidth="200.0">
                <children>
-                  <Accordion AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <Accordion AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <panes>
                         <TitledPane expanded="false" text="Spirits" wrapText="true">
                            <content>
@@ -1406,7 +1406,7 @@
                               <Font size="13.0" />
                            </font>
                         </TitledPane>
-                        <TitledPane expanded="false" text="Bar Stock &amp; Pantry">
+                        <TitledPane expanded="false" prefHeight="400.0" prefWidth="250.0" text="Bar Stock &amp; Pantry">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
@@ -1695,7 +1695,7 @@
                         </TitledPane>
                      </panes>
                   </Accordion>
-                  <Button fx:id="whatCanIMakeButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="180.0" text="Ready To Make" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
+                  <Button fx:id="whatCanIMakeButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="180.0" text="Ready To Make" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
                      <effect>
                         <InnerShadow blurType="GAUSSIAN" color="#01650b" radius="15.19" width="41.76" />
                      </effect>
@@ -1703,7 +1703,8 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Button fx:id="selectAllIngredientsButton" layoutY="572.0" mnemonicParsing="false" text="Select All Ingredients" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
+                  <Button fx:id="selectAllIngredientsButton" layoutY="572.0" mnemonicParsing="false" text="Select All Ingredients" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
+                  <Button fx:id="deselectAllButton" layoutX="15.0" layoutY="548.0" mnemonicParsing="false" text="Clear All Ingredients" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="532.0" prefWidth="825.0">
@@ -1777,12 +1778,12 @@
                                              <content>
                                                 <VBox prefHeight="500.0" prefWidth="310.0" spacing="2.0">
                                                    <children>
-                                                      <Label fx:id="cocktailName" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" text="Cocktail Name" textAlignment="CENTER">
+                                                      <Label fx:id="cocktailName" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" text="Cocktail Name" textAlignment="CENTER" wrapText="true">
                                                          <font>
                                                             <Font name="System Bold" size="18.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label fx:id="cocktailInfo" alignment="CENTER" text="Instructions Go Here" textAlignment="CENTER" wrapText="true" />
+                                                      <Label fx:id="cocktailInfo" alignment="CENTER" text="Select the ingredients from the left menu." textAlignment="CENTER" wrapText="true" />
                                                       <Line endX="200.0" startX="-100.0" />
                                                       <Label fx:id="ingredientInfo1" text="ingredientInfo1" />
                                                       <Label fx:id="ingredientInfo2" layoutX="10.0" layoutY="10.0" text="ingredientInfo2" />
