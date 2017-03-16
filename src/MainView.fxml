@@ -1809,7 +1809,7 @@
                         </AnchorPane>
                     </items>
                   </SplitPane>
-                  <TextField fx:id="searchbar" layoutX="14.0" layoutY="565.0" maxWidth="380.0" minWidth="380.0" onKeyTyped="#partialsearch" prefHeight="30.0" prefWidth="380.0" promptText="Search Recipe By Name" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="10.0" />
+                  <TextField fx:id="searchbar" layoutX="14.0" layoutY="565.0" maxWidth="380.0" minWidth="380.0" onInputMethodTextChanged="#partialsearch" prefHeight="30.0" prefWidth="380.0" promptText="Search Recipe By Name" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="10.0" />
                </children>
             </AnchorPane>
         </items>
