@@ -140,7 +140,6 @@ public class MainViewController implements Initializable {
 			  
             @Override  
             public void handle(KeyEvent event) {  
-            	System.out.println("A");
                 partialsearch();
             }  
         });  
