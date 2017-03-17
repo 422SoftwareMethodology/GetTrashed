@@ -61,6 +61,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -173,13 +174,6 @@ public class MainViewController implements Initializable {
 		//Default img load
 		BufferedImage bufferedImage = null;
 		ClassLoader cldr = getClass().getClassLoader();
-		searchbar.setOnKeyReleased(new EventHandler<KeyEvent>() {  
-			  
-            @Override  
-            public void handle(KeyEvent event) {  
-                partialsearch();
-            }  
-        });  
 	    URL url = cldr.getResource("cocktail-neon.jpg");
 	    try {
 			bufferedImage = ImageIO.read(url);
@@ -189,6 +183,12 @@ public class MainViewController implements Initializable {
 	    Image image = SwingFXUtils.toFXImage(bufferedImage, null);
 	    cocktailImage.setImage(image);
 		ingredientsInfo = new ArrayList<>();
+		searchbar.setOnKeyReleased(new EventHandler<KeyEvent>() {  
+			  
+        @Override  
+        public void handle(KeyEvent event) {  
+            partialsearch();
+        }}); 
 		for (int i = 1; i < 14; ++i) {
             try {
 				Field field = getClass().getDeclaredField("ingredientInfo" + i);
@@ -223,6 +223,7 @@ public class MainViewController implements Initializable {
 		
 		//Hides the search bar until the Browse button is clicked
 		searchbar.setVisible(false);
+		randomButton.setVisible(false);
 		
 		//Allows the image to automatically resize
 		cocktailImage.fitWidthProperty().bind(imgPane.widthProperty());
@@ -327,10 +328,12 @@ public class MainViewController implements Initializable {
 			browseStatus = false;
 			cocktailList.setVisible(false);
 			searchbar.setVisible(false);
+			randomButton.setVisible(false);
 		} else {
 			browseStatus = true;
 			cocktailList.setVisible(true);
 			searchbar.setVisible(true);
+			randomButton.setVisible(true);
 		}
 		if (!selectAllStatus) {
 			deselectAllButton.fire();
@@ -1848,6 +1851,7 @@ public class MainViewController implements Initializable {
 				if (browseStatus) {
 					cocktailList.setVisible(false);
 					searchbar.setVisible(false);
+					randomButton.setVisible(false);
 					browseStatus = !browseStatus;
 				}
 //opens up the SQL Database and pulls the potential cocktails, matching them against the number of missing ingredients

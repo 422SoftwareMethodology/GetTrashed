@@ -1,0 +1,1819 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="mainStage" prefHeight="600.0" prefWidth="1183.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainViewController">
+   <children>
+      <SplitPane dividerPositions="0.5" layoutX="213.0" layoutY="272.0" prefHeight="600.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane maxWidth="250.0" minWidth="200.0">
+               <children>
+                  <Accordion AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <panes>
+                        <TitledPane expanded="false" text="Spirits" wrapText="true">
+                           <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="434.0" prefWidth="267.0">
+                                 <children>
+                                    <Accordion layoutX="32.0" layoutY="32.0" prefHeight="434.0" prefWidth="198.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                      <panes>
+                                          <TitledPane layoutX="10.0" layoutY="49.0" prefHeight="246.0" prefWidth="178.0" text="Whiskey">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                   <children>
+                                                      <ScrollPane hbarPolicy="NEVER" layoutY="30.0" prefHeight="349.0" prefViewportHeight="330.0" prefViewportWidth="216.0" prefWidth="176.0" AnchorPane.bottomAnchor="-10.0" AnchorPane.leftAnchor="-10.0" AnchorPane.rightAnchor="-10.0" AnchorPane.topAnchor="-10.0">
+                                                         <content>
+                                                            <VBox prefHeight="291.0" prefWidth="168.0" spacing="2.0" AnchorPane.topAnchor="30.0">
+                                                               <children>
+                                                                  <Button fx:id="selectAllWhiskey" mnemonicParsing="false" prefHeight="31.0" prefWidth="131.0" text="Select All" />
+                                                                  <CheckBox fx:id="whiskeyCheckbox" layoutX="10.0" layoutY="280.0" mnemonicParsing="false" text="Whiskey">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="whiskeyBlendedCheckbox" mnemonicParsing="false" text="Blended">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="scotchCheckbox" mnemonicParsing="false" text="Scotch">
+                                                                     <font>
+                                                                        <Font size="16.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="whiskeyBourbonCheckbox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Bourbon">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="whiskeyCanadianCheckbox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Canadian">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="whiskeyIrishCheckbox" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" text="Irish">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="whiskeyJackDanielsCheckbox" layoutX="10.0" layoutY="100.0" mnemonicParsing="false" text="Jack Daniels">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="whiskeyJimBeamCheckbox" layoutX="10.0" layoutY="130.0" mnemonicParsing="false" text="Jim Beam">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="whiskeyRyeCheckbox" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" text="Rye">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="whiskeyTennesseeCheckbox" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" text="Tennessee">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="whiskeyWildTurkeyCheckbox" layoutX="10.0" layoutY="220.0" mnemonicParsing="false" text="Wild Turkey">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                               </children>
+                                                            </VBox>
+                                                         </content>
+                                                      </ScrollPane>
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                             <font>
+                                                <Font size="13.0" />
+                                             </font>
+                                          </TitledPane>
+                                          <TitledPane prefHeight="327.0" prefWidth="178.0" text="Vodka">
+                                             <content>
+                                                <ScrollPane prefHeight="331.0" prefViewportHeight="330.0" prefViewportWidth="216.0" prefWidth="190.0">
+                                                   <content>
+                                                      <VBox AnchorPane.topAnchor="30.0">
+                                                         <children>
+                                                            <Button fx:id="selectAllVodka" mnemonicParsing="false" prefHeight="31.0" prefWidth="131.0" text="Select All" />
+                                                            <CheckBox fx:id="vodkaCheckbox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Vodka">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="vodkaAbsolutCitronCheckbox" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" text="Citron">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="vodkaAbsolutPepparCheckbox" layoutX="10.0" layoutY="100.0" mnemonicParsing="false" text="Peppar">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="vodkaCitrusCheckbox" layoutX="10.0" layoutY="130.0" mnemonicParsing="false" text="Citrus">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="vodkaCranberryCheckbox" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" text="Cranberry">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="vodkaLemonCheckbox" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" text="Lemon">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="vodkaLimeCheckbox" layoutX="10.0" layoutY="220.0" mnemonicParsing="false" text="Lime">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="vodkaMelonCheckbox" layoutX="10.0" layoutY="250.0" mnemonicParsing="false" text="Melon">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="vodkaOrangeCheckbox" layoutX="10.0" layoutY="280.0" mnemonicParsing="false" text="Orange">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="vodkaPeachCheckbox" layoutX="10.0" layoutY="210.0" mnemonicParsing="false" text="Peach">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="vodkaRaspberryCheckbox" layoutX="10.0" layoutY="235.0" mnemonicParsing="false" text="Raspberry">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="vodkaVanillaCheckbox" layoutX="10.0" layoutY="260.0" mnemonicParsing="false" text="Vanilla">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="vodkaAbsolutKurantCheckbox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Kurant">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                         </children>
+                                                      </VBox>
+                                                   </content>
+                                                </ScrollPane>
+                                             </content>
+                                             <font>
+                                                <Font size="13.0" />
+                                             </font>
+                                          </TitledPane>
+                                          <TitledPane expanded="false" text="Rum">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                   <children>
+                                                      <ScrollPane hbarPolicy="NEVER" layoutY="30.0" prefHeight="349.0" prefViewportHeight="330.0" prefViewportWidth="216.0" prefWidth="176.0" AnchorPane.bottomAnchor="-10.0" AnchorPane.leftAnchor="-10.0" AnchorPane.rightAnchor="-10.0" AnchorPane.topAnchor="-10.0">
+                                                         <content>
+                                                            <VBox prefHeight="290.0" prefWidth="168.0" spacing="1.0" AnchorPane.topAnchor="30.0">
+                                                               <children>
+                                                                  <Button fx:id="selectAllRum" mnemonicParsing="false" prefHeight="31.0" prefWidth="131.0" text="Select All" />
+                                                                  <CheckBox fx:id="rumCheckbox" layoutX="10.0" layoutY="280.0" mnemonicParsing="false" text="Rum">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="rumAnejoCheckbox" mnemonicParsing="false" text="Anejo Rum">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="rumBacardiLimonCheckbox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Limon Rum">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="rumBlackCheckbox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Black Rum">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="rumCoconutCheckbox" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" text="Coconut Rum">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="rumDarkCheckbox" layoutX="10.0" layoutY="100.0" mnemonicParsing="false" text="Dark Rum">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="rumGoldCheckbox" layoutX="10.0" layoutY="130.0" mnemonicParsing="false" text="Gold Rum">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="rumLightCheckbox" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" text="LIght Rum">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="rumMalibuCheckbox" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" text="Malibu Rum">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="rumOrangeCheckbox" layoutX="10.0" layoutY="220.0" mnemonicParsing="false" text="Orange Rum">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="rumSpicedCheckbox" layoutX="10.0" layoutY="250.0" mnemonicParsing="false" text="Spiced Rum">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                               </children>
+                                                            </VBox>
+                                                         </content>
+                                                      </ScrollPane>
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                             <font>
+                                                <Font size="13.0" />
+                                             </font>
+                                          </TitledPane>
+                                          <TitledPane layoutX="10.0" layoutY="10.0" prefHeight="246.0" prefWidth="178.0" text="Gin">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                   <children>
+                                                      <ScrollPane hbarPolicy="NEVER" layoutY="30.0" prefHeight="349.0" prefViewportHeight="330.0" prefViewportWidth="216.0" prefWidth="176.0" AnchorPane.bottomAnchor="-10.0" AnchorPane.leftAnchor="-10.0" AnchorPane.rightAnchor="-10.0" AnchorPane.topAnchor="-10.0">
+                                                         <content>
+                                                            <VBox prefHeight="291.0" prefWidth="168.0" spacing="2.0" AnchorPane.topAnchor="30.0">
+                                                               <children>
+                                                                  <CheckBox fx:id="ginCheckbox" mnemonicParsing="false" text="Gin">
+                                                                     <font>
+                                                                        <Font size="16.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="sloeGinCheckbox" mnemonicParsing="false" text="Sloe Gin">
+                                                                     <font>
+                                                                        <Font size="16.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                               </children>
+                                                            </VBox>
+                                                         </content>
+                                                      </ScrollPane>
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                             <font>
+                                                <Font size="13.0" />
+                                             </font>
+                                          </TitledPane>
+                                          <TitledPane layoutX="10.0" layoutY="126.0" prefHeight="246.0" prefWidth="178.0" text="Tequilia">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                   <children>
+                                                      <ScrollPane hbarPolicy="NEVER" layoutY="30.0" prefHeight="349.0" prefViewportHeight="330.0" prefViewportWidth="216.0" prefWidth="176.0" AnchorPane.bottomAnchor="-10.0" AnchorPane.leftAnchor="-10.0" AnchorPane.rightAnchor="-10.0" AnchorPane.topAnchor="-10.0">
+                                                         <content>
+                                                            <VBox prefHeight="291.0" prefWidth="168.0" spacing="2.0" AnchorPane.topAnchor="30.0">
+                                                               <children>
+                                                                  <CheckBox fx:id="tequilaCheckbox" mnemonicParsing="false" text="Tequilia">
+                                                                     <font>
+                                                                        <Font size="14.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                               </children>
+                                                            </VBox>
+                                                         </content>
+                                                      </ScrollPane>
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                             <font>
+                                                <Font size="13.0" />
+                                             </font>
+                                          </TitledPane>
+                                          <TitledPane expanded="false" prefHeight="246.0" prefWidth="178.0" text="Schnapps">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                   <children>
+                                                      <ScrollPane hbarPolicy="NEVER" layoutY="30.0" prefHeight="349.0" prefViewportHeight="330.0" prefViewportWidth="216.0" prefWidth="176.0" AnchorPane.bottomAnchor="-10.0" AnchorPane.leftAnchor="-10.0" AnchorPane.rightAnchor="-10.0" AnchorPane.topAnchor="-10.0">
+                                                         <content>
+                                                            <VBox prefHeight="291.0" prefWidth="168.0" spacing="1.0" AnchorPane.topAnchor="30.0">
+                                                               <children>
+                                                                  <CheckBox fx:id="schnappsCheckbox" layoutX="10.0" layoutY="280.0" mnemonicParsing="false" text="Schnapps">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="schnappsAppleCheckbox" mnemonicParsing="false" text="Apple">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="schnappsBlackberryCheckbox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Blackberry">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="schnappsButterscotchCheckbox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Butterscotch">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="schnappsCinnamonCheckbox" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" text="Cinnamon">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="schnappsKeyLargoCheckbox" layoutX="10.0" layoutY="100.0" mnemonicParsing="false" text="Key Largo">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="schnappsPeachTreeCheckbox" layoutX="10.0" layoutY="130.0" mnemonicParsing="false" text="Peach Tree">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="schnappsPeppermintCheckbox" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" text="Peppermint">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="schnappsRaspberryCheckbox" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" text="Raspberry">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="schnappsRootBeerCheckbox" layoutX="10.0" layoutY="220.0" mnemonicParsing="false" text="Root Beer ">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="schnappsStrawberryCheckbox" layoutX="10.0" layoutY="208.0" mnemonicParsing="false" text="Strawberry">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="schnappsVanillaCheckbox" layoutX="10.0" layoutY="230.0" mnemonicParsing="false" text="Vanilla">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="schnappsWatermelonCheckbox" layoutX="10.0" layoutY="252.0" mnemonicParsing="false" text="Watermelon">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="schnappsWildberryCheckbox" layoutX="10.0" layoutY="274.0" mnemonicParsing="false" text="Wildberry">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="rumpleMinzeCheckbox" layoutX="10.0" layoutY="252.0" mnemonicParsing="false" text="Rumple Minze">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="schnappsBlueberryCheckbox" layoutX="10.0" layoutY="54.0" mnemonicParsing="false" text="Blueberry">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="schnappsPeachCheckbox" layoutX="10.0" layoutY="142.0" mnemonicParsing="false" text="Peach">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                               </children>
+                                                            </VBox>
+                                                         </content>
+                                                      </ScrollPane>
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                             <font>
+                                                <Font size="13.0" />
+                                             </font>
+                                          </TitledPane>
+                                          <TitledPane expanded="false" text="Brandy">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                   <children>
+                                                      <ScrollPane hbarPolicy="NEVER" layoutY="30.0" prefHeight="349.0" prefViewportHeight="330.0" prefViewportWidth="216.0" prefWidth="176.0" AnchorPane.bottomAnchor="-10.0" AnchorPane.leftAnchor="-10.0" AnchorPane.rightAnchor="-10.0" AnchorPane.topAnchor="-10.0">
+                                                         <content>
+                                                            <VBox prefHeight="290.0" prefWidth="168.0" spacing="1.0" AnchorPane.topAnchor="30.0">
+                                                               <children>
+                                                                  <CheckBox fx:id="brandyCheckbox" layoutX="10.0" layoutY="280.0" mnemonicParsing="false" text="Brandy">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="brandyAppleCheckbox" mnemonicParsing="false" text="Apple">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="brandyApricotCheckbox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Apricot">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="brandyBlackberryCheckbox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Blackberry">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="brandyCherryCheckbox" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" text="Cherry">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="brandyCoffeeCheckbox" layoutX="10.0" layoutY="100.0" mnemonicParsing="false" text="Coffee">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="brandyPeachCheckbox" layoutX="10.0" layoutY="130.0" mnemonicParsing="false" text="Peach">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="calvadosCheckbox" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" text="Calvados">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="cherryHeeringCheckbox" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" text="Cherry Heering">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="piscoCheckbox" layoutX="10.0" layoutY="220.0" mnemonicParsing="false" text="Pisco">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                               </children>
+                                                            </VBox>
+                                                         </content>
+                                                      </ScrollPane>
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                             <font>
+                                                <Font size="13.0" />
+                                             </font>
+                                          </TitledPane>
+                                        <TitledPane prefHeight="327.0" prefWidth="178.0" text="Other Spirits">
+                                             <content>
+                                                <ScrollPane prefHeight="331.0" prefViewportHeight="330.0" prefViewportWidth="216.0" prefWidth="190.0">
+                                                   <content>
+                                                      <VBox AnchorPane.topAnchor="30.0">
+                                                         <children>
+                                                            <CheckBox fx:id="absintheCheckbox" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" text="Absinthe">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="amarettoCheckbox" layoutX="10.0" layoutY="100.0" mnemonicParsing="false" text="Amaretto">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="appleJackCheckbox" layoutX="10.0" layoutY="130.0" mnemonicParsing="false" text="AppleJack">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="cognacCheckbox" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" text="Cognac">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="everclearCheckbox" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" text="Everclear">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="grainAlcoholCheckbox" layoutX="10.0" layoutY="220.0" mnemonicParsing="false" text="Grain Alcohol">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="cachacaCheckbox" layoutX="10.0" layoutY="250.0" mnemonicParsing="false" text="Cachaca">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="firewaterCheckbox" layoutX="10.0" layoutY="280.0" mnemonicParsing="false" text="Firewater">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="vermouthCheckbox" layoutX="10.0" layoutY="210.0" mnemonicParsing="false" text="Vermouth">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="vermouthDryCheckbox" layoutX="10.0" layoutY="235.0" mnemonicParsing="false" text="Dry Vermouth">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="vermouthSweetCheckbox" layoutX="10.0" layoutY="260.0" mnemonicParsing="false" text="Sweet Vermouth">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                         </children>
+                                                      </VBox>
+                                                   </content>
+                                                </ScrollPane>
+                                             </content>
+                                             <font>
+                                                <Font size="13.0" />
+                                             </font>
+                                          </TitledPane>
+                                      </panes>
+                                    </Accordion>
+                                    <Button fx:id="selectAllSpiritsButton" mnemonicParsing="false" text="Select All Spirits" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </TitledPane>
+                        <TitledPane expanded="false" layoutX="10.0" layoutY="39.0" text="Liqueurs &amp; Cremes">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <Accordion prefHeight="434.0" prefWidth="198.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <panes>
+                                          <TitledPane prefHeight="327.0" prefWidth="178.0" text="Herbal Liqueurs">
+                                             <content>
+                                                <ScrollPane prefHeight="331.0" prefViewportHeight="330.0" prefViewportWidth="216.0" prefWidth="190.0">
+                                                   <content>
+                                                      <VBox AnchorPane.topAnchor="30.0">
+                                                         <children>
+                                                            <CheckBox fx:id="kummelCheckbox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Kummel">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="greenChartreuseCheckbox" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" text="Green Chartreuse">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="yellowChartreuseCheckbox" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" text="Yellow Chartreuse">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="aquavitCheckbox" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" text="Aquavit">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="gallianoCheckbox" layoutX="10.0" layoutY="100.0" mnemonicParsing="false" text="Gallino">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="benedictineCheckbox" layoutX="10.0" layoutY="130.0" mnemonicParsing="false" text="Benedictine">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                         </children>
+                                                      </VBox>
+                                                   </content>
+                                                </ScrollPane>
+                                             </content>
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TitledPane>
+                                          <TitledPane expanded="false" prefHeight="246.0" prefWidth="178.0" text="Orange Liqueurs">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                   <children>
+                                                      <ScrollPane hbarPolicy="NEVER" layoutY="30.0" prefHeight="349.0" prefViewportHeight="330.0" prefViewportWidth="216.0" prefWidth="176.0" AnchorPane.bottomAnchor="-10.0" AnchorPane.leftAnchor="-10.0" AnchorPane.rightAnchor="-10.0" AnchorPane.topAnchor="-10.0">
+                                                         <content>
+                                                            <VBox prefHeight="291.0" prefWidth="168.0" spacing="1.0" AnchorPane.topAnchor="30.0">
+                                                               <children>
+                                                                  <CheckBox fx:id="tripleSecCheckbox" layoutX="10.0" layoutY="280.0" mnemonicParsing="false" text="Triple Sec">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="CuracaoCheckbox" mnemonicParsing="false" text="Curacao">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="orangeCuracaoCheckbox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Orange Curacao">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="blueCuracaoCheckbox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Blue Curacao">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="cointreauCheckbox" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" text="Cointreau">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="grandMarnierCheckbox" layoutX="10.0" layoutY="100.0" mnemonicParsing="false" text="Grand Marnier">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="tuacaCheckbox" layoutX="10.0" layoutY="120.0" mnemonicParsing="false" text="Tuaca">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="liqueurOrangeCheckbox" layoutX="10.0" layoutY="142.0" mnemonicParsing="false" text="Orange">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                               </children>
+                                                            </VBox>
+                                                         </content>
+                                                      </ScrollPane>
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TitledPane>
+                                          <TitledPane expanded="false" text="Fruit Liqueurs">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                   <children>
+                                                      <ScrollPane hbarPolicy="NEVER" layoutY="30.0" prefHeight="349.0" prefViewportHeight="330.0" prefViewportWidth="216.0" prefWidth="176.0" AnchorPane.bottomAnchor="-10.0" AnchorPane.leftAnchor="-10.0" AnchorPane.rightAnchor="-10.0" AnchorPane.topAnchor="-10.0">
+                                                         <content>
+                                                            <VBox prefHeight="290.0" prefWidth="168.0" spacing="1.0" AnchorPane.topAnchor="30.0">
+                                                               <children>
+                                                                  <CheckBox fx:id="liqueurBananaCheckbox" layoutX="10.0" layoutY="280.0" mnemonicParsing="false" text="Banana">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="liqueurRaspberryCheckbox" mnemonicParsing="false" text="Raspberry">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="liqueurKiwiCheckbox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Kiwi">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="liqueurMelonCheckbox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Melon">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="liqueurMidoriMelonCheckbox" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" text="Midori Melon">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="liqueurPeachCheckbox" layoutX="10.0" layoutY="100.0" mnemonicParsing="false" text="Peach">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="liqueurStrawberryCheckbox" layoutX="10.0" layoutY="130.0" mnemonicParsing="false" text="Strawberry">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="liqueurCoconutCheckbox" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" text="Coconut">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="tequilaRoseCheckbox" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" text="Tequila Rose">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                               </children>
+                                                            </VBox>
+                                                         </content>
+                                                      </ScrollPane>
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TitledPane>
+                                          <TitledPane expanded="false" text="Coffee and Chocolate Liqueurs">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                   <children>
+                                                      <ScrollPane hbarPolicy="NEVER" layoutY="30.0" prefHeight="349.0" prefViewportHeight="330.0" prefViewportWidth="216.0" prefWidth="176.0" AnchorPane.bottomAnchor="-10.0" AnchorPane.leftAnchor="-10.0" AnchorPane.rightAnchor="-10.0" AnchorPane.topAnchor="-10.0">
+                                                         <content>
+                                                            <VBox prefHeight="290.0" prefWidth="168.0" spacing="1.0" AnchorPane.topAnchor="30.0">
+                                                               <children>
+                                                                  <CheckBox fx:id="liqueurChocolateCheckbox" layoutX="10.0" layoutY="280.0" mnemonicParsing="false" text="Chocolate">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="liqueurCoffeeCheckbox" mnemonicParsing="false" text="Coffee">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="liqueurGodivaCheckbox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Godiva">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="kahluaCheckbox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Kahlua">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="baileysIrishCreamCheckbox" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" text="Baileys Irish Cream">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="tiaMariaCheckbox" layoutX="10.0" layoutY="100.0" mnemonicParsing="false" text="Tia Maria">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                               </children>
+                                                            </VBox>
+                                                         </content>
+                                                      </ScrollPane>
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TitledPane>
+                                          <TitledPane expanded="false" text="Other Liqueur">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                   <children>
+                                                      <ScrollPane hbarPolicy="NEVER" layoutY="30.0" prefHeight="349.0" prefViewportHeight="330.0" prefViewportWidth="216.0" prefWidth="176.0" AnchorPane.bottomAnchor="-10.0" AnchorPane.leftAnchor="-10.0" AnchorPane.rightAnchor="-10.0" AnchorPane.topAnchor="-10.0">
+                                                         <content>
+                                                            <VBox prefHeight="290.0" prefWidth="168.0" spacing="1.0" AnchorPane.topAnchor="30.0">
+                                                               <children>
+                                                                  <CheckBox fx:id="anisetteCheckbox" layoutX="10.0" layoutY="280.0" mnemonicParsing="false" text="Anisette">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="apfelkornCheckbox" mnemonicParsing="false" text="Apfelkorn">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="OuzoCheckbox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Ouzo">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="barenjagerCheckbox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Barenjager">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="pernodCheckbox" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" text="Pernod">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="blackSambucaCheckbox" layoutX="10.0" layoutY="100.0" mnemonicParsing="false" text="Black Sambuca">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="campariCheckbox" layoutX="10.0" layoutY="130.0" mnemonicParsing="false" text="Campari">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="drambuieCheckbox" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" text="Drambuie">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="frangelicoCheckbox" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" text="Frangelico">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="pisangAmbonCheckbox" layoutX="10.0" layoutY="220.0" mnemonicParsing="false" text="Pisang Ambon">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="jagermeisterCheckbox" layoutX="10.0" layoutY="208.0" mnemonicParsing="false" text="Jagermeister">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="ricardCheckbox" layoutX="10.0" layoutY="230.0" mnemonicParsing="false" text="Ricard">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="sambucaCheckbox" layoutX="10.0" layoutY="252.0" mnemonicParsing="false" text="Sambuca">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="southernComfortCheckbox" layoutX="10.0" layoutY="274.0" mnemonicParsing="false" text="Southern Comfort">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="swedishPunschCheckbox" layoutX="10.0" layoutY="274.0" mnemonicParsing="false" text="Swedish Punsch">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="yukonJackCheckbox" layoutX="10.0" layoutY="318.0" mnemonicParsing="false" text="Yukon Jack">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="advocaatCheckbox" layoutX="10.0" layoutY="340.0" mnemonicParsing="false" text="Advocaat">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="aftershockCheckbox" mnemonicParsing="false" text="Aftershock">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="mauiCheckbox" mnemonicParsing="false" text="Maui">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="goldschlagerCheckbox" mnemonicParsing="false" text="Goldschlager">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="hotDamnCheckbox" mnemonicParsing="false" text="Hot Damn">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="hypnotiqCheckbox" mnemonicParsing="false" text="Hypnotiq">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="sourApplePuckerCheckbox" mnemonicParsing="false" text="Sour Apple Pucker">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                               </children>
+                                                            </VBox>
+                                                         </content>
+                                                      </ScrollPane>
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TitledPane>
+                                          <TitledPane prefHeight="327.0" prefWidth="178.0" text="Creme De ...">
+                                             <content>
+                                                <ScrollPane prefHeight="331.0" prefViewportHeight="330.0" prefViewportWidth="216.0" prefWidth="190.0">
+                                                   <content>
+                                                      <VBox AnchorPane.topAnchor="30.0">
+                                                         <children>
+                                                            <CheckBox fx:id="creamOfCoconutCheckbox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Coconut">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="cremeDeNoyauxCheckbox" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" text="Noyaux">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="cremeDeBananaCheckbox" layoutX="10.0" layoutY="100.0" mnemonicParsing="false" text="Banana">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="cremeDeCacaoCheckbox" layoutX="10.0" layoutY="130.0" mnemonicParsing="false" text="Cacao">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="cremeDeCassisCheckbox" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" text="Cassis">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="cremeDeMentheCheckbox" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" text="Menthe">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                         </children>
+                                                      </VBox>
+                                                   </content>
+                                                </ScrollPane>
+                                             </content>
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TitledPane>
+                                       </panes>
+                                    </Accordion>
+                                    <Button fx:id="selectAllLiquorsButton" mnemonicParsing="false" text="Select All Liqueurs" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TitledPane>
+                        <TitledPane expanded="false" text="Beer &amp; Wines">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                 <children>
+                                    <ScrollPane hbarPolicy="NEVER" layoutY="30.0" prefHeight="349.0" prefViewportHeight="330.0" prefViewportWidth="216.0" prefWidth="176.0" AnchorPane.bottomAnchor="-10.0" AnchorPane.leftAnchor="-10.0" AnchorPane.rightAnchor="-10.0" AnchorPane.topAnchor="-10.0">
+                                       <content>
+                                          <VBox prefHeight="290.0" prefWidth="168.0" spacing="1.0" AnchorPane.topAnchor="30.0">
+                                             <children>
+                                                <CheckBox fx:id="aleCheckbox" layoutX="10.0" layoutY="280.0" mnemonicParsing="false" text="Ale">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </CheckBox>
+                                                <CheckBox fx:id="beerCheckbox" mnemonicParsing="false" text="Beer">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </CheckBox>
+                                                <CheckBox fx:id="champagneCheckbox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Champagne">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </CheckBox>
+                                                <CheckBox fx:id="dubonnetBlancCheckbox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Dubonnet Blanc">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </CheckBox>
+                                                <CheckBox fx:id="dubonnetRougeCheckbox" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" text="Dubonnet Rouge">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </CheckBox>
+                                                <CheckBox fx:id="whiteWineCheckbox" layoutX="10.0" layoutY="100.0" mnemonicParsing="false" text="White Wine">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </CheckBox>
+                                                <CheckBox fx:id="coronaCheckbox" layoutX="10.0" layoutY="130.0" mnemonicParsing="false" text="Corona">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </CheckBox>
+                                                <CheckBox fx:id="guinessStoutCheckbox" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" text="Guiness Stout">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </CheckBox>
+                                                <CheckBox fx:id="lagerCheckbox" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" text="Lager">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </CheckBox>
+                                                <CheckBox fx:id="sakeCheckbox" layoutX="10.0" layoutY="220.0" mnemonicParsing="false" text="Sake">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </CheckBox>
+                                                <CheckBox fx:id="sherryCheckbox" layoutX="10.0" layoutY="208.0" mnemonicParsing="false" text="Sherry">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </CheckBox>
+                                                <CheckBox fx:id="zimaCheckbox" layoutX="10.0" layoutY="230.0" mnemonicParsing="false" text="Zima">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </CheckBox>
+                                                <CheckBox fx:id="portCheckbox" layoutX="10.0" layoutY="252.0" mnemonicParsing="false" text="Port">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </CheckBox>
+                                                <CheckBox fx:id="redWineCheckbox" layoutX="10.0" layoutY="274.0" mnemonicParsing="false" text="Red Wine">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </CheckBox>
+                                             </children>
+                                          </VBox>
+                                       </content>
+                                    </ScrollPane>
+                                    <Button fx:id="selectAllBeersButton" mnemonicParsing="false" text="Select All Beer &amp; Wines" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TitledPane>
+                        <TitledPane expanded="false" text="Mixers">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <Button fx:id="selectAllMixersButton" mnemonicParsing="false" text="Select All Mixers" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="5.0" />
+                                    <Accordion prefHeight="434.0" prefWidth="198.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-0.0" AnchorPane.topAnchor="0.0">
+                                       <panes>
+                                          <TitledPane prefHeight="327.0" prefWidth="178.0" text="Soda">
+                                             <content>
+                                                <ScrollPane hbarPolicy="NEVER" prefHeight="331.0" prefViewportHeight="330.0" prefViewportWidth="216.0" prefWidth="190.0">
+                                                   <content>
+                                                      <VBox AnchorPane.topAnchor="30.0">
+                                                         <children>
+                                                            <CheckBox fx:id="sodaWaterCheckbox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Soda Water">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="sodaCherryColaCheckbox" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" text="Cherry Cola">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="sodaColaCheckbox" layoutX="10.0" layoutY="35.0" mnemonicParsing="false" text="Cola">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="sodaDrPepperCheckbox" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" text="Dr Pepper">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="sodaGingerAleCheckbox" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" text="Ginger Ale">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="sodaLemonLimeCheckbox" layoutX="10.0" layoutY="100.0" mnemonicParsing="false" text="Lemon Lime">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="sodaMountainDewCheckbox" layoutX="10.0" layoutY="130.0" mnemonicParsing="false" text="Mountain Dew">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="sodaOrangeCheckbox" layoutX="10.0" layoutY="135.0" mnemonicParsing="false" text="Orange">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="sodaRootBeerCheckbox" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" text="RootBeer">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="schweppesRusschianCheckbox" layoutX="10.0" layoutY="185.0" mnemonicParsing="false" text="Schweppes Russchian">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </CheckBox>
+                                                         </children>
+                                                      </VBox>
+                                                   </content>
+                                                </ScrollPane>
+                                             </content>
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TitledPane>
+                                          <TitledPane expanded="false" layoutX="10.0" layoutY="49.0" prefHeight="246.0" prefWidth="178.0" text="Juice">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                   <children>
+                                                      <ScrollPane hbarPolicy="NEVER" layoutY="30.0" prefHeight="349.0" prefViewportHeight="330.0" prefViewportWidth="216.0" prefWidth="176.0" AnchorPane.bottomAnchor="-10.0" AnchorPane.leftAnchor="-10.0" AnchorPane.rightAnchor="-10.0" AnchorPane.topAnchor="-10.0">
+                                                         <content>
+                                                            <VBox prefHeight="291.0" prefWidth="168.0" spacing="1.0" AnchorPane.topAnchor="30.0">
+                                                               <children>
+                                                                  <CheckBox fx:id="juiceAppleCheckbox" layoutX="10.0" layoutY="280.0" mnemonicParsing="false" text="Apple">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="juiceCiderCheckbox" mnemonicParsing="false" text="Cider">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="juiceClamatoCheckbox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Clamato">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="juiceCranberryCheckbox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Cranberry">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="juiceFruitCheckbox" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" text="Fruit">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="juiceFruitPunchCheckbox" layoutX="10.0" layoutY="98.0" mnemonicParsing="false" text="Fruit Punch">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="juiceGrapeCheckbox" layoutX="10.0" layoutY="100.0" mnemonicParsing="false" text="Grape">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="juiceHawaiianPunchCheckbox" layoutX="10.0" layoutY="120.0" mnemonicParsing="false" text="Hawaiian Punch">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="juiceKoolAidCheckbox" layoutX="10.0" layoutY="142.0" mnemonicParsing="false" text="Kool Aid">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="juiceMaraschinoCherryCheckbox" layoutX="10.0" layoutY="164.0" mnemonicParsing="false" text="Maraschino Cherry" wrapText="true">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="juicePassionFruitCheckbox" layoutX="10.0" layoutY="186.0" mnemonicParsing="false" text="Passion Fruit">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="juicePineappleCheckbox" layoutX="10.0" layoutY="230.0" mnemonicParsing="false" text="Pineapple">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="juiceTomatoCheckbox" layoutX="10.0" layoutY="273.0" mnemonicParsing="false" text="Tomato">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="sourMixCheckbox" mnemonicParsing="false" text="Sour Mix">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="sweetAndSourCheckbox" mnemonicParsing="false" text="Sweet and Sour Mix">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="juiceOrangeCheckbox" mnemonicParsing="false" text="Orange Juice">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="juiceLemonCheckbox" mnemonicParsing="false" text="Lemon Juice">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="juiceTropicanaCheckbox" mnemonicParsing="false" text="Tropicana Juice">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="juicePinkLemonadeCheckbox" mnemonicParsing="false" text="Pink Lemonade Juice">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="grenadineCheckbox" mnemonicParsing="false" text="Grenadine">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="juiceGrapefruitCheckbox" mnemonicParsing="false" text="Grapefruit">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="juiceLimeCheckbox" mnemonicParsing="false" text="Lime Juice">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="limeJuiceCordialCheckbox" mnemonicParsing="false" text="Lime Cordial">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="juiceLimeadeCheckbox" mnemonicParsing="false" text="Limeade Juice">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="juiceLemonadeCheckbox" mnemonicParsing="false" text="Lemonade Juice">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="peachNectarCheckbox" layoutX="10.0" layoutY="280.0" mnemonicParsing="false" text="Peach Nectar">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                               </children>
+                                                            </VBox>
+                                                         </content>
+                                                      </ScrollPane>
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TitledPane>
+                                          <TitledPane expanded="false" layoutX="10.0" layoutY="70.0" text="Coffee, Tea, &amp; Dairy">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                   <children>
+                                                      <ScrollPane hbarPolicy="NEVER" layoutY="30.0" prefHeight="349.0" prefViewportHeight="330.0" prefViewportWidth="216.0" prefWidth="176.0" AnchorPane.bottomAnchor="-10.0" AnchorPane.leftAnchor="-10.0" AnchorPane.rightAnchor="-10.0" AnchorPane.topAnchor="-10.0">
+                                                         <content>
+                                                            <VBox prefHeight="290.0" prefWidth="168.0" spacing="1.0" AnchorPane.topAnchor="30.0">
+                                                               <children>
+                                                                  <CheckBox fx:id="tangCheckbox" layoutX="10.0" layoutY="280.0" mnemonicParsing="false" text="Tang">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="teaCheckbox" mnemonicParsing="false" text="Tea">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="waterCheckbox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Water">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="icedTeaCheckbox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Iced Tea">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="chocolateMilkCheckbox" mnemonicParsing="false" prefHeight="25.0" prefWidth="135.0" text="Chocolate Milk">
+                                                                     <font>
+                                                                        <Font size="16.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="creamCheckbox" mnemonicParsing="false" text="Cream">
+                                                                     <font>
+                                                                        <Font size="16.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="eggnogCheckbox" mnemonicParsing="false" text="Eggnog">
+                                                                     <font>
+                                                                        <Font size="16.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="espressoCheckbox" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" text="Espresso">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="condensedMilkCheckbox" mnemonicParsing="false" text="Condensed Milk">
+                                                                     <font>
+                                                                        <Font size="16.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="coffeeCheckbox" layoutX="10.0" layoutY="100.0" mnemonicParsing="false" text="Coffee">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="milkCheckbox" mnemonicParsing="false" text="Milk">
+                                                                     <font>
+                                                                        <Font size="16.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="halfAndHalfCheckbox" mnemonicParsing="false" text="Half and Half">
+                                                                     <font>
+                                                                        <Font size="16.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="heavyCreamCheckbox" mnemonicParsing="false" text="Heavy Cream">
+                                                                     <font>
+                                                                        <Font size="16.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="yoghurtCheckbox" mnemonicParsing="false" text="Yoghurt">
+                                                                     <font>
+                                                                        <Font size="16.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="chocolateIceCreamCheckbox" mnemonicParsing="false" text="Chocolate Ice Cream">
+                                                                     <font>
+                                                                        <Font size="16.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="whippingCreamCheckbox" mnemonicParsing="false" text="Whipping Cream">
+                                                                     <font>
+                                                                        <Font size="16.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="vanillaIceCreamCheckbox" mnemonicParsing="false" text="Vanilla Ice Cream">
+                                                                     <font>
+                                                                        <Font size="16.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="coconutMilkCheckbox" layoutX="10.0" layoutY="120.0" mnemonicParsing="false" text="Coconut Milk">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="hotChocolateCheckbox" layoutX="10.0" layoutY="142.0" mnemonicParsing="false" text="Hot Chocolate">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                               </children>
+                                                            </VBox>
+                                                         </content>
+                                                      </ScrollPane>
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TitledPane>
+                                       </panes>
+                                    </Accordion>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </TitledPane>
+                        <TitledPane expanded="false" text="Bar Stock &amp; Pantry">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <Accordion prefHeight="434.0" prefWidth="198.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-0.0" AnchorPane.topAnchor="0.0">
+                                       <panes>
+                                          <TitledPane expanded="false" layoutX="10.0" layoutY="70.0" text="Sugar">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                   <children>
+                                                      <ScrollPane hbarPolicy="NEVER" layoutY="30.0" prefHeight="349.0" prefViewportHeight="330.0" prefViewportWidth="216.0" prefWidth="176.0" AnchorPane.bottomAnchor="-10.0" AnchorPane.leftAnchor="-10.0" AnchorPane.rightAnchor="-10.0" AnchorPane.topAnchor="-10.0">
+                                                         <content>
+                                                            <VBox prefHeight="290.0" prefWidth="168.0" spacing="1.0" AnchorPane.topAnchor="30.0">
+                                                               <children>
+                                                                  <CheckBox fx:id="brownSugarCheckbox" layoutX="10.0" layoutY="280.0" mnemonicParsing="false" text="Brown Sugar">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="sugarSyrupCheckbox" mnemonicParsing="false" text="Sugar Syrup">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="sugarCheckbox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Sugar">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="honeyCheckbox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Honey">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                               </children>
+                                                            </VBox>
+                                                         </content>
+                                                      </ScrollPane>
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TitledPane>
+                                          <TitledPane expanded="false" text="Fruit">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                   <children>
+                                                      <ScrollPane hbarPolicy="NEVER" layoutY="30.0" prefHeight="349.0" prefViewportHeight="330.0" prefViewportWidth="216.0" prefWidth="176.0" AnchorPane.bottomAnchor="-10.0" AnchorPane.leftAnchor="-10.0" AnchorPane.rightAnchor="-10.0" AnchorPane.topAnchor="-10.0">
+                                                         <content>
+                                                            <VBox prefHeight="290.0" prefWidth="168.0" spacing="1.0" AnchorPane.topAnchor="30.0">
+                                                               <children>
+                                                                  <CheckBox fx:id="fruitAppleCheckbox" layoutX="10.0" layoutY="280.0" mnemonicParsing="false" text="Apple">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="fruitBananaCheckbox" mnemonicParsing="false" text="Banana">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="fruitCranberriesCheckbox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Cranberries">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="fruitGrapesCheckbox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Grapes">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="fruitKiwiCheckbox" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" text="Kiwi">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="fruitLemonCheckbox" layoutX="10.0" layoutY="100.0" mnemonicParsing="false" text="Lemon">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="lemonPeelCheckbox" mnemonicParsing="false" text="Lemon Peel">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="fruitLimeCheckbox" layoutX="10.0" layoutY="120.0" mnemonicParsing="false" text="Lime">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="fruitMangoCheckbox" layoutX="10.0" layoutY="142.0" mnemonicParsing="false" text="Mango">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="fruitOrangeCheckbox" layoutX="10.0" layoutY="164.0" mnemonicParsing="false" text="Orange">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="orangePeelCheckbox" mnemonicParsing="false" text="Orange Peel">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="fruitPineappleCheckbox" layoutX="10.0" layoutY="186.0" mnemonicParsing="false" text="Pineapple">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="fruitRasinsCheckbox" layoutX="10.0" layoutY="208.0" mnemonicParsing="false" text="Rasins">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="fruitStrawberriesCheckbox" layoutX="10.0" layoutY="230.0" mnemonicParsing="false" text="Strawberries">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                               </children>
+                                                            </VBox>
+                                                         </content>
+                                                      </ScrollPane>
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TitledPane>
+                                          <TitledPane expanded="false" layoutX="10.0" layoutY="49.0" prefHeight="246.0" prefWidth="178.0" text="Spice &amp; Bitters">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                   <children>
+                                                      <ScrollPane hbarPolicy="NEVER" layoutY="30.0" prefHeight="349.0" prefViewportHeight="330.0" prefViewportWidth="216.0" prefWidth="176.0" AnchorPane.bottomAnchor="-10.0" AnchorPane.leftAnchor="-10.0" AnchorPane.rightAnchor="-10.0" AnchorPane.topAnchor="-10.0">
+                                                         <content>
+                                                            <VBox prefHeight="291.0" prefWidth="168.0" spacing="1.0" AnchorPane.topAnchor="30.0">
+                                                               <children>
+                                                                  <CheckBox fx:id="anisCheckbox" layoutX="10.0" layoutY="280.0" mnemonicParsing="false" text="Anis">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="angosturaBittersCheckbox" mnemonicParsing="false" text="Angostura Bitters">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="bittersCheckbox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Bitters">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="cardamomCheckbox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Cardamom">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="clovesCheckbox" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" text="Cloves">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="gingerCheckbox" layoutX="10.0" layoutY="98.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="73.0" text="Ginger">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="mintCheckbox" layoutX="10.0" layoutY="100.0" mnemonicParsing="false" text="Mint">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="orangeBittersCheckbox" layoutX="10.0" layoutY="120.0" mnemonicParsing="false" text="Orange Bitters">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                               </children>
+                                                            </VBox>
+                                                         </content>
+                                                      </ScrollPane>
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TitledPane>
+                                          <TitledPane expanded="false" text="Kitchen Supplies">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                   <children>
+                                                      <ScrollPane hbarPolicy="NEVER" layoutY="30.0" prefHeight="349.0" prefViewportHeight="330.0" prefViewportWidth="216.0" prefWidth="176.0" AnchorPane.bottomAnchor="-10.0" AnchorPane.leftAnchor="-10.0" AnchorPane.rightAnchor="-10.0" AnchorPane.topAnchor="-10.0">
+                                                         <content>
+                                                            <VBox prefHeight="290.0" prefWidth="168.0" spacing="1.0" AnchorPane.topAnchor="30.0">
+                                                               <children>
+                                                                  <CheckBox fx:id="worcestershireSauceCheckbox" mnemonicParsing="false" text="Worcestershire ">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="chocolateSyrupCheckbox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Chocolate Syrup">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="chocolateCheckbox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Chocolate">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="cocoaPowderCheckbox" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" text="Coco Powder">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="beefBouillonCheckbox" layoutX="10.0" layoutY="100.0" mnemonicParsing="false" text="Beef Bouillon">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="almondCheckbox" layoutX="10.0" layoutY="130.0" mnemonicParsing="false" text="Almond">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="iceCheckbox" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" text="Ice">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="eggYolkCheckbox" mnemonicParsing="false" text="Egg Yolk">
+                                                                     <font>
+                                                                        <Font size="16.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="eggCheckbox" mnemonicParsing="false" text="Egg">
+                                                                     <font>
+                                                                        <Font size="16.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="jelloCheckbox" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" text="Jello">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="saltCheckbox" layoutX="10.0" layoutY="186.0" mnemonicParsing="false" text="Salt">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="sherbetCheckbox" layoutX="10.0" layoutY="208.0" mnemonicParsing="false" text="Sherbet">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                                  <CheckBox fx:id="tabascoSauceCheckbox" layoutX="10.0" layoutY="230.0" mnemonicParsing="false" text="Tabasco">
+                                                                     <font>
+                                                                        <Font size="15.0" />
+                                                                     </font>
+                                                                  </CheckBox>
+                                                               </children>
+                                                            </VBox>
+                                                         </content>
+                                                      </ScrollPane>
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TitledPane>
+                                       </panes>
+                                    </Accordion>
+                                    <Button fx:id="selectAllStockButton" mnemonicParsing="false" text="Select All Stock" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </TitledPane>
+                     </panes>
+                  </Accordion>
+                  <Button fx:id="whatCanIMakeButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="180.0" text="Ready To Make" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
+                     <effect>
+                        <InnerShadow blurType="GAUSSIAN" color="#01650b" radius="15.19" width="41.76" />
+                     </effect>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="selectAllIngredientsButton" layoutY="572.0" mnemonicParsing="false" text="Select All Ingredients" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="532.0" prefWidth="825.0">
+               <children>
+                  <SplitPane dividerPositions="0.5255157437567861" layoutY="36.0" prefHeight="559.0" prefWidth="825.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <items>
+                      <AnchorPane maxWidth="400.0" prefHeight="628.0" prefWidth="400.0">
+                           <children>
+                              <Accordion AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+                                <panes>
+                                  <TitledPane fx:id="canMake" text="You can make these right now">
+                                       <content>
+                                          <ListView fx:id="missingNoneList" />
+                                       </content>
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </TitledPane>
+                                  <TitledPane text="Missing One Ingredient">
+                                       <content>
+                                          <ListView fx:id="missingOneList" prefHeight="200.0" prefWidth="200.0" />
+                                       </content>
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </TitledPane>
+                                    <TitledPane layoutX="10.0" layoutY="40.0" text="Missing Two Ingredients">
+                                       <content>
+                                          <ListView fx:id="missingTwoList" prefHeight="200.0" prefWidth="200.0" />
+                                       </content>
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </TitledPane>
+                                    <TitledPane layoutX="10.0" layoutY="70.0" text="Missing Three or More Ingredients">
+                                       <content>
+                                          <ListView fx:id="missingThreePlusList" prefHeight="200.0" prefWidth="200.0" />
+                                       </content>
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </TitledPane>
+                                </panes>
+                              </Accordion>
+                              <Button fx:id="browseButton" layoutX="203.0" layoutY="561.0" maxWidth="180.0" minWidth="180.0" mnemonicParsing="false" onAction="#Browse" prefHeight="25.0" prefWidth="180.0" text="Browse" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="203.0" />
+                              <Button fx:id="randomButton" layoutX="260.0" layoutY="531.0" maxWidth="180.0" minWidth="180.0" mnemonicParsing="false" onAction="#Random" prefHeight="25.0" prefWidth="200.0" text="Random" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
+                              <Label layoutX="141.0" layoutY="1.0" prefHeight="27.0" prefWidth="119.0" text="Cocktails" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <ListView id="browseList" fx:id="cocktailList" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="556.0" prefWidth="335.0">
+                           <children>
+                              <SplitPane dividerPositions="0.37937743190661477" orientation="VERTICAL" prefHeight="516.0" prefWidth="185.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <items>
+                                  <AnchorPane fx:id="imgPane" minHeight="200.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                       <children>
+                                          <ImageView fx:id="cocktailImage" fitHeight="192.0" fitWidth="189.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <image>
+                                                <Image url="@../../../../../Pictures/2cehhr7.jpg" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </AnchorPane>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                       <children>
+                                          <ScrollPane hbarPolicy="NEVER" prefHeight="215.0" prefWidth="247.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <content>
+                                                <VBox prefHeight="500.0" prefWidth="310.0" spacing="2.0">
+                                                   <children>
+                                                      <Label fx:id="cocktailName" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" text="Cocktail Name" textAlignment="CENTER">
+                                                         <font>
+                                                            <Font name="System Bold" size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label fx:id="cocktailInfo" alignment="CENTER" text="Instructions Go Here" textAlignment="CENTER" wrapText="true" />
+                                                      <Line endX="200.0" startX="-100.0" />
+                                                      <Label fx:id="ingredientInfo1" text="ingredientInfo1" />
+                                                      <Label fx:id="ingredientInfo2" layoutX="10.0" layoutY="10.0" text="ingredientInfo2" />
+                                                      <Label fx:id="ingredientInfo3" layoutX="10.0" layoutY="27.0" text="ingredientInfo3" />
+                                                      <Label fx:id="ingredientInfo4" layoutX="10.0" layoutY="44.0" text="ingredientInfo4" />
+                                                      <Label fx:id="ingredientInfo5" layoutX="10.0" layoutY="61.0" text="ingredientInfo5" />
+                                                      <Label fx:id="ingredientInfo6" layoutX="10.0" layoutY="78.0" text="ingredientInfo6" />
+                                                      <Label fx:id="ingredientInfo7" layoutX="10.0" layoutY="95.0" text="ingredientInfo7" />
+                                                      <Label fx:id="ingredientInfo8" layoutX="10.0" layoutY="112.0" text="ingredientInfo8" />
+                                                      <Label fx:id="ingredientInfo9" layoutX="10.0" layoutY="129.0" text="ingredientInfo9" />
+                                                      <Label fx:id="ingredientInfo10" layoutX="10.0" layoutY="146.0" text="ingredientInfo10" />
+                                                      <Label fx:id="ingredientInfo11" layoutX="10.0" layoutY="163.0" text="ingredientInfo11" />
+                                                      <Label fx:id="ingredientInfo12" layoutX="10.0" layoutY="180.0" text="ingredientInfo12" />
+                                                      <Label fx:id="ingredientInfo13" layoutX="10.0" layoutY="197.0" text="ingredientInfo13" />
+                                                   </children>
+                                                </VBox>
+                                             </content>
+                                          </ScrollPane>
+                                       </children>
+                                    </AnchorPane>
+                                </items>
+                              </SplitPane>
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+                  <TextField fx:id="searchbar" layoutX="14.0" layoutY="565.0" maxWidth="380.0" minWidth="380.0" onKeyTyped="#partialsearch" prefHeight="30.0" prefWidth="380.0" promptText="Search Recipe By Name" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="10.0" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+      <SplitPane orientation="VERTICAL" prefHeight="598.0" prefWidth="218.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+   </children>
+</AnchorPane>
