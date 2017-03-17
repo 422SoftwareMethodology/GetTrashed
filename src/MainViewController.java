@@ -136,6 +136,14 @@ public class MainViewController implements Initializable {
 		//Default img load
 		BufferedImage bufferedImage = null;
 		ClassLoader cldr = getClass().getClassLoader();
+		searchbar.setOnKeyReleased(new EventHandler<KeyEvent>() {  
+			  
+            @Override  
+            public void handle(KeyEvent event) {  
+            	System.out.println("A");
+                partialsearch();
+            }  
+        });  
 	    URL url = cldr.getResource("cocktail-neon.jpg");
 	    try {
 			bufferedImage = ImageIO.read(url);
