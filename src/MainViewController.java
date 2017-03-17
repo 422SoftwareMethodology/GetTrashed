@@ -1,3 +1,40 @@
+/***
+ * 
+Purpose of this class: To act as an intermediary between the MainView.fxml and the SqlQuery Builder. It is instantiated by the Driver Class. The function descriptions below describe in detail what the class
+does, but in general the class calls the sql query functions and puts the results in a "missing ingredients" order. It then displays that information.
+
+ * Class Functions
+initialize - initialize the button actions to their JavaFX process
+partialsearch - runs a partial word search every time a new key is typed
+selectAllLiquorCheckboxes - Listeners for button clicks
+selectAllSpiritsCheckboxes - Listeners for button clicks
+selectAllMixerCheckboxes - Listeners for button clicks
+selectAllStockCheckboxes - Listeners for button clicks
+selectAllBeerCheckboxes - Listeners for button clicks
+selectAllWhiskyCheckboxes - Listeners for button clicks
+selectAllVodkaCheckboxes - Listeners for button clicks
+selectAllRumCheckboxes - Listeners for button clicks
+Browse - Makes a list of all possible cocktails, makes a hidden listView visible
+Random -  loads a random drink in browse mode
+selectAllIngredients - checks all ingredient checkboxes
+deselectAll -- unchecks all ingredient checkboxes
+cocktailListClick - displays the cocktail clicked on the cocktail list
+missingNoneListClick - displays the cocktail clicked on the cocktail list
+missingOneListClick - displays the cocktail clicked on the cocktail list
+missingTwoListClick - displays the cocktail clicked on the cocktail list
+missingThreePlusListClick - displays the cocktail clicked on the cocktail list
+loadDetailView - takes the query information and displays it on the right hand "cocktail view" 
+checkAllMixers - checks all checkboxes
+checkAllStock - checks all checkboxes
+checkAllSpirits - checks all checkboxes
+checkAllLiqueure - checks all checkboxes
+checkAllBeer - checks all checkboxes
+checkAllWhiskey - checks all checkboxes
+checkAllVodka - checks all checkboxes
+checkAllRum - checks all checkboxes
+ingredientArraylistMaker - makes an arraylist out of all checked checkboxes
+ */
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
